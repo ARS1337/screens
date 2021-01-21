@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="248" height="323" viewBox="0 0 248 323">
+   <defs>
+      <style>.a{fill:#fff;stroke:#858585;stroke-width:0.3px;}.b{fill:#383434;font-size:20px;font-family:Raleway-Bold, Raleway;font-weight:700;}.c{fill:#db080b;}.d{fill:#f8ebeb;}.e{stroke:none;}.f{fill:none;}</style>
+   </defs>
+   <g transform="translate(-280 -687.5)">
+      <g class="a" transform="translate(280 687.5)">
+         <rect class="e" width="248" height="323" rx="10" />
+         <rect class="f" x="0.15" y="0.15" width="247.7" height="322.7" rx="9.85" />
+      </g>
+      <text class="b" transform="translate(310 781.5)">
+         <tspan x="0" y="0">Combos</tspan>
+      </text>
+      <text class="b" transform="translate(310 731.5)">
+         <tspan x="0" y="0">Meals</tspan>
+      </text>
+      <rect class="c" width="6" height="43.479" transform="translate(280 802.76)" />
+      <rect class="d" width="242" height="45" transform="translate(286 802)" />
+      <text class="b" transform="translate(310 831.5)">
+         <tspan x="0" y="0">Recommended</tspan>
+      </text>
+      <text class="b" transform="translate(310 881.5)">
+         <tspan x="0" y="0">Extras</tspan>
+      </text>
+      <text class="b" transform="translate(310 931.5)">
+         <tspan x="0" y="0">Reviews</tspan>
+      </text>
+      <text class="b" transform="translate(310 981.5)">
+         <tspan x="0" y="0">Videos</tspan>
+      </text>
+   </g>
+</svg>
