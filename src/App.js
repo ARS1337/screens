@@ -25,7 +25,7 @@ function App() {
       <div class="main">
         <div class="main-container">
           <div class="main-title">
-            {/* <Title/> */}
+            <Title/>
           </div>
           <div class="main-header">
             <Header />
