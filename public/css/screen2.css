@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    /* margin: 10px 15%; */
+    font-family: Raleway-Bold, Raleway;
+    align-content: center;
+}
+
+
+/* heading start */
+
+.flexbox-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    border: 1px solid black;
+    border-radius: 10px;
+    max-width: 50%;
+    min-width: 45%;
+    padding: 10px 10px;
+    margin: 15px;
+    /* background-color: yellow; */
+}
+
+.flexbox-item {
+    background-color: white;
+    padding: 10px;
+    min-height: 35px;
+    /* border: 3px solid black; */
+    width: max-content;
+}
+
+.flexbox-item img {
+    /* border:1px solid black; */
+    min-width: 200px;
+    min-height: 80px;
+    max-width: 180px;
+    padding: 10px;
+}
+
+td:hover {
+    background-color: red;
+}
+
+.left-items {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.right-items {
+    width: auto;
+    min-width: 400px;
+    min-height: 220px;
+}
+
+.flexbox-item .left-details {
+    /* border:1px solid black; */
+    padding: 10px 10px 10px 30px;
+    word-wrap: break-word;
+}
+
+.flexbox-container p {
+    font-weight: 800;
+}
+
+@media screen and (max-width: 600px) {
+    .week ul {
+        display: block;
+        width: 100%;
+    }
+}
+
+.week {
+    max-width: 460px;
+    min-width: 300px;
+    min-height: 10px;
+    border: 1px solid #e1e1e1;
+    float: right;
+    overflow: hidden;
+    padding: 10px 0px;
+}
+
+.week li {
+    display: inline;
+    list-style-type: none;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.week a {
+    text-decoration: none;
+}
+
+.week li:hover {
+    background-color: red;
+}
+
+.right-items p {
+    align-content: flex-end;
+    text-align: right;
+    padding: 10px;
+}
+
+.type-location {
+    color: gray;
+    font-weight: bold;
+    word-break: normal;
+}
+
+
+/* heading end */
+
+
+/* left menu start */
+
+.card {
+    border: 1px lightgray solid;
+    float: left;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.card a {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: none;
+    color: #383434;
+}
+
+.leftMenu li {
+    list-style-type: none;
+    border: 5px white solid;
+    padding: 10px 60px 10px 25px;
+}
+
+.leftMenu li:hover {
+    background-color: #F8EBEB;
+    border: 5px #F8EBEB solid;
+    border-left: 5px red solid;
+    border-radius: 4%;
+}
+
+
+/* leftMenu done  */
+
+
+/* //////////////////////////////////// */
