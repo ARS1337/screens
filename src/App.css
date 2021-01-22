@@ -775,21 +775,21 @@ ul::before {
 
 .main-title {
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    /* grid-template-columns: repeat(5, auto); */
+    grid-template-columns: 0.1fr 0.3fr 0.6fr 0.15fr 0.2fr;
     grid-template-rows: 1fr;
     grid-template-areas: "logo company-name search-box help user-login";
     width: 100%;
+    height: fit-content
 }
 
+.main-title>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* .main-title{
-  display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-} */
-
+.logo img,
 .company-name img,
 .help img,
 .user-login img,
@@ -797,9 +797,25 @@ ul::before {
     grid-area: logo;
     min-width: 10px;
     min-height: 10px;
-    width: inherit;
-    height: inherit;
-    background-color: yellow;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+    .help>*,
+    .user-login>* {
+        height: auto;
+        width: auto;
+        object-fit: contain;
+        font-size: small;
+    }
+    /* .main-title{
+      grid-template-columns: 0.1fr 0.3fr 0.6fr 0.15fr 0.2fr;
+    } */
+    .search {
+        width: 80%;
+    }
 }
 
 .logo {
@@ -811,7 +827,7 @@ ul::before {
 .user-login {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
 }
 
