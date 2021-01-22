@@ -1,3 +1,4 @@
+// https://github.com/ARS1337/screens
 import logo from "./logo.svg";
 import "./App.css";
 import Videos from "./components/Videos";
@@ -23,7 +24,9 @@ function App() {
     <div className="App">
       <div class="main">
         <div class="main-container">
-          {/* <div class="main-title"><Title/></div> */}
+          <div class="main-title">
+            <Title/>
+          </div>
           <div class="main-header">
             <Header />
           </div>
@@ -31,7 +34,14 @@ function App() {
             <Navigation />
           </div>
           <Switch>
-            <Route path="/Recommended">
+            {/* <Route path="/Recommended"> */}
+            using Recommended as Home
+            <Route exact path="/"> 
+              <div class="main-content">
+                <Recommended />
+              </div>
+            </Route>
+            <Route exact path="/Recommended"> 
               <div class="main-content">
                 <Recommended />
               </div>
