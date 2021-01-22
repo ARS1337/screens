@@ -35,7 +35,7 @@ function App() {
           </div>
           <Switch>
             {/* <Route path="/Recommended"> */}
-            {/* using Recommended as Home for no*/}
+            {/* using Recommended as Home for no  gngf*/}
             <Route exact path="/"> 
               <div class="main-content">
                 <Recommended />
