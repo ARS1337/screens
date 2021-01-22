@@ -23,9 +23,9 @@ function App() {
 
     <div className="App">
       <div class="main">
-        {/* <div class="main-container"> */}
+        <div class="main-container">
           <div class="main-title">
-            <Title/>
+            {/* <Title/> */}
           </div>
           <div class="main-header">
             <Header />
@@ -35,7 +35,7 @@ function App() {
           </div>
           <Switch>
             {/* <Route path="/Recommended"> */}
-            {/* using Recommended as Home for nowdddddddddddd*/}
+            {/* using Recommended as Home for no*/}
             <Route exact path="/"> 
               <div class="main-content">
                 <Recommended />
@@ -59,6 +59,7 @@ function App() {
           </Switch>
         </div>
       </div>
+    </div>
     </Router>
   );
 }
