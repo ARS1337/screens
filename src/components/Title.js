@@ -1,34 +1,31 @@
-import React from 'react'
+import React from "react";
 // import styles from '../screen4.css';
-import '../App.css';
-
+import "../App.css";
 
 function Title() {
-   return (
-      <>
-        <div class="title row col-12">
-            <div class="logo col-1">
-                <img src="images jpg/title/pukkao_final-2.png" alt="" />
-            </div>
-            <div class="company-name col-2">
-                <img src="images jpg/title/logo white.png" alt="" />
-            </div>
-            <div class="search-box col-4">
-            {/* <input type="text"/> */}
-            </div>
-            <div class="help col-2">
-                <img src="images jpg/title/Warning.png" alt="" class="col-2" />
-                <h2 class="col-3">Help</h2>
-            </div>
+  return (
+    <>
+      {/* <div class="title"> */}
+      <img src="images jpg/title/pukkao_final-2.png" class="logo" width="72" height="69"/>
+      <div class="company-name" >
+      <img src="images jpg/title/logo white.png" width="250" height="34"/>
+      </div>
+      <div class="search-box">
+          <input type="text"/>
+          </div>
+      <div class="help">
+        <img src="images jpg/title/Warning.png"  />
+        <h2>Help</h2>
+      </div>
 
-            <div class="user-login col-2">
-                <img src="images jpg/title/Profile.png" alt="" class="col-5" />
-                <h4 class="col-1">Siddhu</h4>
-            </div>
+      <div class="user-login">
+        <img src="images jpg/title/Profile.png" alt="" />
+        <h4>Siddhu</h4>
+      </div>
 
-        </div>
-      </>
-   )
+      {/* </div> */}
+    </>
+  );
 }
 
-export default Title
+export default Title;

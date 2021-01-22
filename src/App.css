@@ -142,14 +142,14 @@
   height: initial;
   width: initial;
 }
-
+/* 
 .search-box {
   border: 1px grey solid;
   height: 15px;
   margin: 20px;
   border-radius: 5px;
   width: 30%;
-}
+} */
 
 .user-login {
   width: initial;
@@ -295,11 +295,21 @@
 /* reviews end  */
 
 .main {
-  align-items: center;
+  /* align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; */
+  display:grid;
+  grid-template-columns: 0.05fr 1fr 0.05fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  ". main-container . "
+  ;
 }
+.main-container{
+  grid-area:main-container;
+}
+
 
 /* heading start */
 
@@ -429,6 +439,9 @@ ul::before {
   color: #383434;
   /* font-size: 0.9vw; */
 }
+.leftMenu Link{
+  display:block;
+}
 
 @media only screen and (max-width: 800px) {
   /* For mobile phones: */
@@ -451,6 +464,7 @@ ul::before {
   align-items: center;
   flex-direction: column;
   padding:20px;
+  width: 100%;
 }
 .content-card {
   display: flex;
@@ -621,13 +635,15 @@ ul::before {
 }
 
 .videos {
-  margin: 15px;
+  margin: 15px 0px 0px 0px;
   border: 1px solid gray;
   border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-self: center;
+  padding:20px;
+  width:100%
 }
 .desc {
   white-space: pre-wrap;
@@ -638,6 +654,12 @@ ul::before {
   text-align: left;
   color: red;
 }
+@media only screen and (max-width: 500px) {
+  .videos{
+    width:100%;
+  }
+}
+
 /* videos end  */
 
 /* CSS GRID START  */
@@ -645,10 +667,10 @@ ul::before {
 /* main container css grid start  */
 .main-container {
   display: grid;
-  height: auto;
+  height: fit-content;
   width: 100%;
-  grid-template-columns: 0.1fr 0.15fr 0.35fr 0.35fr 0.1fr;
-  grid-template-rows: 0.1fr 0.6fr 1fr 1fr;
+  grid-template-columns: 0.1fr 0.15fr 0.45fr 0.45fr 0.1fr;
+  grid-template-rows: 0.1fr 0.3fr auto auto;
   /* grid-template-columns: repeat(4, 1fr);
    grid-template-rows:  repeat(4, 1fr); */
   grid-template-areas:
@@ -656,9 +678,12 @@ ul::before {
     " . main-header main-header main-header . "
     " . main-navigation main-content main-content . "
     " . . main-content main-content . ";
+    /* align-items: start; */
+    
 }
 .main-title {
   grid-area: main-title;
+  margin:20px 0px;
 }
 .main-header {
   display: flex;
@@ -681,14 +706,14 @@ ul::before {
 @media only screen and (max-width: 800px) {
   .main-container {
     grid-template-columns: 1fr;
-    /* grid-template-rows: 1fr 2.5fr 3fr 6fr; */
-    grid-template-rows: auto auto auto 1fr;
+    /* grid-template-rows: 0.1fr 0.5fr 0.5fr 1fr; */
+    grid-template-rows: auto auto auto auto;
     grid-template-areas:
       "main-title"
       "main-header"
       "main-navigation"
       "main-content";
-    grid-row-gap: 5px;
+    /* grid-row-gap: 5px; */
   }
   .main-navigation a {
     text-align: center;
@@ -700,7 +725,54 @@ ul::before {
     padding: 0px;
   }
 }
+.main-title{
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: 1fr;
+  grid-template-areas: 
+  "logo company-name search-box help user-login"
+  ;
+  width: 100%;
+}
+/* .main-title{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+} */
+.company-name img, .help img, .user-login img, .search-box{
+  grid-area: logo;
+  min-width: 10px;
+  min-height: 10px;
+  width: inherit;
+  height:inherit;
+  background-color: yellow;
+}
+.logo{
+width:100%;
+height:auto;
+}
+.help, .user-login{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 
+}
+
+.company-name{
+  grid-area: company-name;
+}
+.search-box{
+  grid-area: search-box;
+}
+.help{
+  grid-area: help;
+}
+.user-login{
+  grid-area: user-login;
+}
 /* main container css grid end  */
 
 /* header grid css start  */
@@ -1055,6 +1127,7 @@ ul::before {
   "user-reviews user-reviews"
   ;
   grid-row-gap: 10px;
+  width:100%;
 }
 .review-container>*{
   display:flex;

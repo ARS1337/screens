@@ -21,29 +21,6 @@ import {
 function Navigation() {
    return (
     <>
-      {/* <nav>
-        <ul class="leftMenu">
-            <li>
-              <a href="#">Meals</a>
-            </li>
-            <li>
-              <a href="#">Combos</a>
-            </li>
-            <li>
-              <a href="#">Recommended</a>
-            </li>
-            <li>
-              <a href="#">Extras</a>
-            </li>
-            <li>
-              <a href="#">Reviews</a>
-            </li>
-            <li>
-              <a href="#">Videos</a>
-            </li>
-        </ul>
-      </nav> */}
-
         <>
           <nav>
             <ul class="leftMenu">
