@@ -776,7 +776,7 @@ ul::before {
 .main-title {
     display: grid;
     /* grid-template-columns: repeat(5, auto); */
-    grid-template-columns: 0.1fr 0.3fr 0.6fr 0.15fr 0.2fr;
+    grid-template-columns: 0.1fr 0.3fr 0.50fr 0.15fr 0.2fr;
     grid-template-rows: 1fr;
     grid-template-areas: "logo company-name search-box help user-login";
     width: 100%;
@@ -792,8 +792,7 @@ ul::before {
 .logo img,
 .company-name img,
 .help img,
-.user-login img,
-.search-box {
+.user-login img {
     grid-area: logo;
     min-width: 10px;
     min-height: 10px;
@@ -808,7 +807,7 @@ ul::before {
         height: auto;
         width: auto;
         object-fit: contain;
-        font-size: small;
+        font-size: smaller;
     }
     /* .main-title{
       grid-template-columns: 0.1fr 0.3fr 0.6fr 0.15fr 0.2fr;
@@ -837,6 +836,61 @@ ul::before {
 
 .search-box {
     grid-area: search-box;
+    border: 1px solid gray;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 0.4fr 0.1fr 1fr 0.1fr 0.2fr;
+    grid-template-rows: auto;
+    grid-template-areas: "search-box-left vl1 search-box-center vl2 search-box-right";
+}
+
+.vl1 {
+    grid-area: vl1;
+    border-left: 1px solid #E54E51;
+    height: 80%;
+}
+
+.vl2 {
+    grid-area: vl2;
+    border-left: 1px solid #E54E51;
+    height: 80%;
+}
+
+.search-box-left {
+    grid-area: search-box-left;
+}
+
+.search-box-center {
+    grid-area: search-box-center;
+}
+
+.search-box-right {
+    grid-area: search-box-right;
+}
+
+.search-box>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    color: gray;
+    font-weight: 300;
+}
+
+.location-list {
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: #E94E53;
+}
+
+.search-box-right img {
+    margin-right: 50px
 }
 
 .help {
