@@ -12,7 +12,7 @@ function Title() {
       <div class="company-name">
         <img src="images jpg/title/logo white.png" />
       </div>
-      <div class="search-box">
+      <div class="search-box" id="search-box">
         <div class="search-box-left">
           <img src="images jpg/title/location-marker.png" />
           <select id="cars" name="cars" class="location-list">
@@ -27,17 +27,21 @@ function Title() {
         <div class="vl1"/>
         <div class="search-box-center">
           <input
+          id="search"
             type="text"
             class="search"
-            value="Search for dishes, Restaurants"
+            placeholder="Search for dishes, Restaurants"
+            onClick={clearPlaceholder}
           />
         </div>
         <div class="vl2"/>
         <div class="search-box-right">
+          <button onClick={red} class="search-btn">
           <img src="images jpg/title/Icon search.png" />
+          </button>
         </div>
       </div>
-      <div class="help">
+      <div class="help" id="help">
         <img src="images jpg/title/Warning.png" />
         <p>Help</p>
       </div>
@@ -46,10 +50,14 @@ function Title() {
         <img src="images jpg/title/Profile.png" alt="" />
         <p>Siddhu</p>
       </div>
-
-      {/* </div> */}
     </>
   );
 }
+const red=()=>{
+  // document.getElementById("help").style.backgroundColor ="yellow";
+}
+const clearPlaceholder=()=>{
+  document.getElementById("search").style.placeholder="";
+}
 
-export default Title;
+export {Title, red, clearPlaceholder};

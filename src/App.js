@@ -2,7 +2,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Videos from "./components/Videos";
-import Title from "./components/Title";
+import {Title} from "./components/Title";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Playground from "./components/Playground";

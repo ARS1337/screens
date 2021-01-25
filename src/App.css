@@ -581,7 +581,7 @@ ul::before {
 }
 
 .line {
-    width: 90%;
+    width: 100%;
     height: 0px;
 }
 
@@ -731,7 +731,7 @@ ul::before {
 
 .main-title {
     grid-area: main-title;
-    margin: 20px 0px;
+    margin: 20px 0px 40px 0px;
 }
 
 .main-header {
@@ -778,15 +778,21 @@ ul::before {
     grid-template-columns: 0.1fr 0.2fr 0.60fr 0.1fr 0.1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "logo company-name search-box help user-login";
-    width: 100%;
     height: fit-content;
     gap: 20px;
 }
 
+.main-title>* {
+    width: auto;
+}
+
 @media only screen and (max-width: 800px) {
     .main-title {
-        width: 100%;
-        grid-template-columns: repeat(5, 0.3fr);
+        grid-template-columns: 0.2fr 1fr 0.5fr 0.3fr 0.3fr;
+        gap: 10px;
+    }
+    .main-title>* {
+        font-size: 16px;
     }
 }
 
@@ -816,9 +822,9 @@ ul::before {
         object-fit: contain;
         font-size: smaller;
     }
-    .main-title {
+    /* .main-title {
         grid-template-columns: 0.1fr 0.3fr 0.2fr 0.15fr 0.2fr;
-    }
+    } */
     .search {
         width: 80%;
     }
@@ -869,10 +875,17 @@ ul::before {
 
 .search-box-center {
     grid-area: search-box-center;
+    min-width: 50px;
 }
 
 .search-box-right {
     grid-area: search-box-right;
+}
+
+.search-btn {
+    border: none;
+    background-color: white;
+    width: auto;
 }
 
 .search-box>* {
@@ -885,7 +898,7 @@ ul::before {
 .search {
     width: 100%;
     border: none;
-    font-size: 16px;
+    font-size: 25px;
     color: gray;
     font-weight: 300;
 }
@@ -910,13 +923,13 @@ ul::before {
 }
 
 @media only screen and (max-width: 800px) {
-    .search-box-left,
+    /* .search-box-left,
     .search-box-center,
     .vl1,
     .vl2 {
         display: none;
         background-color: red;
-    }
+    } */
     .search-box-right {
         /* background-color: #282c34; */
         margin-right: 20px;
@@ -924,8 +937,13 @@ ul::before {
     .search-box-right img {
         margin: 0px;
     }
-    .search-box {
+    .search-box,
+    .vl1,
+    .vl2 {
         border: none;
+    }
+    .location-list {
+        font-size: 16px;
     }
 }
 
@@ -939,13 +957,13 @@ ul::before {
     display: grid;
     width: 100%;
     height: auto;
-    grid-template-columns: 0.1fr 1fr 2fr;
+    grid-template-columns: 0.4fr 1fr 1fr;
     grid-template-rows: repeat(4, 0.2fr);
     grid-template-areas: "header-img header-info-title header-rating" "header-img header-info-details1 header-reviews" "header-img header-info-details2 header-weeks-menu" "header-img . header-week";
     border: 1px solid gray;
     border-radius: 10px;
     padding: 25px;
-    grid-column-gap: 5vw;
+    grid-column-gap: 3vw;
     overflow: hidden;
     font-size: 1vw;
 }
