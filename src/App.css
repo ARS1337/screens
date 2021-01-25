@@ -775,12 +775,19 @@ ul::before {
 
 .main-title {
     display: grid;
-    /* grid-template-columns: repeat(5, auto); */
-    grid-template-columns: 0.1fr 0.3fr 0.50fr 0.15fr 0.2fr;
+    grid-template-columns: 0.1fr 0.2fr 0.60fr 0.1fr 0.1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "logo company-name search-box help user-login";
     width: 100%;
-    height: fit-content
+    height: fit-content;
+    gap: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .main-title {
+        width: 100%;
+        grid-template-columns: repeat(5, 0.3fr);
+    }
 }
 
 .main-title>* {
@@ -809,9 +816,9 @@ ul::before {
         object-fit: contain;
         font-size: smaller;
     }
-    /* .main-title{
-      grid-template-columns: 0.1fr 0.3fr 0.6fr 0.15fr 0.2fr;
-    } */
+    .main-title {
+        grid-template-columns: 0.1fr 0.3fr 0.2fr 0.15fr 0.2fr;
+    }
     .search {
         width: 80%;
     }
@@ -839,7 +846,7 @@ ul::before {
     border: 1px solid gray;
     border-radius: 5px;
     display: grid;
-    grid-template-columns: 0.4fr 0.1fr 1fr 0.1fr 0.2fr;
+    grid-template-columns: 0.4fr 0.1fr 0.6fr 0.1fr 0.2fr;
     grid-template-rows: auto;
     grid-template-areas: "search-box-left vl1 search-box-center vl2 search-box-right";
 }
@@ -872,6 +879,7 @@ ul::before {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: auto;
 }
 
 .search {
@@ -901,6 +909,26 @@ ul::before {
     grid-area: user-login;
 }
 
+@media only screen and (max-width: 800px) {
+    .search-box-left,
+    .search-box-center,
+    .vl1,
+    .vl2 {
+        display: none;
+        background-color: red;
+    }
+    .search-box-right {
+        /* background-color: #282c34; */
+        margin-right: 20px;
+    }
+    .search-box-right img {
+        margin: 0px;
+    }
+    .search-box {
+        border: none;
+    }
+}
+
 
 /* main container css grid end  */
 
@@ -912,24 +940,26 @@ ul::before {
     width: 100%;
     height: auto;
     grid-template-columns: 0.1fr 1fr 2fr;
-    grid-template-rows: repeat(3, 0.5fr) 1fr;
+    grid-template-rows: repeat(4, 0.2fr);
     grid-template-areas: "header-img header-info-title header-rating" "header-img header-info-details1 header-reviews" "header-img header-info-details2 header-weeks-menu" "header-img . header-week";
     border: 1px solid gray;
     border-radius: 10px;
     padding: 25px;
-    grid-column-gap: 60px;
+    grid-column-gap: 5vw;
     overflow: hidden;
     font-size: 1vw;
 }
 
 .header-img {
     grid-area: header-img;
+    height: 100%;
+    width: auto
 }
 
 .header-img img {
     height: inherit;
-    /* min-height: 12vw;
-  min-width: 12vw; */
+    height: 100%;
+    width: auto
 }
 
 .header-info-title {
@@ -983,7 +1013,7 @@ ul::before {
 .header-info-details1>*,
 .header-reviews>*,
 .header-weeks-menu>* {
-    font-size: 1.3vw;
+    font-size: 1.4vw;
     margin: 0px;
 }
 
@@ -1090,7 +1120,7 @@ ul::before {
     grid-template-rows: 0.2fr 0.1fr 0.3fr 0.1fr 0.1fr auto;
     grid-template-areas: "reviews-header reviews-header reviews-header" "rate-your-experience-header rate-your-experience-rating ." "submit-review-header submit-review-input submit-review-button" "customer-reviews . . " "rating-and-total-reviews . . " "user-reviews user-reviews user-reviews ";
     grid-column-gap: 10px;
-    margin-top: 20px;
+    margin-top: 15px;
     border: 1px solid gray;
     border-radius: 5px;
     ;
