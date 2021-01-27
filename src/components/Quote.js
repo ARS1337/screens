@@ -1,0 +1,60 @@
+import React from "react";
+import "../App.css";
+
+function Quote() {
+  return (
+    <>
+      <div class="highlight-above-quote">
+        <span>Let us know what you</span>
+        <br />
+        <span>want to eat...</span>
+      </div>
+      <div class="quote-price">
+        <div class="what-eat">
+          <h3>What would you like to eat...</h3>
+        </div>
+        <div class="search-icon">
+          <img src="images jpg/landing/Icon search.png" />
+        </div>
+        <div class="what-eat-input">
+          <input type="text" class="pp" />
+        </div>
+        <div class="quote-price-label">
+          <h3>...and quote your own price.</h3>
+        </div>
+        <div class="pay">
+          <label>Pay:</label>
+          <input type="number" placeholder="Minimum 100" />
+        </div>
+        <div class="blank-input">
+          <input type="text" />
+        </div>
+        <div class="radio">
+          <ul class="select-type">
+            <li>
+              <input type="radio" value="1" name="radio" id="Breakfast" />
+              <label for="Breakfast">Breakfast</label>
+            </li>
+            <li>
+              <input type="radio" value="2" name="radio" id="Lunch" />
+              <label for="Lunch">Lunch</label>
+            </li>
+            <li>
+              <input type="radio" value="3" name="radio" id="Dinner" />
+              <label for="Dinner">Dinner</label>
+            </li>
+          </ul>
+        </div>
+        <div class="date">{new Date().toDateString()}</div>
+        <div class="calendar-icon">
+          <img src="images jpg/landing/date-range.png" alt="" />
+        </div>
+      </div>
+      <div class="quote-confirm">
+        <button value="Confirm">CONFIRM</button>
+      </div>
+    </>
+  );
+}
+
+export default Quote;

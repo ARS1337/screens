@@ -1360,3 +1360,400 @@ ul::before {
 
 
 /* CSS GRID END  */
+
+
+/* Quote start */
+
+.quote-price {
+    display: grid;
+    grid-template-columns: 0.5fr 0.3fr 0.2fr 0.3fr 0.2fr 0.1fr;
+    grid-template-rows: 1fr 1fr 1fr 0.3fr 1fr;
+    grid-template-areas: "what-eat what-eat . . . search-icon" "what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input " "quote-price-label quote-price-label . pay . blank-input" "radio radio . . date calendar-icon" ".  quote-confirm . . . .";
+    padding: 20px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    max-width: 746px;
+}
+
+.what-eat {
+    grid-area: what-eat;
+}
+
+.search-icon {
+    grid-area: search-icon;
+}
+
+.what-eat-input {
+    grid-area: what-eat-input;
+}
+
+.quote-price-label {
+    grid-area: quote-price-label;
+    white-space: nowrap;
+    /* font-size: 2vw; */
+}
+
+.pay {
+    grid-area: pay;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.blank-input {
+    grid-area: blank-input;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.radio {
+    grid-area: radio;
+    max-width: 400px;
+    font-size: 18px;
+}
+
+.date {
+    grid-area: date;
+    white-space: nowrap;
+}
+
+.calendar-icon {
+    grid-area: calendar-icon;
+}
+
+.quote-confirm {
+    grid-area: quote-confirm;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.quote-price>* {
+    margin: 5px;
+}
+
+.quote-price input {
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.blank-input input {
+    width: 40px;
+}
+
+.pay input {
+    width: 80px;
+}
+
+.what-eat-input input[type="text"] {
+    width: 100%;
+}
+
+
+/* radio labels */
+
+.radio ul {
+    list-style: none;
+    border: 1px solid red;
+    overflow: hidden;
+    margin-bottom: 0px;
+    max-width: fit-content;
+    padding: 0px;
+}
+
+.radio li {
+    display: inline-block;
+    text-align: center;
+}
+
+.radio input {
+    visibility: hidden;
+}
+
+.radio label {
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px 15px;
+    font-weight: 500;
+}
+
+.radio input:checked+label {
+    background: red;
+    color: white
+}
+
+input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+.quote-confirm button {
+    background-color: #E54E51;
+    color: white;
+    border-radius: 40px;
+    border: 1px solid grey;
+    font-size: 25px;
+    padding: 10px 30px;
+    font-weight: 600;
+}
+
+
+/* radio labels */
+
+.highlight-above-quote p,
+.highlight-above-quote span {
+    background-color: #E54E51;
+    font-size: 3vw;
+    color: white;
+    padding: 10px;
+    margin: 0px;
+}
+
+.highlight-above-quote {
+    margin-bottom: 100px;
+}
+
+.highlight-above-quote span {
+    background-color: #E54E51;
+}
+
+
+/*Quote end  */
+
+
+/* landing heading strat  */
+
+.mainbg {
+    background-image: url("images jpg/landing/MainImage.png");
+    background-size: cover;
+}
+
+.mainbg-title {
+    display: grid;
+    grid-template-columns: 0.2fr 0.3fr 0.3fr 0.5fr 0.2fr 0.1fr 0.2fr;
+    grid-template-rows: repeat(2, auto) 0.5fr;
+    grid-template-areas: ". main-location . company-name help user-login signup " ". . mainbg-search mainbg-search . . ." ". quote quote quote . . .";
+    padding-top: 35px;
+}
+
+.main-location {
+    grid-area: main-location;
+}
+
+.company-name {
+    grid-area: company-name;
+    padding-bottom: 20px;
+}
+
+.mainbg .help {
+    grid-area: help;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.user-login {
+    grid-area: user-login;
+}
+
+.signup {
+    grid-area: signup;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    font-size: medium;
+}
+
+.quote {
+    grid-area: quote;
+}
+
+.main-location>*,
+.help>*,
+.signup>*,
+.user-login>* {
+    font-weight: 400;
+    color: #282c34;
+    cursor: pointer;
+}
+
+.mainbg-search {
+    grid-area: mainbg-search;
+    padding-bottom: 300px;
+}
+
+.mainbg-search input {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+
+/* explore category start */
+
+.exploreCategory {
+    /* display: grid;
+    grid-template-columns: repeat(7, auto);
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas: ". . h1 h1 h1 h1 . ." ". . span span span span . ." ". categories categories categories categories categories ." ". categories categories categories categories categories ."; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(214, 208, 208);
+    padding: 30px 0px;
+}
+
+.exploreCategory-title,
+.exploreKitchen-title,
+.cookVideos-title {
+    /* grid-area: h1; */
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.exploreCategory span,
+.exploreKitchen span,
+.cookVideos span {
+    /* grid-area: span; */
+    font-size: 18px;
+}
+
+.categories {
+    /* grid-area: categories; */
+    padding: 2% 10%;
+}
+
+.types {
+    /* border: 1px solid black; */
+    padding: 0px;
+    max-width: min-content;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin-bottom: 30px
+}
+
+.types img {
+    max-width: 80%;
+}
+
+.types span {
+    margin-top: -50px;
+    font-weight: 600;
+}
+
+
+/* explore category end */
+
+
+/* explore kitchen :start  */
+
+.exploreKitchen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(214, 208, 208);
+    width: 100%;
+    padding: 20px 0px;
+    margin: 50px 0px;
+}
+
+.exploreKitchen-content {
+    /* display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: 1fr;
+    grid-template-areas: "kitchen kitchen kitchen"; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10%;
+}
+
+.kitchen {
+    grid-area: kitchen;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas: "kitchenImage kitchenImage" "kitchenName kitchenRating" "type . " "foodCost kitchenReviews";
+    max-width: min-content;
+    margin: 30px;
+}
+
+.kitchenImage {
+    grid-area: kitchenImage;
+}
+
+.kitchenRating {
+    grid-area: kitchenRating;
+    margin-top: 25px;
+}
+
+.kitchenName {
+    grid-area: kitchenName;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 25px;
+}
+
+.type {
+    grid-area: type;
+}
+
+.foodCost {
+    grid-area: foodCost;
+}
+
+.kitchenReviews {
+    grid-area: kitchenReviews;
+}
+
+.kitchenReviews,
+.kitchenRating {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+/* expore kitchen end  */
+
+
+/* .cookVideos start  */
+
+.cookVideos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(214, 208, 208);
+    width: 100%;
+    padding: 20px 0px;
+    margin: 50px 0px;
+}
+
+.cookVideos-content {
+    margin: 0px 10%;
+}
+
+
+/* .cookVideos end  */
+
+
+/* landing heading end  */
