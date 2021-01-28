@@ -1693,11 +1693,14 @@ input[type="radio"] {
     grid-template-rows: repeat(4, auto);
     grid-template-areas: "kitchenImage kitchenImage" "kitchenName kitchenRating" "type . " "foodCost kitchenReviews";
     max-width: min-content;
-    margin: 30px;
+    margin: 20px 2%;
+    max-width: auto;
+    max-height: auto;
 }
 
 .kitchenImage {
     grid-area: kitchenImage;
+    max-width: fit-content;
 }
 
 .kitchenRating {
@@ -1754,6 +1757,101 @@ input[type="radio"] {
 
 
 /* .cookVideos end  */
+
+
+/* footer strat  */
+
+.mainbg-footer {
+    background-color: #2d2d2d;
+    display: grid;
+    grid-template-columns: 0.1fr repeat(4, auto) 0.1fr;
+    grid-template-rows: repeat(9, auto);
+    grid-template-areas: ". footer-title footer-title footer-title footer-title ." ". . . . CompanyLink ." ". social social social AboutusLink . " ". social social social TnCLink ." ". . downloads . ContactusLink ." ". google-apple google-apple google-apple PrivacyPolicyLink ." ". google-apple google-apple google-apple FaqsLink ." ". line line line line ." ". last-line last-line last-line last-line .";
+    width: 100%;
+}
+
+.footer-title {
+    grid-area: footer-title;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px
+}
+
+.CompanyLink {
+    grid-area: CompanyLink;
+}
+
+.social {
+    grid-area: social;
+}
+
+.AboutusLink {
+    grid-area: AboutusLink;
+}
+
+.TnCLink {
+    grid-area: TnCLink;
+}
+
+.downloads {
+    grid-area: downloads;
+    font-size: 25px;
+    color: white;
+    font-weight: 600;
+}
+
+.ContactusLink {
+    grid-area: ContactusLink;
+}
+
+.PrivacyPolicyLink {
+    grid-area: PrivacyPolicyLink;
+}
+
+.google-apple {
+    grid-area: google-apple;
+}
+
+.last-line {
+    grid-area: last-line;
+}
+
+.FaqsLink {
+    grid-area: FaqsLink;
+}
+
+.line {
+    grid-area: line;
+}
+
+.mainbg-footer a {
+    text-decoration: none;
+    color: White;
+    font-size: 20px;
+    margin: 10px
+}
+
+.mainbg-footer img {
+    max-width: 100%;
+}
+
+.google-apple,
+.social,
+.downloads {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.social>* {
+    padding: 5px
+}
+
+
+/* footer end  */
 
 
 /* landing heading end  */
