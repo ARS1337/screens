@@ -5,20 +5,16 @@ function Quote() {
   return (
     <>
       <div class="highlight-above-quote">
-        <span>Let us know what you</span>
+        <span>let us know what you</span>
         <br />
         <span>want to eat...</span>
       </div>
       <div class="quote-price">
-        <div class="what-eat">
-          <h3>What would you like to eat...</h3>
-        </div>
+          <h3 class="what-eat">What would you like to eat...</h3>
         <div class="search-icon">
           <img src="images jpg/landing/Icon search.png" />
         </div>
-        <div class="what-eat-input">
-          <input type="text" class="pp" />
-        </div>
+          <input type="text" class="pp" class="what-eat-input"/>
         <div class="quote-price-label">
           <h3>...and quote your own price.</h3>
         </div>

@@ -45,6 +45,18 @@
     font-family: Raleway-Bold, Raleway;
 }
 
+*:focus {
+    outline: none;
+}
+
+html {
+    min-width: 100%;
+}
+
+body {
+    min-width: 100%;
+}
+
 .col-1 {
     width: 8.33%;
 }
@@ -332,6 +344,13 @@
     grid-area: main-container;
 }
 
+@media only screen and (max-width: 800px) {
+    .main {
+        grid-template-columns: 1fr;
+        grid-template-areas: "main-container";
+    }
+}
+
 
 /* heading start */
 
@@ -473,13 +492,8 @@ ul::before {
 }
 
 @media only screen and (max-width: 800px) {
-    /* For mobile phones: */
     .leftMenu-container {
         width: 100%;
-    }
-    .content {
-        width: 100%;
-        padding: 0px;
     }
 }
 
@@ -504,7 +518,7 @@ ul::before {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 15px 20px;
+    padding: 10px 20px;
 }
 
 .content-title {
@@ -641,6 +655,24 @@ ul::before {
     }
 }
 
+@media only screen and (max-width: 800px) {
+    /* For mobile phones: */
+    .content {
+        width: 100%;
+        padding: 20px 0px;
+    }
+    .content-title {
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+    .content-card .left {
+        padding: 12px 0px;
+    }
+    .content .line {
+        padding: 10px 0px;
+    }
+}
+
 
 /* content end  */
 
@@ -663,8 +695,8 @@ ul::before {
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    max-height: auto;
+    max-width: 300px;
+    max-height: 450px;
     min-height: auto;
     min-width: auto;
     margin: 20px 2%;
@@ -688,7 +720,7 @@ ul::before {
     justify-content: center;
     align-self: center;
     padding: 20px;
-    width: 100%
+    width: 100%;
 }
 
 .desc {
@@ -707,6 +739,13 @@ ul::before {
         width: 100%;
     }
 }
+
+
+/* @media only screen and (max-width: 1200px) {
+    .videos .card {
+        width: 50%
+    }
+} */
 
 
 /* videos end  */
@@ -734,6 +773,12 @@ ul::before {
     margin: 20px 0px 40px 0px;
 }
 
+@media only screen and (max-width: 600px) {
+    .main-title {
+        width: 100%;
+    }
+}
+
 .main-header {
     display: flex;
     justify-content: center;
@@ -746,12 +791,18 @@ ul::before {
     grid-area: main-navigation;
 }
 
+.main-navigation a {
+    display: block;
+}
+
 .main-content {
     grid-area: main-content;
     /* border: 1px gray solid; */
     border-radius: 5px;
     /* margin-top: 15px ; */
     padding: 0px;
+    overflow: hidden;
+    width: auto;
 }
 
 @media only screen and (max-width: 800px) {
@@ -766,7 +817,6 @@ ul::before {
         text-align: center;
         color: #383434;
         font-size: 5vw;
-        display: block;
     }
     .main-navigation li {
         padding: 0px;
@@ -775,7 +825,7 @@ ul::before {
 
 .main-title {
     display: grid;
-    grid-template-columns: 0.1fr 0.2fr 0.60fr 0.1fr 0.1fr;
+    grid-template-columns: 0.1fr 0.2fr 0.6fr 0.1fr 0.1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "logo company-name search-box help user-login";
     height: fit-content;
@@ -788,8 +838,8 @@ ul::before {
 
 @media only screen and (max-width: 800px) {
     .main-title {
-        grid-template-columns: 0.2fr 1fr 0.5fr 0.3fr 0.3fr;
-        gap: 10px;
+        grid-template-columns: 0.2fr 0.5fr 1fr 0.3fr 0.3fr;
+        gap: 3px;
     }
     .main-title>* {
         font-size: 16px;
@@ -805,7 +855,9 @@ ul::before {
 .logo img,
 .company-name img,
 .help img,
-.user-login img {
+.user-login img,
+.search-box-left img,
+.search-box-right img {
     grid-area: logo;
     min-width: 10px;
     min-height: 10px;
@@ -816,10 +868,17 @@ ul::before {
 
 @media only screen and (max-width: 800px) {
     .help>*,
-    .user-login>* {
+    .user-login>*,
+    .search-box-center>*,
+    .search-box-left select,
+    .search-box-left option {
         height: auto;
         width: auto;
         object-fit: contain;
+        font-size: smaller;
+        font-weight: 600;
+    }
+    .search-box-center input {
         font-size: smaller;
     }
     /* .main-title {
@@ -859,13 +918,13 @@ ul::before {
 
 .vl1 {
     grid-area: vl1;
-    border-left: 1px solid #E54E51;
+    border-left: 1px solid #e54e51;
     height: 80%;
 }
 
 .vl2 {
     grid-area: vl2;
-    border-left: 1px solid #E54E51;
+    border-left: 1px solid #e54e51;
     height: 80%;
 }
 
@@ -907,11 +966,11 @@ ul::before {
     border: none;
     font-size: 20px;
     font-weight: 500;
-    color: #E94E53;
+    color: #e94e53;
 }
 
 .search-box-right img {
-    margin-right: 50px
+    margin-right: 50px;
 }
 
 .help {
@@ -920,6 +979,7 @@ ul::before {
 
 .user-login {
     grid-area: user-login;
+    text-align: right;
 }
 
 @media only screen and (max-width: 800px) {
@@ -932,7 +992,7 @@ ul::before {
     } */
     .search-box-right {
         /* background-color: #282c34; */
-        margin-right: 20px;
+        margin-right: 0px;
     }
     .search-box-right img {
         margin: 0px;
@@ -971,13 +1031,13 @@ ul::before {
 .header-img {
     grid-area: header-img;
     height: 100%;
-    width: auto
+    width: auto;
 }
 
 .header-img img {
     height: inherit;
     height: 100%;
-    width: auto
+    width: auto;
 }
 
 .header-info-title {
@@ -1099,7 +1159,7 @@ ul::before {
     .header-weeks-menu>*,
     .header-reviews>* {
         font-size: large;
-        margin: 5px
+        margin: 5px;
     }
     .header-info-details1>* {
         font-size: 3vw;
@@ -1141,7 +1201,7 @@ ul::before {
     margin-top: 15px;
     border: 1px solid gray;
     border-radius: 5px;
-    ;
+    width: 100%;
     padding: 20px;
 }
 
@@ -1205,7 +1265,7 @@ ul::before {
 .submit-review-header>*,
 .customer-review-header,
 .total-reviews {
-    font-size: 1.3vw
+    font-size: 1.3vw;
 }
 
 .submit-review-header,
@@ -1280,7 +1340,7 @@ ul::before {
 .review-date {
     grid-area: review-date;
     text-align: right;
-    color: black
+    color: black;
 }
 
 .user-name {
@@ -1367,16 +1427,18 @@ ul::before {
 .quote-price {
     display: grid;
     grid-template-columns: 0.5fr 0.3fr 0.2fr 0.3fr 0.2fr 0.1fr;
-    grid-template-rows: 1fr 1fr 1fr 0.3fr 1fr;
-    grid-template-areas: "what-eat what-eat . . . search-icon" "what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input " "quote-price-label quote-price-label . pay . blank-input" "radio radio . . date calendar-icon" ".  quote-confirm . . . .";
+    grid-template-rows: 1fr 1fr 1fr 0.3fr;
+    grid-template-areas: "what-eat what-eat what-eat what-eat what-eat search-icon" "what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input " "quote-price-label quote-price-label . pay . blank-input" "radio radio radio radio date calendar-icon";
     padding: 20px;
     border: 1px solid gray;
     border-radius: 10px;
     max-width: 746px;
+    background-color: white;
 }
 
 .what-eat {
     grid-area: what-eat;
+    text-align: left;
 }
 
 .search-icon {
@@ -1389,7 +1451,6 @@ ul::before {
 
 .quote-price-label {
     grid-area: quote-price-label;
-    white-space: nowrap;
     /* font-size: 2vw; */
 }
 
@@ -1433,6 +1494,10 @@ ul::before {
     margin-bottom: 100px;
 }
 
+.quote-confirm button:hover {
+    cursor: pointer;
+}
+
 .quote-price>* {
     margin: 5px;
 }
@@ -1447,11 +1512,12 @@ ul::before {
 }
 
 .pay input {
-    width: 80px;
+    min-width: 100px;
+    margin-left: 10px;
 }
 
 .what-eat-input input[type="text"] {
-    width: 100%;
+    width: fit-content;
 }
 
 
@@ -1478,13 +1544,13 @@ ul::before {
 .radio label {
     cursor: pointer;
     font-size: 18px;
-    padding: 10px 15px;
+    padding: 10px 10px;
     font-weight: 500;
 }
 
 .radio input:checked+label {
-    background: red;
-    color: white
+    background: #e54e51;
+    color: white;
 }
 
 input[type="radio"] {
@@ -1494,7 +1560,7 @@ input[type="radio"] {
 }
 
 .quote-confirm button {
-    background-color: #E54E51;
+    background-color: #e54e51;
     color: white;
     border-radius: 40px;
     border: 1px solid grey;
@@ -1508,19 +1574,44 @@ input[type="radio"] {
 
 .highlight-above-quote p,
 .highlight-above-quote span {
-    background-color: #E54E51;
+    background-color: #e54e51;
     font-size: 3vw;
     color: white;
-    padding: 10px;
-    margin: 0px;
+    padding: 0px;
+    padding-right: 100px;
+    margin: 100px 0px;
 }
 
 .highlight-above-quote {
-    margin-bottom: 100px;
+    margin-bottom: 70px;
+    text-align: left;
+    font-size: 25px;
 }
 
 .highlight-above-quote span {
-    background-color: #E54E51;
+    background-color: #e54e51;
+}
+
+@media only screen and (max-width: 900px) {
+    .quote-price {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(9, auto);
+        grid-template-areas: "what-eat search-icon" "what-eat-input what-eat-input" "quote-price-label quote-price-label" "pay pay" "blank-input blank-input" "radio radio" "date date" "calendar-icon calendar-icon" "quote-confirm quote-confirm";
+        margin: 0px 10px;
+    }
+    .quote-price>* {
+        display: flex;
+        justify-content: center;
+    }
+    .quote-price>* {
+        font-size: 15px;
+    }
+    .quote-price label {
+        font-size: 15px;
+    }
+    .highlight-above-quote {
+        margin-left: 10px
+    }
 }
 
 
@@ -1531,24 +1622,51 @@ input[type="radio"] {
 
 .mainbg {
     background-image: url("images jpg/landing/MainImage.png");
-    background-size: cover;
+    /* background-size: contain; */
+    width: 100%;
+    height: auto;
 }
 
 .mainbg-title {
     display: grid;
-    grid-template-columns: 0.2fr 0.3fr 0.3fr 0.5fr 0.2fr 0.1fr 0.2fr;
+    grid-template-columns: 0.4fr 0.3fr 0.5fr 1fr 0.2fr 0.2fr 0.3fr 0.1fr;
     grid-template-rows: repeat(2, auto) 0.5fr;
-    grid-template-areas: ". main-location . company-name help user-login signup " ". . mainbg-search mainbg-search . . ." ". quote quote quote . . .";
-    padding-top: 35px;
+    grid-template-areas: ". main-location company-name company-name help user-login signup ." ". . mainbg-search mainbg-search . . . ." ". quote quote quote . . . .";
+    padding-top: 50px;
+    width: 100%;
+}
+
+.company-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+    .mainbg-title {
+        grid-template-columns: 0.4fr 1fr 0.2fr 0.2fr 0.2fr;
+        grid-template-areas: "main-location company-name help user-login signup" ". mainbg-search mainbg-search mainbg-search . " "quote quote quote quote quote";
+    }
+    .mainbg {
+        /* background-size: contain; */
+        width: 100%;
+        height: auto;
+        background-repeat: no-repeat;
+    }
 }
 
 .main-location {
     grid-area: main-location;
 }
 
+.main-location select {
+    background: transparent;
+}
+
 .company-name {
     grid-area: company-name;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
 }
 
 .mainbg .help {
@@ -1589,7 +1707,8 @@ input[type="radio"] {
 
 .mainbg-search {
     grid-area: mainbg-search;
-    padding-bottom: 300px;
+    padding-bottom: 200px;
+    padding-top: 40px;
 }
 
 .mainbg-search input {
@@ -1598,6 +1717,15 @@ input[type="radio"] {
     border-radius: 10px;
     border: 1px solid gray;
 }
+
+.user-login label:hover,
+.signup label:hover,
+.help label:hover {
+    border-bottom: 5px red solid;
+    border-bottom-width: 50%;
+}
+
+.user-login label {}
 
 
 /* explore category start */
@@ -1613,6 +1741,7 @@ input[type="radio"] {
     flex-direction: column;
     background-color: rgb(214, 208, 208);
     padding: 30px 0px;
+    width: 100%;
 }
 
 .exploreCategory-title,
@@ -1646,7 +1775,11 @@ input[type="radio"] {
     justify-content: center;
     align-items: center;
     float: left;
-    margin-bottom: 30px
+    margin-bottom: 30px;
+}
+
+.types img:hover {
+    cursor: pointer;
 }
 
 .types img {
@@ -1696,6 +1829,10 @@ input[type="radio"] {
     margin: 20px 2%;
     max-width: auto;
     max-height: auto;
+}
+
+.kitchen:hover {
+    cursor: pointer;
 }
 
 .kitchenImage {
@@ -1755,6 +1892,18 @@ input[type="radio"] {
     margin: 0px 10%;
 }
 
+.name-upload-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.kitchen-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
 
 /* .cookVideos end  */
 
@@ -1776,7 +1925,7 @@ input[type="radio"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px
+    margin: 20px 0px;
 }
 
 .CompanyLink {
@@ -1816,6 +1965,10 @@ input[type="radio"] {
 
 .last-line {
     grid-area: last-line;
+    color: white;
+    font-size: 18px;
+    padding: 20px 0px;
+    font-weight: 600;
 }
 
 .FaqsLink {
@@ -1830,7 +1983,7 @@ input[type="radio"] {
     text-decoration: none;
     color: White;
     font-size: 20px;
-    margin: 10px
+    margin: 10px;
 }
 
 .mainbg-footer img {
@@ -1847,7 +2000,12 @@ input[type="radio"] {
 }
 
 .social>* {
-    padding: 5px
+    margin: 15px;
+}
+
+.social img:hover,
+.google-apple img:hover {
+    cursor: pointer;
 }
 
 

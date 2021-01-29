@@ -8,6 +8,7 @@ import Videos from "./Videos";
 function Playground() {
   return (
     <>
+    
       <div class="mainbg">
         <div class="mainbg-title">
           <div class="main-location">
@@ -28,7 +29,7 @@ function Playground() {
           </div>
           <div class="help" id="help">
             <img src="images jpg/title/Warning.png" />
-            <p>Help</p>
+            <label>Help</label>
           </div>
           <div class="user-login">
             <label>Login</label>
@@ -94,94 +95,16 @@ function Playground() {
         </div>
         <h1>Nearby Kitchens</h1>
         <div class="exploreKitchen-content">
-          <div class="kitchen">
-            <img
-              src="images jpg/landing/MamaKitchen.png"
-              alt=""
-              class="kitchenImage"
-            />
-            <div class="kitchenName">Mama's kitchen</div>
-            <img
-              src="images jpg/Reviews/Rating.png"
-              alt=""
-              class="kitchenRating"
-            />
-            <div class="type">North Indian, Chinese</div>
-            <div class="foodCost">Cost for 2: Rs.150</div>
-            <div class="kitchenReviews">778 Reviews</div>
-          </div>
+
         </div>
         <h1>Recommended Kitchens</h1>
         <div class="exploreKitchen-content">
-          <div class="kitchen">
-            <img
-              src="images jpg/landing/MamaKitchen.png"
-              alt=""
-              class="kitchenImage"
-            />
-            <div class="kitchenName">Mama's kitchen</div>
-            <img
-              src="images jpg/Reviews/Rating.png"
-              alt=""
-              class="kitchenRating"
-            />
-            <div class="type">North Indian, Chinese</div>
-            <div class="foodCost">Cost for 2: Rs.150</div>
-            <div class="kitchenReviews">778 Reviews</div>
-          </div>
+
         </div>
         <h1>Top picks</h1>
         <div class="exploreKitchen-content">
-        <div class="kitchen">
-            <img
-              src="images jpg/landing/MamaKitchen.png"
-              alt=""
-              class="kitchenImage"
-            />
-            <div class="kitchenName">Mama's kitchen</div>
-            <img
-              src="images jpg/Reviews/Rating.png"
-              alt=""
-              class="kitchenRating"
-            />
-            <div class="type">North Indian, Chinese</div>
-            <div class="foodCost">Cost for 2: Rs.150</div>
-            <div class="kitchenReviews">778 Reviews</div>
-          </div>
 
-          <div class="kitchen">
-            <img
-              src="images jpg/landing/MamaKitchen.png"
-              alt=""
-              class="kitchenImage"
-            />
-            <div class="kitchenName">Mama's kitchen</div>
-            <img
-              src="images jpg/Reviews/Rating.png"
-              alt=""
-              class="kitchenRating"
-            />
-            <div class="type">North Indian, Chinese</div>
-            <div class="foodCost">Cost for 2: Rs.150</div>
-            <div class="kitchenReviews">778 Reviews</div>
-          </div>
 
-          <div class="kitchen">
-            <img
-              src="images jpg/landing/MamaKitchen.png"
-              alt=""
-              class="kitchenImage"
-            />
-            <div class="kitchenName">Mama's kitchen</div>
-            <img
-              src="images jpg/Reviews/Rating.png"
-              alt=""
-              class="kitchenRating"
-            />
-            <div class="type">North Indian, Chinese</div>
-            <div class="foodCost">Cost for 2: Rs.150</div>
-            <div class="kitchenReviews">778 Reviews</div>
-          </div>
         </div>
         {/* kitchens done cook videos start */}
         <div class="cookVideos">
@@ -189,8 +112,11 @@ function Playground() {
           <span>"Happiness is.. surprising your mother by cooking supper"</span>
         </div>
         <div class="cookVideos-content">
+          {/* card1 */}
 
-{/* card1 */}
+          {/* card2 */}
+
+          {/* card3 */}
           <div class="card">
             <img src="images jpg/videoPic1.jpg" alt="" srcset="" />
             <div class="video-title">
@@ -199,64 +125,55 @@ function Playground() {
             <div class="desc">
               how to make a dhaba style paneer butter masala in 30 min{" "}
             </div>
-            <div class="uploadDate">
-              <h5>Uplaoded on : 24 Aug 2020</h5>
-            </div>
-          </div>
-{/* card2 */}
-          <div class="card">
-            <img src="images jpg/videoPic1.jpg" alt="" srcset="" />
-            <div class="video-title">
-              <h2>Paneer Butter Masala</h2>
-            </div>
-            <div class="desc">
-              how to make a dhaba style paneer butter masala in 30 min{" "}
-            </div>
-            <div class="uploadDate">
-              <h5>Uplaoded on : 24 Aug 2020</h5>
-            </div>
-          </div>
-{/* card3 */}
-          <div class="card">
-            <img src="images jpg/videoPic1.jpg" alt="" srcset="" />
-            <div class="video-title">
-              <h2>Paneer Butter Masala</h2>
-            </div>
-            <div class="desc">
-              how to make a dhaba style paneer butter masala in 30 min{" "}
-            </div>
-            <div class="uploadDate">
-              <h5>Uplaoded on : 24 Aug 2020</h5>
+            <div class="name-upload-date">
+              <div class="kitchen-name">Mama's kitchen</div>
+              <div class="uploadDate">
+                <h5>Uplaoded on : 24 Aug 2020</h5>
+              </div>
             </div>
           </div>
         </div>
         {/* footer  */}
         <div class="mainbg-footer">
           <div class="footer-title">
-            <img src="images jpg/Footer/Title.png" alt="footer title"/>
+            <img src="images jpg/Footer/Title.png" alt="footer title" />
           </div>
           <div class="social">
-            <img src="images jpg/Footer/Facebook.png" alt=""/>
-            <img src="images jpg/Footer/Youtube.png" alt=""/>
-            <img src="images jpg/Footer/Twitter.png" alt=""/>
+            <img src="images jpg/Footer/Facebook.png" alt="" />
+            <img src="images jpg/Footer/Youtube.png" alt="" />
+            <img src="images jpg/Footer/Twitter.png" alt="" />
           </div>
           <span class="downloads">Downloads</span>
           <div class="google-apple">
-            <img src="images jpg/Footer/GooglePlayBadge.png" alt=""/>
-            <img src="images jpg/Footer/AppStoreBadge.png" alt=""/>
+            <img src="images jpg/Footer/GooglePlayBadge.png" alt="" />
+            <img src="images jpg/Footer/AppStoreBadge.png" alt="" />
           </div>
-          <a href="#" class="CompanyLink">Company</a>
-          <a href="#" class="AboutusLink">About us</a>
-          <a href="#" class="TnCLink">Terms and Conditions</a>
-          <a href="#" class="ContactusLink">Contact Us</a>
-          <a href="#" class="PrivacyPolicyLink">Privacy Policy</a>
-          <a href="#" class="FaqsLink">FAQs</a>
-          <hr class="line"/>
+          <a href="#" class="CompanyLink">
+            Company
+          </a>
+          <a href="#" class="AboutusLink">
+            About us
+          </a>
+          <a href="#" class="TnCLink">
+            Terms and Conditions
+          </a>
+          <a href="#" class="ContactusLink">
+            Contact Us
+          </a>
+          <a href="#" class="PrivacyPolicyLink">
+            Privacy Policy
+          </a>
+          <a href="#" class="FaqsLink">
+            FAQs
+          </a>
+          <hr class="line" />
           <span class="last-line">
-            By Continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of respective owners.
-            2008-2020 © All rights reserved. 
+            By Continuing past this page, you agree to our Terms of Service,
+            Cookie Policy, Privacy Policy and Content Policies. All trademarks
+            are properties of respective owners. 2008-2020 © All rights
+            reserved.
           </span>
-        </div> 
+        </div>
       </div>
     </>
   );

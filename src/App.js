@@ -2,13 +2,13 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Videos from "./components/Videos";
-import {Title} from "./components/Title";
+import { Title } from "./components/Title";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
-import {clearPlaceholder, Playground }from "./components/Playground";
+import { clearPlaceholder, Playground } from "./components/Playground";
 import Reviews from "./components/Reviews";
 import Recommended from "./components/Recommended";
-import Quote from './components/Quote';
+import Quote from "./components/Quote";
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,7 +21,9 @@ import {
 function App() {
   return (
     <>
-    <Playground/>
+      <div className="App">
+        <Playground />
+      </div>
     </>
 
     // <Router>
@@ -41,12 +43,12 @@ function App() {
     //       <Switch>
     //         {/* <Route path="/Recommended"> */}
     //         {/* using Recommended as Home for no  gngf*/}
-    //         <Route exact path="/"> 
+    //         <Route exact path="/">
     //           <div class="main-content">
     //             <Recommended />
     //           </div>
     //         </Route>
-    //         <Route exact path="/Recommended"> 
+    //         <Route exact path="/Recommended">
     //           <div class="main-content">
     //             <Recommended />
     //           </div>
