@@ -8,7 +8,6 @@ import Videos from "./Videos";
 function Playground() {
   return (
     <>
-    
       <div class="mainbg">
         <div class="mainbg-title">
           <div class="main-location">
@@ -44,6 +43,9 @@ function Playground() {
               placeholder="Search for dishes, Restaurants"
               onClick={clearPlaceholder}
             />
+            <button class="mainbg-search-icon">
+              <img src="images jpg/landing/icon search.png" alt="" />
+            </button>
           </div>
           <div class="quote">
             <Quote />
@@ -95,17 +97,56 @@ function Playground() {
         </div>
         <h1>Nearby Kitchens</h1>
         <div class="exploreKitchen-content">
+          <div class="kitchen">
+            <div class="kitchenImage">
+              <img src="images jpg/landing/MamaKitchen.png" alt="" />
+            </div>
 
+            <div class="kitchenName">Mama's kitchen</div>
+            <div class="kitchenRating">
+              <img src="images jpg/Reviews/Rating.png" alt="" />
+            </div>
+
+            <div class="type">North Indian, Chinese</div>
+            <div class="foodCost">Cost for 2: Rs.150</div>
+            <div class="kitchenReviews">778 Reviews</div>
+          </div>
         </div>
         <h1>Recommended Kitchens</h1>
         <div class="exploreKitchen-content">
+          <div class="kitchen">
+            <div class="kitchenImage">
+              <img src="images jpg/landing/MamaKitchen.png" alt="" />
+            </div>
 
+            <div class="kitchenName">Mama's kitchen</div>
+            <div class="kitchenRating">
+              <img src="images jpg/Reviews/Rating.png" alt="" />
+            </div>
+
+            <div class="type">North Indian, Chinese</div>
+            <div class="foodCost">Cost for 2: Rs.150</div>
+            <div class="kitchenReviews">778 Reviews</div>
+          </div>
         </div>
         <h1>Top picks</h1>
         <div class="exploreKitchen-content">
+          <div class="kitchen">
+            <div class="kitchenImage">
+              <img src="images jpg/landing/MamaKitchen.png" alt="" />
+            </div>
 
+            <div class="kitchenName">Mama's kitchen</div>
+            <div class="kitchenRating">
+              <img src="images jpg/Reviews/Rating.png" alt="" />
+            </div>
 
+            <div class="type">North Indian, Chinese</div>
+            <div class="foodCost">Cost for 2: Rs.150</div>
+            <div class="kitchenReviews">778 Reviews</div>
+          </div>
         </div>
+
         {/* kitchens done cook videos start */}
         <div class="cookVideos">
           <div class="cookVideos-title">Cooks Videos!</div>
@@ -148,24 +189,27 @@ function Playground() {
             <img src="images jpg/Footer/GooglePlayBadge.png" alt="" />
             <img src="images jpg/Footer/AppStoreBadge.png" alt="" />
           </div>
-          <a href="#" class="CompanyLink">
-            Company
-          </a>
-          <a href="#" class="AboutusLink">
-            About us
-          </a>
-          <a href="#" class="TnCLink">
-            Terms and Conditions
-          </a>
-          <a href="#" class="ContactusLink">
-            Contact Us
-          </a>
-          <a href="#" class="PrivacyPolicyLink">
-            Privacy Policy
-          </a>
-          <a href="#" class="FaqsLink">
-            FAQs
-          </a>
+          <div class="footer-links">
+            <a href="#" class="CompanyLink">
+              Company
+            </a>
+            <a href="#" class="AboutusLink">
+              About us
+            </a>
+            <a href="#" class="TnCLink">
+              Terms and Conditions
+            </a>
+            <a href="#" class="ContactusLink">
+              Contact Us
+            </a>
+            <a href="#" class="PrivacyPolicyLink">
+              Privacy Policy
+            </a>
+            <a href="#" class="FaqsLink">
+              FAQs
+            </a>
+          </div>
+
           <hr class="line" />
           <span class="last-line">
             By Continuing past this page, you agree to our Terms of Service,

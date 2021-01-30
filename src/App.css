@@ -871,7 +871,8 @@ ul::before {
     .user-login>*,
     .search-box-center>*,
     .search-box-left select,
-    .search-box-left option {
+    .search-box-left option,
+    .signup>* {
         height: auto;
         width: auto;
         object-fit: contain;
@@ -1428,7 +1429,7 @@ ul::before {
     display: grid;
     grid-template-columns: 0.5fr 0.3fr 0.2fr 0.3fr 0.2fr 0.1fr;
     grid-template-rows: 1fr 1fr 1fr 0.3fr;
-    grid-template-areas: "what-eat what-eat what-eat what-eat what-eat search-icon" "what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input " "quote-price-label quote-price-label . pay . blank-input" "radio radio radio radio date calendar-icon";
+    grid-template-areas: "what-eat what-eat what-eat what-eat what-eat search-icon" "what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input what-eat-input " "quote-price-label quote-price-label . pay blank-input blank-input" "radio radio radio radio date calendar-icon";
     padding: 20px;
     border: 1px solid gray;
     border-radius: 10px;
@@ -1445,13 +1446,22 @@ ul::before {
     grid-area: search-icon;
 }
 
+.search-icon img {
+    max-height: 26px;
+    max-width: 26px;
+}
+
 .what-eat-input {
     grid-area: what-eat-input;
 }
 
 .quote-price-label {
     grid-area: quote-price-label;
-    /* font-size: 2vw; */
+    color: #e54e51;
+}
+
+.quote-price-label>* {
+    color: #e54e51;
 }
 
 .pay {
@@ -1460,6 +1470,11 @@ ul::before {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+}
+
+.pay label,
+.date {
+    font-weight: 500;
 }
 
 .blank-input {
@@ -1502,6 +1517,10 @@ ul::before {
     margin: 5px;
 }
 
+.blank-input img {
+    margin: 0px 20px;
+}
+
 .quote-price input {
     border: none;
     border-bottom: 1px solid gray;
@@ -1511,9 +1530,11 @@ ul::before {
     width: 40px;
 }
 
-.pay input {
-    min-width: 100px;
+.pay input,
+.what-eat-input {
+    min-width: fit-content;
     margin-left: 10px;
+    width: 100%;
 }
 
 .what-eat-input input[type="text"] {
@@ -1594,23 +1615,55 @@ input[type="radio"] {
 
 @media only screen and (max-width: 900px) {
     .quote-price {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(9, auto);
-        grid-template-areas: "what-eat search-icon" "what-eat-input what-eat-input" "quote-price-label quote-price-label" "pay pay" "blank-input blank-input" "radio radio" "date date" "calendar-icon calendar-icon" "quote-confirm quote-confirm";
+        /* grid-template-columns: repeat(2, 1fr); */
+        grid-template-columns: 1fr 0.1fr;
+        grid-template-rows: repeat(7, auto);
+        /* grid-template-areas: "what-eat search-icon" "what-eat-input what-eat-input" "quote-price-label quote-price-label" "pay pay" "blank-input blank-input" "radio radio" "date calendar-icon" "quote-confirm quote-confirm"; */
+        grid-template-areas: "what-eat search-icon" "what-eat-input what-eat-input" "quote-price-label quote-price-label" "pay blank-input" "radio calendar-icon" "date date " "quote-confirm quote-confirm";
         margin: 0px 10px;
+        overflow: hidden;
+        padding: 15px;
     }
     .quote-price>* {
         display: flex;
         justify-content: center;
-    }
-    .quote-price>* {
+        align-items: center;
+        margin: 10px 2px;
         font-size: 15px;
+        text-align: left;
     }
     .quote-price label {
         font-size: 15px;
     }
     .highlight-above-quote {
-        margin-left: 10px
+        margin-left: 10px;
+    }
+    .radio ul {
+        border: gray 1px solid;
+    }
+    .radio label {
+        font-weight: 400;
+    }
+    .what-eat-input {
+        margin-top: 30px;
+    }
+    .radio ul {
+        width: 100%;
+        max-width: max-content;
+    }
+    .blank-input img {
+        margin: 0px;
+    }
+    .calendar-icon,
+    .search-icon,
+    .blank-input {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .highlight-above-quote span {
+        font-size: 6vw;
+        white-space: nowrap;
     }
 }
 
@@ -1627,6 +1680,11 @@ input[type="radio"] {
     height: auto;
 }
 
+.mainbg h1 {
+    text-align: left;
+    padding-left: 20px
+}
+
 .mainbg-title {
     display: grid;
     grid-template-columns: 0.4fr 0.3fr 0.5fr 1fr 0.2fr 0.2fr 0.3fr 0.1fr;
@@ -1636,7 +1694,8 @@ input[type="radio"] {
     width: 100%;
 }
 
-.company-name {
+.company-name,
+.search-box-left {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1647,11 +1706,12 @@ input[type="radio"] {
     .mainbg-title {
         grid-template-columns: 0.4fr 1fr 0.2fr 0.2fr 0.2fr;
         grid-template-areas: "main-location company-name help user-login signup" ". mainbg-search mainbg-search mainbg-search . " "quote quote quote quote quote";
+        padding-top: 10px;
     }
     .mainbg {
-        /* background-size: contain; */
-        width: 100%;
-        height: auto;
+        background-size: contain;
+        /* width: 100%;
+        height: auto; */
         background-repeat: no-repeat;
     }
 }
@@ -1707,15 +1767,32 @@ input[type="radio"] {
 
 .mainbg-search {
     grid-area: mainbg-search;
-    padding-bottom: 200px;
-    padding-top: 40px;
+    margin-bottom: 200px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    max-width: max-content;
+    border: 1px solid gray;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.mainbg-search button {
+    padding: 15px;
+    background-color: #e54e51;
+    border: none;
+    min-width: 15%;
+    max-width: 60px;
+    float: left;
 }
 
 .mainbg-search input {
     width: 100%;
     padding: 20px;
-    border-radius: 10px;
-    border: 1px solid gray;
+    float: left;
+    border: none;
 }
 
 .user-login label:hover,
@@ -1726,6 +1803,16 @@ input[type="radio"] {
 }
 
 .user-login label {}
+
+@media only screen and (max-width: 800px) {
+    .mainbg-search {
+        margin-bottom: 50px;
+    }
+    .mainbg {
+        width: 100%;
+        height: auto;
+    }
+}
 
 
 /* explore category start */
@@ -1763,13 +1850,17 @@ input[type="radio"] {
 .categories {
     /* grid-area: categories; */
     padding: 2% 10%;
+    align-content: center;
 }
 
 .types {
     /* border: 1px solid black; */
     padding: 0px;
-    max-width: min-content;
-    min-width: 250px;
+    /* max-width: fit-content; */
+    max-width: 20%;
+    max-height: fit-content;
+    min-height: auto;
+    min-width: 20%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1783,12 +1874,35 @@ input[type="radio"] {
 }
 
 .types img {
-    max-width: 80%;
+    max-width: inherit;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .types span {
-    margin-top: -50px;
+    margin-top: -40px;
     font-weight: 600;
+}
+
+@media only screen and (max-width: 1200px) {
+    .types span {
+        margin-top: -30px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .types {
+        width: 50%;
+        max-width: 150px;
+        max-height: 180px;
+        margin-bottom: 15px;
+    }
+    .types span {
+        margin-top: -30px;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    .categories {}
 }
 
 
@@ -1819,16 +1933,23 @@ input[type="radio"] {
     margin: 0px 10%;
 }
 
+@media only screen and (max-width: 800px) {
+    .exploreKitchen-content {
+        flex-direction: column;
+    }
+}
+
 .kitchen {
     grid-area: kitchen;
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: 1fr 0.4fr;
+    /* grid-template-columns: repeat(2, auto); */
     grid-template-rows: repeat(4, auto);
-    grid-template-areas: "kitchenImage kitchenImage" "kitchenName kitchenRating" "type . " "foodCost kitchenReviews";
-    max-width: min-content;
+    grid-template-areas: "kitchenImage kitchenImage" "kitchenName kitchenRating" "type kitchenReviews " "foodCost kitchenReviews";
     margin: 20px 2%;
-    max-width: auto;
-    max-height: auto;
+    max-width: fit-content;
+    max-height: fit-content;
+    row-gap: 5px;
 }
 
 .kitchen:hover {
@@ -1837,19 +1958,26 @@ input[type="radio"] {
 
 .kitchenImage {
     grid-area: kitchenImage;
-    max-width: fit-content;
+}
+
+.kitchenImage img {
+    max-width: 100%;
+    max-height: auto;
 }
 
 .kitchenRating {
     grid-area: kitchenRating;
-    margin-top: 25px;
+}
+
+.kitchenRating img {
+    max-width: 80%;
 }
 
 .kitchenName {
     grid-area: kitchenName;
     font-weight: 600;
     font-size: 20px;
-    margin-top: 25px;
+    text-align: left;
 }
 
 .type {
@@ -1858,6 +1986,12 @@ input[type="radio"] {
 
 .foodCost {
     grid-area: foodCost;
+}
+
+.type,
+.foodCost {
+    text-align: left;
+    font-weight: 500;
 }
 
 .kitchenReviews {
@@ -1890,6 +2024,10 @@ input[type="radio"] {
 
 .cookVideos-content {
     margin: 0px 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .name-upload-date {
@@ -1904,6 +2042,15 @@ input[type="radio"] {
     font-weight: 600;
 }
 
+@media only screen and (max-width: 800px) {
+    .cookVideos-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 
 /* .cookVideos end  */
 
@@ -1915,8 +2062,16 @@ input[type="radio"] {
     display: grid;
     grid-template-columns: 0.1fr repeat(4, auto) 0.1fr;
     grid-template-rows: repeat(9, auto);
-    grid-template-areas: ". footer-title footer-title footer-title footer-title ." ". . . . CompanyLink ." ". social social social AboutusLink . " ". social social social TnCLink ." ". . downloads . ContactusLink ." ". google-apple google-apple google-apple PrivacyPolicyLink ." ". google-apple google-apple google-apple FaqsLink ." ". line line line line ." ". last-line last-line last-line last-line .";
+    grid-template-areas: ". footer-title footer-title footer-title footer-title ." ". . . . footer-links ." ". social social social footer-links . " ". social social social footer-links ." ". . downloads . footer-links ." ". google-apple google-apple google-apple footer-links ." ". google-apple google-apple google-apple footer-links ." ". line line line line ." ". last-line last-line last-line last-line .";
     width: 100%;
+}
+
+.footer-links {
+    grid-area: footer-links;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .footer-title {
@@ -1984,6 +2139,7 @@ input[type="radio"] {
     color: White;
     font-size: 20px;
     margin: 10px;
+    white-space: nowrap;
 }
 
 .mainbg-footer img {
@@ -2006,6 +2162,47 @@ input[type="radio"] {
 .social img:hover,
 .google-apple img:hover {
     cursor: pointer;
+}
+
+
+/* .mainbg-footer img {
+    max-width: 80%;
+    max-height: auto;
+    min-height: auto;
+    min-width: auto;
+} */
+
+@media only screen and (max-width: 1100px) {
+    .footer-links {
+        align-items: center;
+    }
+    .mainbg-footer a {
+        font-size: 20px;
+    }
+    .social img,
+    .google-apple img {
+        max-width: 60%;
+        max-height: auto;
+        min-height: auto;
+        min-width: auto;
+    }
+    .google-apple {
+        padding: 0px 40px;
+    }
+    .social {
+        padding: 0px 100px;
+    }
+    .mainbg-footer {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(7, auto);
+        grid-template-areas: "footer-title" "social" "downloads" "google-apple" "footer-links" "line" "last-line";
+    }
+    .footer-title img {
+        max-width: 90%;
+    }
+    .last-line {
+        font-size: 14px;
+    }
 }
 
 

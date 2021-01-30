@@ -20,10 +20,11 @@ function Quote() {
         </div>
         <div class="pay">
           <label>Pay:</label>
-          <input type="number" placeholder="Minimum 100" />
+          <input type="number" placeholder="Minimum 100" size="11"/>
         </div>
         <div class="blank-input">
-          <input type="text" />
+          <img src="images jpg/landing/people.png" alt=""/>
+          <input type="number" />
         </div>
         <div class="radio">
           <ul class="select-type">
@@ -41,7 +42,7 @@ function Quote() {
             </li>
           </ul>
         </div>
-        <div class="date">{new Date().toDateString()}</div>
+        <div class="date">{new Date().toDateString().substr(3,12)}</div>
         <div class="calendar-icon">
           <img src="images jpg/landing/date-range.png" alt="" />
         </div>
