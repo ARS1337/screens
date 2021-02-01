@@ -9,6 +9,7 @@ import { clearPlaceholder, Playground } from "./components/Playground";
 import Reviews from "./components/Reviews";
 import Recommended from "./components/Recommended";
 import Quote from "./components/Quote";
+import Card from './components/Card';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,14 +18,15 @@ import {
   useRouteMatch,
   useParams,
 } from "react-router-dom";
+import TestingRouter from "./components/TestingRouter";
 
 function App() {
   return (
-    <>
-      <div className="App">
-        <Playground />
-      </div>
-    </>
+    // <>
+    //   <div className="App">
+    //     <Playground />
+    //   </div>
+    // </>
 
     // <Router>
 
@@ -41,16 +43,15 @@ function App() {
     //         <Navigation />
     //       </div>
     //       <Switch>
-    //         {/* <Route path="/Recommended"> */}
-    //         {/* using Recommended as Home for no  gngf*/}
     //         <Route exact path="/">
     //           <div class="main-content">
-    //             <Recommended />
+    //             <Playground />
     //           </div>
     //         </Route>
     //         <Route exact path="/Recommended">
     //           <div class="main-content">
     //             <Recommended />
+    //             {/* <TestingRouter/> */}
     //           </div>
     //         </Route>
     //         <Route path="/Reviews">
@@ -68,6 +69,28 @@ function App() {
     //   </div>
     // </div>
     // </Router>
+    <Router>
+
+      {/* <div className="App">
+        <div class="main">
+          <div class="main-container">
+
+          </div>
+        </div>
+      </div> */}
+
+      <Switch>
+        <Route exact path="/">
+          <Playground />
+        </Route>
+        <Route path="/TestingRouter">
+          <TestingRouter />
+        </Route>
+      </Switch>
+     </Router>
+    // <div>
+    //   <Card/>
+    // </div>
   );
 }
 

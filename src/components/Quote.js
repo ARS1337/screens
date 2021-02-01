@@ -1,5 +1,6 @@
 import React from "react";
 import "../App.css";
+import {useState} from "react"
 
 function Quote() {
   return (
@@ -42,9 +43,10 @@ function Quote() {
             </li>
           </ul>
         </div>
-        <div class="date">{new Date().toDateString().substr(3,12)}</div>
+        {/* <div class="date">{new Date().toDateString().substr(3,12)}</div> */}
         <div class="calendar-icon">
-          <img src="images jpg/landing/date-range.png" alt="" />
+          <input type="date" class="date" />
+          {/* <img src="images jpg/landing/date-range.png" alt="" /> */}
         </div>
       </div>
       <div class="quote-confirm">

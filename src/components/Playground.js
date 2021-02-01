@@ -4,6 +4,8 @@ import Quote from "./Quote";
 import Reviews from "./Reviews";
 import Recommended from "./Recommended";
 import Videos from "./Videos";
+import { Link, Route, Switch } from "react-router-dom";
+import TestingRouter from "./TestingRouter";
 
 function Playground() {
   return (
@@ -98,52 +100,58 @@ function Playground() {
         <h1>Nearby Kitchens</h1>
         <div class="exploreKitchen-content">
           <div class="kitchen">
-            <div class="kitchenImage">
-              <img src="images jpg/landing/MamaKitchen.png" alt="" />
-            </div>
+            <Link to="/TestingRouter">
+              <div class="kitchenImage">
+                <img src="images jpg/landing/MamaKitchen.png" alt="" />
+              </div>
 
-            <div class="kitchenName">Mama's kitchen</div>
-            <div class="kitchenRating">
-              <img src="images jpg/Reviews/Rating.png" alt="" />
-            </div>
+              <div class="kitchenName">Mama's kitchen</div>
+              <div class="kitchenRating">
+                <img src="images jpg/Reviews/Rating.png" alt="" />
+              </div>
 
-            <div class="type">North Indian, Chinese</div>
-            <div class="foodCost">Cost for 2: Rs.150</div>
-            <div class="kitchenReviews">778 Reviews</div>
+              <div class="type">North Indian, Chinese</div>
+              <div class="foodCost">Cost for 2: Rs.150</div>
+              <div class="kitchenReviews">778 Reviews</div>
+            </Link>
           </div>
         </div>
         <h1>Recommended Kitchens</h1>
         <div class="exploreKitchen-content">
           <div class="kitchen">
-            <div class="kitchenImage">
-              <img src="images jpg/landing/MamaKitchen.png" alt="" />
-            </div>
+            <Link to="/TestingRouter">
+              <div class="kitchenImage">
+                <img src="images jpg/landing/MamaKitchen.png" alt="" />
+              </div>
 
-            <div class="kitchenName">Mama's kitchen</div>
-            <div class="kitchenRating">
-              <img src="images jpg/Reviews/Rating.png" alt="" />
-            </div>
+              <div class="kitchenName">Mama's kitchen</div>
+              <div class="kitchenRating">
+                <img src="images jpg/Reviews/Rating.png" alt="" />
+              </div>
 
-            <div class="type">North Indian, Chinese</div>
-            <div class="foodCost">Cost for 2: Rs.150</div>
-            <div class="kitchenReviews">778 Reviews</div>
+              <div class="type">North Indian, Chinese</div>
+              <div class="foodCost">Cost for 2: Rs.150</div>
+              <div class="kitchenReviews">778 Reviews</div>
+            </Link>
           </div>
         </div>
         <h1>Top picks</h1>
         <div class="exploreKitchen-content">
           <div class="kitchen">
-            <div class="kitchenImage">
-              <img src="images jpg/landing/MamaKitchen.png" alt="" />
-            </div>
+            <Link to="/TestingRouter">
+              <div class="kitchenImage">
+                <img src="images jpg/landing/MamaKitchen.png" alt="" />
+              </div>
 
-            <div class="kitchenName">Mama's kitchen</div>
-            <div class="kitchenRating">
-              <img src="images jpg/Reviews/Rating.png" alt="" />
-            </div>
+              <div class="kitchenName">Mama's kitchen</div>
+              <div class="kitchenRating">
+                <img src="images jpg/Reviews/Rating.png" alt="" />
+              </div>
 
-            <div class="type">North Indian, Chinese</div>
-            <div class="foodCost">Cost for 2: Rs.150</div>
-            <div class="kitchenReviews">778 Reviews</div>
+              <div class="type">North Indian, Chinese</div>
+              <div class="foodCost">Cost for 2: Rs.150</div>
+              <div class="kitchenReviews">778 Reviews</div>
+            </Link>
           </div>
         </div>
 
