@@ -19,78 +19,19 @@ import {
   useParams,
 } from "react-router-dom";
 import TestingRouter from "./components/TestingRouter";
+import Detch from './components/Detch';
 
 function App() {
   return (
-    // <>
-    //   <div className="App">
-    //     <Playground />
-    //   </div>
-    // </>
-
-    // <Router>
-
-    // <div className="App">
-    //   <div class="main">
-    //     <div class="main-container">
-    //       <div class="main-title">
-    //         <Title/>
-    //       </div>
-    //       <div class="main-header">
-    //         <Header />
-    //       </div>
-    //       <div class="main-navigation">
-    //         <Navigation />
-    //       </div>
-    //       <Switch>
-    //         <Route exact path="/">
-    //           <div class="main-content">
-    //             <Playground />
-    //           </div>
-    //         </Route>
-    //         <Route exact path="/Recommended">
-    //           <div class="main-content">
-    //             <Recommended />
-    //             {/* <TestingRouter/> */}
-    //           </div>
-    //         </Route>
-    //         <Route path="/Reviews">
-    //           <div class="main-content">
-    //             <Reviews />
-    //           </div>
-    //         </Route>
-    //         <Route path="/Videos">
-    //           <div class="main-content">
-    //             <Videos />
-    //           </div>
-    //         </Route>
-    //       </Switch>
-    //     </div>
-    //   </div>
-    // </div>
-    // </Router>
+    
     <Router>
-
-      {/* <div className="App">
-        <div class="main">
-          <div class="main-container">
-
-          </div>
-        </div>
-      </div> */}
-
       <Switch>
-        <Route exact path="/">
-          <Playground />
-        </Route>
-        <Route path="/TestingRouter">
-          <TestingRouter />
-        </Route>
+        <Route exact path="/" component={Playground}/>
+        <Route path="/TestingRouter" component={TestingRouter}/>
       </Switch>
      </Router>
-    // <div>
-    //   <Card/>
-    // </div>
+    // <Detch/>
+
   );
 }
 

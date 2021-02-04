@@ -5,7 +5,6 @@ import { Link, Route, Switch } from "react-router-dom";
 function Kitchen(props) {
   return (
     <>
-      {console.log(props)}
       <div class="kitchen">
         <Link to="/TestingRouter">
           <div class="kitchenImage">

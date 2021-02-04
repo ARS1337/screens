@@ -705,7 +705,15 @@ ul::before {
     float: left;
 }
 
-.card img {
+
+/* video {
+    max-width: -webkit-fill-available;
+    max-height: inherit;
+    min-height: auto;
+    min-width: auto;
+} */
+
+.card video {
     max-width: 100%;
     max-height: 100%;
     cursor: pointer;
@@ -1913,12 +1921,12 @@ input::-webkit-calendar-picker-indicator {
 
 .types img {
     max-width: inherit;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 80%;
+    max-height: 80%;
 }
 
 .types span {
-    margin-top: -40px;
+    /* margin-top: -40px; */
     font-weight: 600;
 }
 

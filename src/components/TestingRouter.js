@@ -28,7 +28,7 @@ function TestingRouter() {
                 <Title />
               </div>
               <div class="main-header">
-                <Header />
+                <Header something="ggnoob"/>
               </div>
               <div class="main-navigation">
                 <Navigation />
@@ -37,26 +37,14 @@ function TestingRouter() {
               <Switch>
                 {/* <Route path="/Recommended"> */}
                 {/* using Recommended as Home for no  gngf*/}
-                <Route exact path="/TestingRouter">
-                  <div class="main-content">
-                    <Recommended />
-                  </div>
-                </Route>
-                <Route exact path="/Recommended">
-                  <div class="main-content">
-                    <Recommended />
-                  </div>
-                </Route>
-                <Route path="/Reviews">
-                  <div class="main-content">
-                    <Reviews />
-                  </div>
-                </Route>
-                <Route path="/Videos">
-                  <div class="main-content">
-                    <Videos />
-                  </div>
-                </Route>
+                <div class="main-content">
+
+                <Route exact path="/TestingRouter" component={Recommended}/>
+                <Route exact path="/Recommended" component={Recommended}/>
+                <Route path="/Reviews" component={Reviews}/>
+                <Route path="/Videos" component={Videos}/>
+                </div>
+
               </Switch>
             </div>
           </div>
