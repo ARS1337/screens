@@ -8,7 +8,6 @@ export class Detch extends Component {
     "https://staging.mypcot.com/Homefood/customergateway/fetchHomeVideos";
 
   myHeaders = {
-    
     Accept: "application/json",
   };
 
