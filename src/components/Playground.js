@@ -32,7 +32,6 @@ class Playground extends React.Component {
     "https://staging.mypcot.com/Homefood/customergateway/hotelsNearby";
 
   myHeaders = {
-    Authorization: "Basic cml0ZXNoOnJpdGVzaFNpbmdo",
     Accept: "application/json",
   };
 
