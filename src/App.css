@@ -175,6 +175,33 @@ body {
     height: initial;
 }
 
+.login-box {
+    display: inline;
+    width: fit-content;
+    background-color: white;
+    height: 20%;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    right: 0%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    padding-top: 0px;
+}
+
+.login-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-box input {
+    font-size: 14px;
+    font-weight: 400;
+}
+
 .help {
     display: flex;
     justify-content: flex-end;

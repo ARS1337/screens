@@ -21,6 +21,8 @@ class Playground extends React.Component {
       categories: [],
       videoData: [],
       hotelsNearby: [],
+      topPicks: [],
+      token: "",
     };
     console.log("Constricrotr");
   }
@@ -30,6 +32,9 @@ class Playground extends React.Component {
     "https://staging.mypcot.com/Homefood/customergateway/fetchHomeVideos";
   HotelsNearbyURL =
     "https://staging.mypcot.com/Homefood/customergateway/hotelsNearby";
+  TopPicksURL =
+    "https://staging.mypcot.com/Homefood/customergateway/homeTopPicks";
+  LoginURL = "https://staging.mypcot.com/Homefood/customergateway/processLogin";
 
   myHeaders = {
     Authorization: "Basic cml0ZXNoOnJpdGVzaFNpbmdo",
@@ -42,24 +47,14 @@ class Playground extends React.Component {
     mode: "cors",
   };
   mainHeaders = new Headers(this.mainInit);
+
   componentDidMount() {
-    console.log("Component did mounddddd");
     this.getMasterData(this.MasterDataURL, this.mainInit, "categories");
     this.getVideoData(this.VideoDataURL, this.mainInit, "videoData");
-    this.getHotelsNearby(this.HotelsNearbyURL,this.mainInit,"hotelsNearby");
+    this.posSuccess(this.HotelsNearbyURL, "hotelsNearby");
+    this.posSuccess(this.TopPicksURL, "topPicks");
   }
-  // getData = (url, key) => {
-  //   fetch(url, this.mainInit)
-  //     .then((r) => r.json())
-  //     .then((res) =>
-  //       this.setState(
-  //         {
-  //           [key]: res.getHomeFoodTypes,
-  //         },
-  //         console.log(key+"" state set")
-  //       )
-  //     );
-  // };
+
   getMasterData = (url) => {
     fetch(url, this.mainInit)
       .then((r) => r.json())
@@ -72,6 +67,7 @@ class Playground extends React.Component {
         )
       );
   };
+
   getVideoData = (url) => {
     fetch(url, this.mainInit)
       .then((r) => r.json())
@@ -84,42 +80,94 @@ class Playground extends React.Component {
         )
       );
   };
-  getHotelsNearby = (url) => {
-    console.log("feffffffffffffffffffffffffff");
-    this.body = {
-      latitude: 0,
-      longitude: 0,
-      page_number: 0,
-      limit: 3,
-    };
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.body.latitude = position.coords.latitude;
-      this.body.longitude = position.coords.longitude;
-      console.log(
-        "nearby hotels set " +
-          position.coords.latitude +
-          " " +
-          position.coords.longitude+
-          "sdfvds"
-      );
+  handleLogin = () => {
+    this.body = new FormData();
+
+    this.id = document.getElementById("login-id").value;
+    this.password = document.getElementById("login-password").value;
+
+    this.body.append("phone_number", this.id);
+    this.body.append("password", this.password);
+
+    this.tempInit = this.mainInit;
+    this.tempInit.body = this.body;
+
+    fetch(
+      "https://staging.mypcot.com/Homefood/customergateway/processLogin",
+      this.tempInit
+    )
+      .then((r) => r.json())
+      .then((res) => {
+        this.setState({
+          token: res.data[0].token,
+        });
+      });
+  };
+
+  getcoords() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  }
+
+  posSuccess = (url, key) => {
+    this.getcoords().then((position) => {
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+
+      this.body = new FormData();
+      this.body.append("latitude", position.coords.latitude);
+      this.body.append("longitude", position.coords.longitude);
+      if (key == "hotelsNearby") {
+        this.body.append("page_limit", 3);
+        this.body.append("limit", 0);
+      }
+
       this.tempInit = this.mainInit;
       this.tempInit.body = this.body;
+
+      this.body = JSON.stringify(this.body);
+
       fetch(url, this.tempInit)
         .then((r) => r.json())
-        .then((res) =>
-          this.setState(
-            {
-              hotelsNearby: res.near_by_hotels,
-            },
-            console.log(" nearby hotels state set")
-          )
-        );
+        .then((res) => {
+          console.log(res);
+          if (res.success > 0) {
+            if (key == "hotelsNearby") {
+              this.setState({
+                [key]: res.near_by_hotels,
+              });
+            } else if (key == "topPicks") {
+              res.data.pop();
+              this.setState({
+                [key]: res.data,
+              });
+            }
+          } else {
+            alert(res.message);
+          }
+        })
+        .then((ress) => console.log(this.state));
     });
-    console.log(this.body);
   };
+  printState = () => {
+    console.log(this.state);
+  };
+
   render() {
     return (
       <>
+        <div class="login-box" id="login-box">
+          <h2>Login</h2>
+          <input type="text" value="7977586379" id="login-id" />
+          <br />
+          <input type="text" value="123456" id="login-password" />
+          <br />
+          <button onClick={this.handleLogin}>Login</button>
+        </div>
+
         <div class="mainbg">
           <div class="mainbg-title">
             <div class="main-location">
@@ -182,28 +230,23 @@ class Playground extends React.Component {
           </div>
           <h1>Nearby Kitchens</h1>
           <div class="exploreKitchen-content">
-            <Kitchen
-              type="North Indian, Chinese"
-              reviews="778 Reviews"
-              foodCost="Cost for 2: Rs.150"
-              kitchenName="Mama's kitchen"
-              kitchenImage="images jpg/landing/MamaKitchen.png"
-              ratingImage="images jpg/Reviews/Rating.png"
-            />
-            <Card />
-            <Card />
+            {this.state.hotelsNearby.map((x) => {
+              return <Kitchen data={x} />;
+            })}
           </div>
-          <h1>Recommended Kitchens</h1>
+{/* 
+          <h1>Recommended</h1>
           <div class="exploreKitchen-content">
-            <Card />
-            <Card />
-            <Card />
-          </div>
+            {this.state.hotelsNearby.map((x) => {
+              return <Kitchen data={x} />;
+            })}
+          </div> */}
+
           <h1>Top picks</h1>
           <div class="exploreKitchen-content">
-            <Card />
-            <Card />
-            <Card />
+            {this.state.topPicks.map((x) => {
+              return <Kitchen data={x} />;
+            })}
           </div>
 
           {/* kitchens done cook videos start */}

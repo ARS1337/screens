@@ -6,6 +6,10 @@ export class Detch extends Component {
     "https://staging.mypcot.com/Homefood/customergateway/getMasterData";
   VideoDataURL =
     "https://staging.mypcot.com/Homefood/customergateway/fetchHomeVideos";
+  HotelsNearbyURL =
+    "https://staging.mypcot.com/Homefood/customergateway/hotelsNearby";
+  TopPicksURL =
+    "https://staging.mypcot.com/Homefood/customergateway/homeTopPick";
 
   myHeaders = {
     Authorization: "Basic cml0ZXNoOnJpdGVzaFNpbmdo",
@@ -24,6 +28,8 @@ export class Detch extends Component {
     this.state = {
       categories: [],
       videoData: [],
+      hotelsNearby: [],
+      topPicks: [],
     };
     console.log("Constricrotr");
   }
@@ -31,6 +37,8 @@ export class Detch extends Component {
     console.log("Component did mounddddd");
     this.getMasterData(this.MasterDataURL, this.mainInit);
     this.getVideoData(this.VideoDataURL, this.mainInit);
+    this.posSuccess(this.HotelsNearbyURL, "hotelsNearby");
+    this.posSuccess(this.TopPicksURL, "topPicks");
   }
   getMasterData = (url) => {
     fetch(url, this.mainInit)
@@ -56,17 +64,52 @@ export class Detch extends Component {
         )
       );
   };
+  getcoords() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  }
+
+  posSuccess = (url, key) => {
+    console.log("possuccess");
+    this.getcoords().then((position) => {
+      this.body = new FormData();
+      this.body.append("latitude", position.coords.latitude);
+      this.body.append("longitude", position.coords.longitude);
+      this.body.append("page_limit", 3);
+      this.body.append("limit", 0);
+
+      this.tempInit = this.mainInit;
+      this.tempInit.body = this.body;
+
+      this.body = JSON.stringify(this.body);
+
+      fetch(url, this.tempInit)
+        .then((r) => r.json())
+        .then((res) => {
+          console.log(res);
+          if (res.success > 0) {
+            if (key == "hotelsNearby") {
+              this.setState({
+                [key]: res.near_by_hotels,
+              });
+            } else if (key == "topPicks") {
+              this.setState({
+                [key]: res.data,
+              });
+            }
+          } else {
+            alert(res.message);
+          }
+        })
+        .then(ress=>console.log(this.state))
+    });
+  };
+
   render() {
     return (
       <>
-        {/* <div class="cookVideos-content">
-          {this.state.videoData.map((x) => {
-            return <Video data={x} />;
-          })}
-        </div> */}
-        <p>
-        {/* {Object.keys(console.log(this.state.videoData))} */}
-        </p>
+        <p></p>
         ggnoob
       </>
     );
@@ -74,3 +117,5 @@ export class Detch extends Component {
 }
 
 export default Detch;
+
+
