@@ -175,10 +175,6 @@ body {
     height: initial;
 }
 
-#login-container {
-    display: none;
-}
-
 .login-box {
     width: fit-content;
     background-color: white;
@@ -2297,3 +2293,7 @@ input::-webkit-calendar-picker-indicator {
 
 
 /* Routing Link decoration  */
+
+#login-container {
+    display: none;
+}

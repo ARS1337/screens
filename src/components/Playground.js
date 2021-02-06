@@ -39,11 +39,6 @@ class Playground extends React.Component {
   RecommendedURL =
     "https://staging.mypcot.com/Homefood/customergateway/recommendedHotelAndBanner";
 
-  // myHeaders = {
-  //   Authorization: "Basic cml0ZXNoOnJpdGVzaFNpbmdo",
-  //   Accept: "application/json",
-  // };
-
   myHeaders = new Headers();
 
   mainInit = {
@@ -51,7 +46,6 @@ class Playground extends React.Component {
     headers: this.myHeaders,
     mode: "cors",
   };
-  // mainHeaders = new Headers(this.mainInit);
 
   componentDidMount() {
     this.myHeaders.append("Authorization", "Basic cml0ZXNoOnJpdGVzaFNpbmdo");
@@ -94,7 +88,7 @@ class Playground extends React.Component {
   };
 
   handleLogin = () => {
-    document.getElementById("login-container").style.display = "block";
+    document.getElementById("login-container").style.display = "none";
     this.body = new FormData();
 
     this.id = document.getElementById("login-id").value;
@@ -112,9 +106,12 @@ class Playground extends React.Component {
     )
       .then((r) => r.json())
       .then((res) => {
-        this.setState({
-          token: res.data[0].token,
-        });
+        if(res.success!=0){
+          alert(res.message);
+          this.setState({
+            token: res.data[0].token,
+          });
+        }
       })
       .then((res) => {
         this.posSuccess(this.RecommendedURL, "recommended");
@@ -185,6 +182,10 @@ class Playground extends React.Component {
     console.log(this.state);
   };
 
+  loginBoxDisplay=()=>{
+    document.getElementById("login-container").style.display = "block";
+  }
+
   render() {
     return (
       <>
@@ -221,8 +222,8 @@ class Playground extends React.Component {
               <img src="images jpg/title/Warning.png" />
               <label>Help</label>
             </div>
-            <div class="user-login">
-              <label>Login</label>
+            <div class="user-login" onClick={this.loginBoxDisplay}>
+              <label >Login</label>
             </div>
             <div class="signup">
               <label>Signup</label>
