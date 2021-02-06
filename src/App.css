@@ -175,8 +175,11 @@ body {
     height: initial;
 }
 
+#login-container {
+    display: none;
+}
+
 .login-box {
-    display: inline;
     width: fit-content;
     background-color: white;
     height: 20%;

@@ -21,6 +21,7 @@ class Playground extends React.Component {
       categories: [],
       videoData: [],
       hotelsNearby: [],
+      recommended: [],
       topPicks: [],
       token: "",
     };
@@ -35,24 +36,35 @@ class Playground extends React.Component {
   TopPicksURL =
     "https://staging.mypcot.com/Homefood/customergateway/homeTopPicks";
   LoginURL = "https://staging.mypcot.com/Homefood/customergateway/processLogin";
+  RecommendedURL =
+    "https://staging.mypcot.com/Homefood/customergateway/recommendedHotelAndBanner";
 
-  myHeaders = {
-    Authorization: "Basic cml0ZXNoOnJpdGVzaFNpbmdo",
-    Accept: "application/json",
-  };
+  // myHeaders = {
+  //   Authorization: "Basic cml0ZXNoOnJpdGVzaFNpbmdo",
+  //   Accept: "application/json",
+  // };
+
+  myHeaders = new Headers();
 
   mainInit = {
     method: "POST",
     headers: this.myHeaders,
     mode: "cors",
   };
-  mainHeaders = new Headers(this.mainInit);
+  // mainHeaders = new Headers(this.mainInit);
 
   componentDidMount() {
+    this.myHeaders.append("Authorization", "Basic cml0ZXNoOnJpdGVzaFNpbmdo");
+    this.myHeaders.append("Accept", "application/json");
+
     this.getMasterData(this.MasterDataURL, this.mainInit, "categories");
     this.getVideoData(this.VideoDataURL, this.mainInit, "videoData");
     this.posSuccess(this.HotelsNearbyURL, "hotelsNearby");
     this.posSuccess(this.TopPicksURL, "topPicks");
+    if (this.state.token.length > 0) {
+      //logged in
+      this.posSuccess(this.RecommendedURL, "recommended");
+    }
   }
 
   getMasterData = (url) => {
@@ -80,7 +92,9 @@ class Playground extends React.Component {
         )
       );
   };
+
   handleLogin = () => {
+    document.getElementById("login-container").style.display = "block";
     this.body = new FormData();
 
     this.id = document.getElementById("login-id").value;
@@ -101,6 +115,10 @@ class Playground extends React.Component {
         this.setState({
           token: res.data[0].token,
         });
+      })
+      .then((res) => {
+        this.posSuccess(this.RecommendedURL, "recommended");
+        res = res;
       });
   };
 
@@ -124,6 +142,9 @@ class Playground extends React.Component {
         this.body.append("page_limit", 3);
         this.body.append("limit", 0);
       }
+      if (key == "recommended") {
+        this.myHeaders.append("X-Access-Token", this.state.token);
+      }
 
       this.tempInit = this.mainInit;
       this.tempInit.body = this.body;
@@ -144,14 +165,22 @@ class Playground extends React.Component {
               this.setState({
                 [key]: res.data,
               });
+            } else if (key == "recommended") {
+              this.setState({
+                [key]: res.recommended_arr,
+              });
             }
           } else {
-            alert(res.message);
+            alert(res.message + " and key is: " + key);
           }
         })
-        .then((ress) => console.log(this.state));
+        .then((ress) => {
+          ress = ress;
+          console.log(this.state);
+        });
     });
   };
+
   printState = () => {
     console.log(this.state);
   };
@@ -159,13 +188,15 @@ class Playground extends React.Component {
   render() {
     return (
       <>
-        <div class="login-box" id="login-box">
-          <h2>Login</h2>
-          <input type="text" value="7977586379" id="login-id" />
-          <br />
-          <input type="text" value="123456" id="login-password" />
-          <br />
-          <button onClick={this.handleLogin}>Login</button>
+        <div id="login-container">
+          <div class="login-box" id="login-box">
+            <h2>Login</h2>
+            <input type="text" value="7977586379" id="login-id" />
+            <br />
+            <input type="text" value="123456" id="login-password" />
+            <br />
+            <button onClick={this.handleLogin}>Login</button>
+          </div>
         </div>
 
         <div class="mainbg">
@@ -234,13 +265,13 @@ class Playground extends React.Component {
               return <Kitchen data={x} />;
             })}
           </div>
-{/* 
+
           <h1>Recommended</h1>
           <div class="exploreKitchen-content">
-            {this.state.hotelsNearby.map((x) => {
+            {this.state.recommended.map((x) => {
               return <Kitchen data={x} />;
             })}
-          </div> */}
+          </div>
 
           <h1>Top picks</h1>
           <div class="exploreKitchen-content">
