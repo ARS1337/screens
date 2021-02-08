@@ -13,17 +13,21 @@ import "fetch";
 import { logDOM } from "@testing-library/react";
 import Categories from "./Categories";
 import Video from "./Video";
+import RecommendedNew from "./RecommendedNew";
 
 class Playground extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: [],
+      servingType:[],
       videoData: [],
       hotelsNearby: [],
       recommended: [],
       topPicks: [],
       token: "",
+      latitude:0,
+      longitude:0
     };
     console.log("Constricrotr");
   }
@@ -35,7 +39,8 @@ class Playground extends React.Component {
     "https://staging.mypcot.com/Homefood/customergateway/hotelsNearby";
   TopPicksURL =
     "https://staging.mypcot.com/Homefood/customergateway/homeTopPicks";
-  LoginURL = "https://staging.mypcot.com/Homefood/customergateway/processLogin";
+  LoginURL = 
+    "https://staging.mypcot.com/Homefood/customergateway/processLogin";
   RecommendedURL =
     "https://staging.mypcot.com/Homefood/customergateway/recommendedHotelAndBanner";
 
@@ -55,7 +60,7 @@ class Playground extends React.Component {
     this.getVideoData(this.VideoDataURL, this.mainInit, "videoData");
     this.posSuccess(this.HotelsNearbyURL, "hotelsNearby");
     this.posSuccess(this.TopPicksURL, "topPicks");
-    if (this.state.token.length > 0) {
+    if (this.state.token != "") {
       //logged in
       this.posSuccess(this.RecommendedURL, "recommended");
     }
@@ -68,6 +73,7 @@ class Playground extends React.Component {
         this.setState(
           {
             categories: res.getHomeFoodTypes,
+            servingType:res.getMenusServingType
           },
           console.log(" type state set")
         )
@@ -106,7 +112,7 @@ class Playground extends React.Component {
     )
       .then((r) => r.json())
       .then((res) => {
-        if(res.success!=0){
+        if (res.success != 0) {
           alert(res.message);
           this.setState({
             token: res.data[0].token,
@@ -152,7 +158,8 @@ class Playground extends React.Component {
         .then((r) => r.json())
         .then((res) => {
           console.log(res);
-          if (res.success > 0) {
+          console.log("token is " + this.state.token);
+          if (res.success == 1) {
             if (key == "hotelsNearby") {
               this.setState({
                 [key]: res.near_by_hotels,
@@ -182,8 +189,25 @@ class Playground extends React.Component {
     console.log(this.state);
   };
 
-  loginBoxDisplay=()=>{
+  loginBoxDisplay = () => {
     document.getElementById("login-container").style.display = "block";
+  };
+
+  clearToken = () => {
+    this.setState(
+      {
+        token: "",
+      },
+      console.log(this.state.token)
+    );
+  };
+
+  returnLogInOut() {
+    if (this.state.token == "") {
+      return <label onClick={this.loginBoxDisplay}>Login</label>;
+    } else {
+      return <label onClick={this.clearToken}>Logout</label>;
+    }
   }
 
   render() {
@@ -222,9 +246,9 @@ class Playground extends React.Component {
               <img src="images jpg/title/Warning.png" />
               <label>Help</label>
             </div>
-            <div class="user-login" onClick={this.loginBoxDisplay}>
-              <label >Login</label>
-            </div>
+
+            <div class="user-login">{this.returnLogInOut()}</div>
+
             <div class="signup">
               <label>Signup</label>
             </div>
@@ -240,7 +264,7 @@ class Playground extends React.Component {
               </button>
             </div>
             <div class="quote">
-              <Quote />
+              <Quote data={this.state}/>
             </div>
           </div>
           <div class="exploreCategory">
@@ -256,10 +280,12 @@ class Playground extends React.Component {
             })}
           </div>
           <br />
+
           <div class="exploreKitchen">
             <div class="exploreKitchen-title">Explore By Kitchen</div>
             <span>"Find out what's cooking around you!"</span>
           </div>
+
           <h1>Nearby Kitchens</h1>
           <div class="exploreKitchen-content">
             {this.state.hotelsNearby.map((x) => {
@@ -267,12 +293,7 @@ class Playground extends React.Component {
             })}
           </div>
 
-          <h1>Recommended</h1>
-          <div class="exploreKitchen-content">
-            {this.state.recommended.map((x) => {
-              return <Kitchen data={x} />;
-            })}
-          </div>
+          <RecommendedNew data={this.state}/>
 
           <h1>Top picks</h1>
           <div class="exploreKitchen-content">
