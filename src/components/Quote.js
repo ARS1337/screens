@@ -2,7 +2,6 @@ import React from "react";
 import "../App.css";
 
 function Quote(props) {
-  console.log("Quote.....");
   return (
     <>
       <div class="highlight-above-quote">
@@ -20,7 +19,7 @@ function Quote(props) {
           class="pp"
           class="what-eat-input"
           id="enquiry_desc"
-          value="milkshake"
+        
         />
         <div class="quote-price-label">
           <h3>...and quote your own price.</h3>
@@ -32,12 +31,12 @@ function Quote(props) {
             placeholder="Minimum 100"
             size="11"
             id="wanna_pay"
-            value="500"
+            
           />
         </div>
         <div class="blank-input">
           <img src="images jpg/landing/people.png" alt="" />
-          <input type="number" id="user_count" value="5" />
+          <input type="number" id="user_count"  />
         </div>
         <div class="radio">
           <ul class="select-type">
