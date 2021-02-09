@@ -8,26 +8,26 @@ import { Link, Route, Switch } from "react-router-dom";
 import TestingRouter from "./TestingRouter";
 import Card from "./Card";
 import Kitchen from "./Kitchen";
-import data from "../data.json";
 import "fetch";
-import { logDOM } from "@testing-library/react";
 import Categories from "./Categories";
 import Video from "./Video";
 import RecommendedNew from "./RecommendedNew";
+import Login from "./Login";
+import MainFooter from './MainFooter'
 
 class Playground extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: [],
-      servingType:[],
+      servingType: [],
       videoData: [],
       hotelsNearby: [],
       recommended: [],
       topPicks: [],
       token: "",
-      latitude:0,
-      longitude:0
+      latitude: 0,
+      longitude: 0,
     };
     console.log("Constricrotr");
   }
@@ -43,6 +43,8 @@ class Playground extends React.Component {
     "https://staging.mypcot.com/Homefood/customergateway/processLogin";
   RecommendedURL =
     "https://staging.mypcot.com/Homefood/customergateway/recommendedHotelAndBanner";
+  EnquiriesURL =
+    "https://staging.mypcot.com/Homefood/customergateway/saveEnquires";
 
   myHeaders = new Headers();
 
@@ -73,7 +75,7 @@ class Playground extends React.Component {
         this.setState(
           {
             categories: res.getHomeFoodTypes,
-            servingType:res.getMenusServingType
+            servingType: res.getMenusServingType,
           },
           console.log(" type state set")
         )
@@ -141,6 +143,7 @@ class Playground extends React.Component {
       this.body = new FormData();
       this.body.append("latitude", position.coords.latitude);
       this.body.append("longitude", position.coords.longitude);
+
       if (key == "hotelsNearby") {
         this.body.append("page_limit", 3);
         this.body.append("limit", 0);
@@ -210,19 +213,46 @@ class Playground extends React.Component {
     }
   }
 
+  sendEnquiry = () => {
+    this.getcoords().then((position) => {
+      console.log("sendEnquiry");
+      this.body = new FormData();
+
+      let quoteVars = [
+        "enquiry_desc",
+        "wanna_pay",
+        "user_count",
+        "delivery_on",
+      ];
+      quoteVars.forEach((x) => {
+        this.body.append(x, document.getElementById(x).value);
+      });
+
+      this.body.append("latitude", position.coords.latitude);
+      this.body.append("longitude", position.coords.longitude);
+      this.body.append(
+        "serving_type",
+        document.querySelector('input[name="radio"]:checked').value
+      );
+
+      this.tempInit = this.mainInit;
+      this.tempInit.body = this.body;
+      this.body = JSON.stringify(this.body);
+
+      fetch(this.EnquiriesURL, this.tempInit)
+        .then((x) => {
+          x.json();
+        })
+        .then((x) => {
+          console.log(x);
+        });
+    });
+  };
+
   render() {
     return (
       <>
-        <div id="login-container">
-          <div class="login-box" id="login-box">
-            <h2>Login</h2>
-            <input type="text" value="7977586379" id="login-id" />
-            <br />
-            <input type="text" value="123456" id="login-password" />
-            <br />
-            <button onClick={this.handleLogin}>Login</button>
-          </div>
-        </div>
+        <Login onClick={()=>{this.handleLogin()}}/>
 
         <div class="mainbg">
           <div class="mainbg-title">
@@ -264,7 +294,7 @@ class Playground extends React.Component {
               </button>
             </div>
             <div class="quote">
-              <Quote data={this.state}/>
+              <Quote data={this.state} onClick={this.sendEnquiry}/>
             </div>
           </div>
           <div class="exploreCategory">
@@ -293,7 +323,7 @@ class Playground extends React.Component {
             })}
           </div>
 
-          <RecommendedNew data={this.state}/>
+          <RecommendedNew data={this.state} />
 
           <h1>Top picks</h1>
           <div class="exploreKitchen-content">
@@ -315,7 +345,7 @@ class Playground extends React.Component {
             })}
           </div>
           {/* footer  */}
-          <div class="mainbg-footer">
+          {/* <div class="mainbg-footer">
             <div class="footer-title">
               <img src="images jpg/Footer/Title.png" alt="footer title" />
             </div>
@@ -357,7 +387,8 @@ class Playground extends React.Component {
               are properties of respective owners. 2008-2020 © All rights
               reserved.
             </span>
-          </div>
+          </div> */}
+          <MainFooter/>
         </div>
       </>
     );
