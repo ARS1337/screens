@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import "../App.css";
 import Quote from "./Quote";
-import Reviews from "./Reviews";
-import Recommended from "./Recommended";
-import Videos from "./Videos";
-import { Link, Route, Switch } from "react-router-dom";
-import TestingRouter from "./TestingRouter";
-import Card from "./Card";
 import Kitchen from "./Kitchen";
-import "fetch";
 import Categories from "./Categories";
 import Video from "./Video";
 import RecommendedNew from "./RecommendedNew";
 import Login from "./Login";
-import MainFooter from './MainFooter'
+import MainFooter from "./MainFooter";
 
 class Playground extends React.Component {
   constructor(props) {
@@ -26,10 +19,8 @@ class Playground extends React.Component {
       recommended: [],
       topPicks: [],
       token: "",
-      latitude: 0,
-      longitude: 0,
+      nearbyKitchens: 0,
     };
-    console.log("Constricrotr");
   }
   MasterDataURL =
     "https://staging.mypcot.com/Homefood/customergateway/getMasterData";
@@ -39,8 +30,7 @@ class Playground extends React.Component {
     "https://staging.mypcot.com/Homefood/customergateway/hotelsNearby";
   TopPicksURL =
     "https://staging.mypcot.com/Homefood/customergateway/homeTopPicks";
-  LoginURL = 
-    "https://staging.mypcot.com/Homefood/customergateway/processLogin";
+  LoginURL = "https://staging.mypcot.com/Homefood/customergateway/processLogin";
   RecommendedURL =
     "https://staging.mypcot.com/Homefood/customergateway/recommendedHotelAndBanner";
   EnquiriesURL =
@@ -62,7 +52,7 @@ class Playground extends React.Component {
     this.getVideoData(this.VideoDataURL, this.mainInit, "videoData");
     this.posSuccess(this.HotelsNearbyURL, "hotelsNearby");
     this.posSuccess(this.TopPicksURL, "topPicks");
-    if (this.state.token != "") {
+    if (this.state.token !== "") {
       //logged in
       this.posSuccess(this.RecommendedURL, "recommended");
     }
@@ -85,32 +75,34 @@ class Playground extends React.Component {
   getVideoData = (url) => {
     fetch(url, this.mainInit)
       .then((r) => r.json())
-      .then((res) =>
+      .then((res) => {
+        res.video_data.pop();
+        res.video_data.pop();
         this.setState(
           {
             videoData: res.video_data,
           },
           console.log("video state set" + res.success)
-        )
-      );
+        );
+      });
   };
 
   handleLogin = () => {
     document.getElementById("login-container").style.display = "none";
-    this.body = new FormData();
+    let body = new FormData();
 
-    this.id = document.getElementById("login-id").value;
-    this.password = document.getElementById("login-password").value;
+    let id = document.getElementById("login-id").value;
+    let password = document.getElementById("login-password").value;
 
-    this.body.append("phone_number", this.id);
-    this.body.append("password", this.password);
+    body.append("phone_number", id);
+    body.append("password", password);
 
-    this.tempInit = this.mainInit;
-    this.tempInit.body = this.body;
+    let tempInit = this.mainInit;
+    tempInit.body = body;
 
     fetch(
       "https://staging.mypcot.com/Homefood/customergateway/processLogin",
-      this.tempInit
+      tempInit
     )
       .then((r) => r.json())
       .then((res) => {
@@ -126,7 +118,6 @@ class Playground extends React.Component {
         res = res;
       });
   };
-
   getcoords() {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -140,24 +131,24 @@ class Playground extends React.Component {
         longitude: position.coords.longitude,
       });
 
-      this.body = new FormData();
-      this.body.append("latitude", position.coords.latitude);
-      this.body.append("longitude", position.coords.longitude);
+      let body = new FormData();
+      body.append("latitude", position.coords.latitude);
+      body.append("longitude", position.coords.longitude);
 
       if (key == "hotelsNearby") {
-        this.body.append("page_limit", 3);
-        this.body.append("limit", 0);
+        body.append("page_limit", 3);
+        body.append("limit", 0);
       }
       if (key == "recommended") {
         this.myHeaders.append("X-Access-Token", this.state.token);
       }
 
-      this.tempInit = this.mainInit;
-      this.tempInit.body = this.body;
+      let tempInit = this.mainInit;
+      tempInit.body = body;
 
-      this.body = JSON.stringify(this.body);
+      body = JSON.stringify(body);
 
-      fetch(url, this.tempInit)
+      fetch(url, tempInit)
         .then((r) => r.json())
         .then((res) => {
           console.log(res);
@@ -166,9 +157,9 @@ class Playground extends React.Component {
             if (key == "hotelsNearby") {
               this.setState({
                 [key]: res.near_by_hotels,
+                nearbyKitchens: 1,
               });
             } else if (key == "topPicks") {
-              res.data.pop();
               this.setState({
                 [key]: res.data,
               });
@@ -178,12 +169,12 @@ class Playground extends React.Component {
               });
             }
           } else {
-            alert(res.message + " and key is: " + key);
+            if (key == "hotelsNearby") {
+              this.setState({
+                nearbyKitchens: 0,
+              });
+            }
           }
-        })
-        .then((ress) => {
-          ress = ress;
-          console.log(this.state);
         });
     });
   };
@@ -216,7 +207,7 @@ class Playground extends React.Component {
   sendEnquiry = () => {
     this.getcoords().then((position) => {
       console.log("sendEnquiry");
-      this.body = new FormData();
+      let body = new FormData();
 
       let quoteVars = [
         "enquiry_desc",
@@ -225,26 +216,27 @@ class Playground extends React.Component {
         "delivery_on",
       ];
       quoteVars.forEach((x) => {
-        this.body.append(x, document.getElementById(x).value);
+        body.append(x, document.getElementById(x).value);
       });
 
-      this.body.append("latitude", position.coords.latitude);
-      this.body.append("longitude", position.coords.longitude);
-      this.body.append(
+      body.append("latitude", position.coords.latitude);
+      body.append("longitude", position.coords.longitude);
+      body.append(
         "serving_type",
         document.querySelector('input[name="radio"]:checked').value
       );
 
       this.tempInit = this.mainInit;
-      this.tempInit.body = this.body;
-      this.body = JSON.stringify(this.body);
+      this.tempInit.body = body;
+      body = JSON.stringify(body);
 
       fetch(this.EnquiriesURL, this.tempInit)
-        .then((x) => {
-          x.json();
-        })
-        .then((x) => {
-          console.log(x);
+        .then((r) => r.json())
+        .then((res) => {
+          console.log(res);
+          res.success == "1"
+            ? alert("enquiry sent successfully!")
+            : alert("enquiry failed!");
         });
     });
   };
@@ -252,17 +244,25 @@ class Playground extends React.Component {
   render() {
     return (
       <>
-        <Login onClick={()=>{this.handleLogin()}}/>
+        {console.log("Playgroun")}
+        <Login
+          onClick={() => {
+            this.handleLogin();
+          }}
+        />
 
         <div class="mainbg">
           <div class="mainbg-title">
             <div class="main-location">
               <div class="search-box-left">
                 <img src="images jpg/title/location-marker.png" />
-                <select id="cars" name="cars" class="location-list">
-                  <option value="volvo" selected>
-                    Volvo
-                  </option>
+                <select
+                  id="cars"
+                  name="cars"
+                  class="location-list"
+                  defaultValue="Mumbai"
+                >
+                  <option value="Mumbai">Mumbai</option>
                   <option value="saab">Saab</option>
                   <option value="fiat">Fiat</option>
                   <option value="audi">Audi</option>
@@ -286,7 +286,7 @@ class Playground extends React.Component {
               <input
                 type="text"
                 id="mainbg-search"
-                placeholder="Search for dishes, Restaurants"
+                defaultValue="Search for dishes, Restaurants"
                 onClick={clearPlaceholder}
               />
               <button class="mainbg-search-icon">
@@ -294,7 +294,7 @@ class Playground extends React.Component {
               </button>
             </div>
             <div class="quote">
-              <Quote data={this.state} onClick={this.sendEnquiry}/>
+              <Quote data={this.state} onClick={this.sendEnquiry} />
             </div>
           </div>
           <div class="exploreCategory">
@@ -316,9 +316,13 @@ class Playground extends React.Component {
             <span>"Find out what's cooking around you!"</span>
           </div>
 
-          <h1>Nearby Kitchens</h1>
+          {() => {
+            if (this.state.nearbyKitchens != 0) {
+              <h1>Nearby Kitchens</h1>;
+            }
+          }}
           <div class="exploreKitchen-content">
-            {this.state.hotelsNearby.map((x) => {
+            {this.state.hotelsNearby.slice(0, 3).map((x) => {
               return <Kitchen data={x} />;
             })}
           </div>
@@ -327,12 +331,11 @@ class Playground extends React.Component {
 
           <h1>Top picks</h1>
           <div class="exploreKitchen-content">
-            {this.state.topPicks.map((x) => {
+            {this.state.topPicks.slice(0, 3).map((x) => {
               return <Kitchen data={x} />;
             })}
           </div>
 
-          {/* kitchens done cook videos start */}
           <div class="cookVideos">
             <div class="cookVideos-title">Cooks Videos!</div>
             <span>
@@ -344,58 +347,20 @@ class Playground extends React.Component {
               return <Video data={x} />;
             })}
           </div>
-          {/* footer  */}
-          {/* <div class="mainbg-footer">
-            <div class="footer-title">
-              <img src="images jpg/Footer/Title.png" alt="footer title" />
-            </div>
-            <div class="social">
-              <img src="images jpg/Footer/Facebook.png" alt="" />
-              <img src="images jpg/Footer/Youtube.png" alt="" />
-              <img src="images jpg/Footer/Twitter.png" alt="" />
-            </div>
-            <span class="downloads">Downloads</span>
-            <div class="google-apple">
-              <img src="images jpg/Footer/GooglePlayBadge.png" alt="" />
-              <img src="images jpg/Footer/AppStoreBadge.png" alt="" />
-            </div>
-            <div class="footer-links">
-              <a href="#" class="CompanyLink">
-                Company
-              </a>
-              <a href="#" class="AboutusLink">
-                About us
-              </a>
-              <a href="#" class="TnCLink">
-                Terms and Conditions
-              </a>
-              <a href="#" class="ContactusLink">
-                Contact Us
-              </a>
-              <a href="#" class="PrivacyPolicyLink">
-                Privacy Policy
-              </a>
-              <a href="#" class="FaqsLink">
-                FAQs
-              </a>
-            </div>
+          {/* <div class="videos-btn">
+            <button class="videos-btn-left">{"<"}</button>
+            <button class="videos-btn-right">{">"}</button>
+          </div>
+          <br /> */}
 
-            <hr class="line" />
-            <span class="last-line">
-              By Continuing past this page, you agree to our Terms of Service,
-              Cookie Policy, Privacy Policy and Content Policies. All trademarks
-              are properties of respective owners. 2008-2020 © All rights
-              reserved.
-            </span>
-          </div> */}
-          <MainFooter/>
+          <MainFooter />
         </div>
       </>
     );
   }
 }
 const clearPlaceholder = () => {
-  document.getElementById("mainbg-search").style.placeholder = "";
+  document.getElementById("mainbg-search").value = "";
 };
 
 export { clearPlaceholder, Playground };

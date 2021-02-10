@@ -759,7 +759,7 @@ ul::before {
 
 .desc {
     white-space: pre-wrap;
-    color: gray;
+    color: #222;
     font-size: larger;
 }
 
@@ -1577,7 +1577,7 @@ ul::before {
 
 .date {
     max-width: 100%;
-    width: fit-content
+    width: fit-content;
 }
 
 
@@ -1941,6 +1941,10 @@ input::-webkit-calendar-picker-indicator {
     margin-bottom: 30px;
 }
 
+.categories .types:last-child {
+    max-width: 100%;
+}
+
 .types img:hover {
     cursor: pointer;
 }
@@ -1956,9 +1960,14 @@ input::-webkit-calendar-picker-indicator {
     font-weight: 600;
 }
 
+.categories .types:last-child img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 @media only screen and (max-width: 1200px) {
     .types span {
-        margin-top: -30px;
+        /* margin-top: -30px; */
     }
 }
 
@@ -1970,7 +1979,7 @@ input::-webkit-calendar-picker-indicator {
         margin-bottom: 15px;
     }
     .types span {
-        margin-top: -30px;
+        /* margin-top: -30px; */
         font-weight: 500;
         font-size: 15px;
     }
@@ -2001,7 +2010,7 @@ input::-webkit-calendar-picker-indicator {
     grid-template-areas: "kitchen kitchen kitchen"; */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 0px 10%;
 }
 
@@ -2015,14 +2024,20 @@ input::-webkit-calendar-picker-indicator {
     grid-area: kitchen;
     display: grid;
     grid-template-columns: 1fr;
-    /* grid-template-columns: repeat(2, auto); */
+    /* grid-template-columns: 0.7fr, 0.3fr; */
     grid-template-rows: repeat(4, auto);
-    grid-template-areas: "kitchenImage kitchenImage" "kitchenName kitchenRating" "type kitchenReviews " "foodCost kitchenReviews";
+    grid-template-areas: "kitchenImage kitchenImage" "kitchenName kitchenRating" "type type" "foodCost kitchenReviews";
     margin: 20px 2%;
-    max-width: fit-content;
+    max-width: 300px;
     max-height: fit-content;
-    row-gap: 5px;
+    row-gap: 10px;
+    color: #222;
 }
+
+
+/* .kitchen h6 {
+    margin: 0px;
+} */
 
 .kitchen:hover {
     cursor: pointer;
@@ -2034,11 +2049,16 @@ input::-webkit-calendar-picker-indicator {
 
 .kitchenImage img {
     max-width: 100%;
-    max-height: auto;
+    max-height: 225px;
+    border-radius: 10px;
+    min-height: auto;
+    min-width: auto;
 }
 
 .kitchenRating {
     grid-area: kitchenRating;
+    color: #7cce00;
+    font-size: 21px;
 }
 
 .kitchenRating img {
@@ -2054,6 +2074,8 @@ input::-webkit-calendar-picker-indicator {
 
 .type {
     grid-area: type;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .foodCost {
@@ -2063,6 +2085,14 @@ input::-webkit-calendar-picker-indicator {
 .type,
 .foodCost {
     text-align: left;
+    font-weight: 500;
+    white-space: break-spaces;
+}
+
+.type,
+.foodCost,
+.kitchenReviews {
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -2098,8 +2128,42 @@ input::-webkit-calendar-picker-indicator {
     margin: 0px 10%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.videos-btn {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.videos-btn>*:hover {
+    cursor: pointer;
+}
+
+.videos-btn>* {
+    background-color: #e54e51;
+    width: 80px;
+    border-radius: 10px;
+    border: 1px;
+    margin-right: 10px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #222;
+}
+
+.videos-btn button {
+    padding: 5px;
+}
+
+.cookVideos-content .card {
+    max-width: 350px;
+}
+
+.card .desc {
+    min-height: 70px;
 }
 
 .name-upload-date {
@@ -2286,9 +2350,8 @@ input::-webkit-calendar-picker-indicator {
 
 /* Routing Link decoration  */
 
-.kitchen a {
+a {
     text-decoration: none;
-    color: black;
 }
 
 

@@ -12,14 +12,12 @@ function Quote(props) {
       <div class="quote-price">
         <h3 class="what-eat">What would you like to eat...</h3>
         <div class="search-icon">
-          <img src="images jpg/landing/Icon search.png" />
+          <img src="images jpg/landing/Icon search.png" alt="serach icon"/>
         </div>
         <input
           type="text"
-          class="pp"
-          class="what-eat-input"
+          class="pp what-eat-input"
           id="enquiry_desc"
-        
         />
         <div class="quote-price-label">
           <h3>...and quote your own price.</h3>
@@ -28,7 +26,7 @@ function Quote(props) {
           <label>Pay:</label>
           <input
             type="number"
-            placeholder="Minimum 100"
+            placeholder="Min. 100/person"
             size="11"
             id="wanna_pay"
             
@@ -36,7 +34,7 @@ function Quote(props) {
         </div>
         <div class="blank-input">
           <img src="images jpg/landing/people.png" alt="" />
-          <input type="number" id="user_count"  />
+          <input type="number" id="user_count"  min="1"/>
         </div>
         <div class="radio">
           <ul class="select-type">
@@ -45,7 +43,7 @@ function Quote(props) {
                 <li key={x.key}>
                   <input
                     type="radio"
-                    value={x.key}
+                    defaultValue={x.key}
                     name="radio"
                     id={x.key}
                     checked
@@ -57,12 +55,13 @@ function Quote(props) {
           </ul>
         </div>
         <div class="calendar-icon">
-          <input type="date" class="date" id="delivery_on" min={new Date().toISOString().substr(0,10)} value={new Date().toISOString().substr(0,10)}  />
+          <input type="date" class="date" id="delivery_on" min={new Date().toISOString().substr(0,10)} defaultValue={new Date().toISOString().substr(0,10)}  />
         </div>
       </div>
       <div class="quote-confirm">
         <button onClick={props.onClick}>PUKKAO</button>
       </div>
+      {console.log("Quote")}
     </>
   );
 }

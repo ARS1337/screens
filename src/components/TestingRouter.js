@@ -1,7 +1,6 @@
 import "../App.css";
 import React from "react";
 import "../App.css";
-import Quote from "./Quote";
 import Reviews from "./Reviews";
 import Recommended from "./Recommended";
 import Videos from "./Videos";
@@ -9,9 +8,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams,
 } from "react-router-dom";
 import { Title } from "./Title";
 import Header from "./Header";

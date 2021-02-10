@@ -14,7 +14,7 @@ function Video(props) {
         <div class="name-upload-date">
           <div class="kitchen-name">{props.data.hotel_name}</div>
           <div class="uploadDate">
-            <h5>{props.data.created_on}</h5>
+            <h5>Uploaded on: {(props.data.created_on).substr(0,10)}</h5>
           </div>
         </div>
       </div>
