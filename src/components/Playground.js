@@ -7,6 +7,7 @@ import Video from "./Video";
 import RecommendedNew from "./RecommendedNew";
 import Login from "./Login";
 import MainFooter from "./MainFooter";
+import { fetchMasterData } from './StoreAndSlices/MasterFetch';
 
 class Playground extends React.Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class Playground extends React.Component {
     this.myHeaders.append("Authorization", "Basic cml0ZXNoOnJpdGVzaFNpbmdo");
     this.myHeaders.append("Accept", "application/json");
 
+    // dispatch(fetchMasterData(this.MasterDataURL,this.mainInit));
     this.getMasterData(this.MasterDataURL, this.mainInit, "categories");
     this.getVideoData(this.VideoDataURL, this.mainInit, "videoData");
     this.posSuccess(this.HotelsNearbyURL, "hotelsNearby");
