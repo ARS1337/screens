@@ -1920,29 +1920,38 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .categories {
-    /* grid-area: categories; */
     padding: 2% 10%;
-    align-content: center;
 }
 
+.categories-container {}
+
 .types {
-    /* border: 1px solid black; */
     padding: 0px;
-    /* max-width: fit-content; */
-    max-width: 20%;
-    max-height: fit-content;
-    min-height: auto;
-    min-width: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    float: left;
     margin-bottom: 30px;
+    margin: 20px 10px;
 }
 
-.categories .types:last-child {
-    max-width: 100%;
+.types-row {
+    min-width: 100%;
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.types-row-last {
+    width: 100%;
+    height: max-content;
+    margin: 5px;
+}
+
+.types-row-last .types {
+    margin: 0px;
 }
 
 .types img:hover {
@@ -1950,40 +1959,60 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .types img {
-    max-width: inherit;
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .types span {
-    /* margin-top: -40px; */
-    font-weight: 600;
-}
-
-.categories .types:last-child img {
-    max-width: 100%;
-    max-height: 100%;
+    font-weight: 500;
+    font-size: 23px;
+    padding: 15px 0px;
 }
 
 @media only screen and (max-width: 1200px) {
-    .types span {
-        /* margin-top: -30px; */
-    }
+    .types span {}
 }
 
 @media only screen and (max-width: 800px) {
+    .categories {
+        padding: 10px;
+    }
+    .types-2rows {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
     .types {
-        width: 50%;
+        min-width: 70%;
         max-width: 150px;
         max-height: 180px;
-        margin-bottom: 15px;
+        margin: 2px;
+        margin-bottom: 10px;
     }
     .types span {
         /* margin-top: -30px; */
         font-weight: 500;
-        font-size: 15px;
+        font-size: 20px;
+        padding: 5px;
     }
-    .categories {}
+    .types-row>* {
+        max-height: fit-content;
+    }
+    .types-row {
+        flex-direction: column;
+        min-width: 50%;
+    }
+    .types-row-last .types {
+        width: 100%;
+        height: max-content;
+        max-width: 100%;
+        max-height: auto;
+    }
+    .types br {
+        display: none;
+    }
 }
 
 
