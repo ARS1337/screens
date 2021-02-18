@@ -1,26 +1,25 @@
 import React from "react";
 import Kitchen from "./Kitchen";
+import { useSelector } from "react-redux";
 
-function RecommendedNew(props) {
+function RecommendedNew() {
+  let token = useSelector((state) => state.token.token);
+  let recommended = useSelector((state) => state.otherData.recommended);
+
   return (
     <>
-      {props.data.token !== "" &&
-      props.data.recommended !== undefined &&
-      props.data.recommended !== null ? (
+      {token !== "" && recommended !== undefined && recommended !== null ? (
         <h1>Recommended</h1>
       ) : (
         ""
       )}
       <div class="exploreKitchen-content">
-        {
-        props.data.token !== "" &&
-        props.data.recommended !==undefined &&
-        props.data.recommended !==null
-          ? props.data.recommended.slice(0, 3).map((x) => {
-              return <Kitchen data={x} />;
-            })
+        {token !== "" && recommended !== undefined && recommended !== null
+          ? 
+              <Kitchen data="recommended" />
+            
           : ""}
-          {console.log("RecommededNew")}
+        {console.log("RecommededNew")}
       </div>
     </>
   );
