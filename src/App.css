@@ -1950,12 +1950,16 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .types-row-last {
-    width: 100%;
+    min-width: 100%;
     height: max-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.types-row-last .types {
+    min-width: 100%;
 }
 
 @media only screen and (max-width: 800px) {
