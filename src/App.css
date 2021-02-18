@@ -723,13 +723,21 @@ ul::before {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
     max-height: 450px;
-    min-height: auto;
-    min-width: auto;
+    min-height: 450px;
+    /* min-height: auto; */
+    min-width: 350px;
     margin: 20px 2%;
     text-align: center;
     padding: 20px;
-    float: left;
 }
+
+@media only screen and (max-width: 1100px) {
+    .card {
+        padding: 0px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {}
 
 
 /* video {
@@ -743,6 +751,8 @@ ul::before {
     max-width: 100%;
     max-height: 100%;
     cursor: pointer;
+    max-width: -webkit-fill-available;
+    max-height: inherit;
 }
 
 .videos {
@@ -1874,8 +1884,6 @@ input::-webkit-calendar-picker-indicator {
     border-bottom-width: 50%;
 }
 
-.user-login label {}
-
 @media only screen and (max-width: 800px) {
     .mainbg-search {
         margin-bottom: 50px;
@@ -1923,8 +1931,6 @@ input::-webkit-calendar-picker-indicator {
     padding: 2% 10%;
 }
 
-.categories-container {}
-
 .types {
     padding: 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -1938,7 +1944,6 @@ input::-webkit-calendar-picker-indicator {
 
 .types-row {
     min-width: 100%;
-    margin: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1947,7 +1952,17 @@ input::-webkit-calendar-picker-indicator {
 .types-row-last {
     width: 100%;
     height: max-content;
-    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 800px) {
+    .types-row-last {
+        margin: 0px;
+        width: 100%;
+    }
 }
 
 .types-row-last .types {
@@ -1968,6 +1983,10 @@ input::-webkit-calendar-picker-indicator {
     font-weight: 500;
     font-size: 23px;
     padding: 15px 0px;
+}
+
+.types-row-last .types img {
+    width: -webkit-fill-available;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -2033,10 +2052,6 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .exploreKitchen-content {
-    /* display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-template-rows: 1fr;
-    grid-template-areas: "kitchen kitchen kitchen"; */
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -2046,8 +2061,19 @@ input::-webkit-calendar-picker-indicator {
 @media only screen and (max-width: 800px) {
     .exploreKitchen-content {
         flex-direction: column;
+        align-items: center;
     }
 }
+
+@media only screen and (max-width: 1100px) {
+    .exploreKitchen-content {
+        margin: 0px 1%;
+    }
+}
+
+
+/* @media only screen and (max-width: 1100px) {
+} */
 
 .kitchen {
     grid-area: kitchen;
@@ -2057,16 +2083,13 @@ input::-webkit-calendar-picker-indicator {
     grid-template-rows: repeat(4, auto);
     grid-template-areas: "kitchenImage kitchenImage" "kitchenName kitchenRating" "type type" "foodCost kitchenReviews";
     margin: 20px 2%;
-    max-width: 300px;
     max-height: fit-content;
-    row-gap: 10px;
+    row-gap: 15px;
     color: #222;
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 225px;
 }
-
-
-/* .kitchen h6 {
-    margin: 0px;
-} */
 
 .kitchen:hover {
     cursor: pointer;
@@ -2077,17 +2100,18 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .kitchenImage img {
-    max-width: 100%;
-    max-height: 225px;
     border-radius: 10px;
-    min-height: auto;
-    min-width: auto;
+    max-width: -webkit-fill-available;
+    max-width: 300px;
+    max-height: 225px;
+    min-width: 300px;
+    min-height: 225px;
 }
 
 .kitchenRating {
     grid-area: kitchenRating;
     color: #7cce00;
-    font-size: 21px;
+    font-size: 25px;
 }
 
 .kitchenRating img {
@@ -2097,7 +2121,7 @@ input::-webkit-calendar-picker-indicator {
 .kitchenName {
     grid-area: kitchenName;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 25px;
     text-align: left;
 }
 
@@ -2121,7 +2145,7 @@ input::-webkit-calendar-picker-indicator {
 .type,
 .foodCost,
 .kitchenReviews {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -2134,6 +2158,22 @@ input::-webkit-calendar-picker-indicator {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+@media only screen and (max-width: 1100px) {
+    .kitchen {
+        max-width: 220px;
+        min-width: 220px;
+        min-height: 146px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .kitchenImage img {
+        min-width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
 }
 
 
@@ -2189,6 +2229,18 @@ input::-webkit-calendar-picker-indicator {
 
 .cookVideos-content .card {
     max-width: 350px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .cookVideos-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cookVideos-content>.card {
+        /* min-width: fit-content; */
+        /* border: 5px black solid; */
+        margin: 10px 0px;
+    }
 }
 
 .card .desc {
@@ -2344,8 +2396,8 @@ input::-webkit-calendar-picker-indicator {
     .mainbg-footer a {
         font-size: 20px;
     }
-    .social img,
-    .google-apple img {
+    .social>img,
+    .google-apple>img {
         max-width: 60%;
         max-height: auto;
         min-height: auto;
@@ -2353,6 +2405,9 @@ input::-webkit-calendar-picker-indicator {
     }
     .google-apple {
         padding: 0px 40px;
+    }
+    .google-apple>img {
+        max-width: 40%;
     }
     .social {
         padding: 0px 100px;
