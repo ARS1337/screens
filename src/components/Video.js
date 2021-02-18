@@ -5,7 +5,7 @@ function Video() {
   // return <></>
   let videos = useSelector((state) => state.video.videoData[0]);
   if (videos !== undefined) {
-    return videos.map((x) => {
+    return videos.slice(0,3).map((x) => {
       return (
         <>
           <div class="card" key={x.video_id}>

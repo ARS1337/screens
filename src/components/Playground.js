@@ -159,16 +159,11 @@ export class Playground extends React.Component {
         <div class="cookVideos-content">
           <Video />
         </div>
-        {/* <div class="videos-btn">
-            <button class="videos-btn-left">{"<"}</button>
-            <button class="videos-btn-right">{">"}</button>
-          </div>
-          <br /> */}
-
         <MainFooter />
       </>
     );
   }
+  
 }
 const clearPlaceholder = () => {
   document.getElementById("mainbg-search").value = "";

@@ -117,14 +117,6 @@ let sendEnquiry = (dispatch, props,token) => {
     tempInit.body = body;
     body = JSON.stringify(body);
     dispatch(SendEnquiry([props.data, tempInit]));
-    // fetch(this.EnquiriesURL, this.tempInit)
-    //   .then((r) => r.json())
-    //   .then((res) => {
-    //     console.log(res);
-    //     res.success == "1"
-    //       ? alert("enquiry sent successfully!")
-    //       : alert("enquiry failed!");
-    //   });
   });
 };
 
