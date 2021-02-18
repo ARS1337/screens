@@ -1,28 +1,27 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchMasterData = createAsyncThunk(
-    "MasterFetch",
-    async(url, init, thunkAPI) => {
-        let temp = await fetch(url, init);
-        console.log(temp);
+    "MasterFetch/fetchMasterData",
+    async(data, thunkAPI) => {
+        let temp = await fetch(data[0], data[1]);
         return temp.json();
     }
 );
 
 export const MasterSlice = createSlice({
-    name: 'MasterFetch',
+    name: "MasterFetch",
     initialState: { categories: [], servingType: [] },
     reducers: {},
     extraReducers: {
-        [fetchMasterData.pending]: (state, action) => {
-
-        },
+        [fetchMasterData.pending]: (state, action) => {},
         [fetchMasterData.rejected]: (state, action) => {
-
+            console.log("rejected");
         },
         [fetchMasterData.fulfilled]: (state, action) => {
-            // state.categories = action.getHomeFoodTypes,
-            // state.servingType = action.getMenusServingType
+            console.log("fulfilled");
+            console.log(action);
+            state.categories = action.payload.getHomeFoodTypes;
+            state.servingType = action.payload.getMenusServingType;
         },
-    }
-})
+    },
+});
