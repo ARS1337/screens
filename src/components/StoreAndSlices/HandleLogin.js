@@ -11,10 +11,28 @@ export const fetchToken = createAsyncThunk(
 
 export const tokenSlice = createSlice({
     name: "tokenSlice",
-    initialState: { token: "" },
+    initialState: {
+        token: "",
+        loginId: "",
+        password: "",
+        displayContainer: { "display": "none" },
+    },
     reducers: {
         clearToken: (state, action) => {
             state.token = "";
+        },
+        setDetails: (state, action) => {
+            state[action.payload.key] = action.payload.value;
+        },
+        clearDetails: (state, action) => {
+            state.loginId = "";
+            state.password = "";
+        },
+        displayContainerVisible: (state, action) => {
+            state.displayContainer.display = "block"
+        },
+        displayContainerInVisible: (state, action) => {
+            state.displayContainer.diplay = "none"
         },
     },
     extraReducers: {
@@ -25,8 +43,18 @@ export const tokenSlice = createSlice({
         [fetchToken.fulfilled]: (state, action) => {
             console.log("login fulfilled");
             console.log(action);
-            state.token = action.payload.data[0].token;
+            if (action.payload.success == "1") {
+                state.token = action.payload.data[0].token;
+            } else {
+                alert(action.payload.message);
+            }
         },
     },
 });
-export const { clearToken } = tokenSlice.actions;
+export const {
+    clearToken,
+    setDetails,
+    clearDetails,
+    displayContainerInVisible,
+    displayContainerVisible,
+} = tokenSlice.actions;

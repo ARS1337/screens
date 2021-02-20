@@ -1,15 +1,27 @@
 import React from "react";
 import "../App.css";
-import { SendEnquiry } from "../components/StoreAndSlices/SendEnquiry";
+import {
+  SendEnquiry,
+  setEnquiryDetails,
+} from "../components/StoreAndSlices/SendEnquiry";
 import { useDispatch, useSelector } from "react-redux";
 
 function Quote(props) {
   const dispatch = useDispatch();
   let servingType = useSelector((state) => state.masterData.servingType);
   const token = useSelector((state) => state.token.token);
-
+  let temp = useSelector((state) => state.Enquiries);
+  console.log(temp);
+  let data={...temp}
+  data["latitude"] = useSelector((state) => state.Location.latitude);
+  data["longitude"] = useSelector((state) => state.Location.longitude);
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        sendEnquiry(dispatch, props, token, data);
+      }}
+    >
       <div class="highlight-above-quote">
         <span>let us know what you</span>
         <br />
@@ -20,7 +32,16 @@ function Quote(props) {
         <div class="search-icon">
           <img src="images jpg/landing/Icon search.png" alt="serach icon" />
         </div>
-        <input type="text" class="pp what-eat-input" id="enquiry_desc" />
+
+        <input
+          type="text"
+          class="pp what-eat-input"
+          id="enquiry_desc"
+          value={useSelector((state) => state.Enquiries.enquiry_desc)}
+          onChange={(event) => {
+            handleChange(event, dispatch);
+          }}
+        />
         <div class="quote-price-label">
           <h3>...and quote your own price.</h3>
         </div>
@@ -31,14 +52,29 @@ function Quote(props) {
             placeholder="Min. 100/person"
             size="11"
             id="wanna_pay"
+            value={useSelector((state) => state.Enquiries.wanna_pay)}
+            onChange={(event) => {
+              handleChange(event, dispatch);
+            }}
           />
         </div>
         <div class="blank-input">
           <img src="images jpg/landing/people.png" alt="" />
-          <input type="number" id="user_count" min="1" />
+          <input
+            type="number"
+            id="user_count"
+            min="1"
+            value={useSelector((state) => state.Enquiries.user_count)}
+            onChange={(event) => {
+              handleChange(event, dispatch);
+            }}
+          />
         </div>
         <div class="radio">
-          <ul class="select-type">
+          <ul
+            class="select-type"
+            value={useSelector((state) => state.Enquiries.serving_type)}
+          >
             {servingType.map((x) => {
               return (
                 <li key={x.key}>
@@ -49,7 +85,21 @@ function Quote(props) {
                     id={x.key}
                     checked
                   />
-                  <label for={x.key}>{x.value}</label>
+                  <label
+                    for={x.key}
+                    id="serving_type"
+                    value={x.key}
+                    onClick={(event) => {
+                      handleChange(
+                        (event = {
+                          target: { id: "serving_type", value: x.key },
+                        }),
+                        dispatch
+                      );
+                    }}
+                  >
+                    {x.value}
+                  </label>
                 </li>
               );
             })}
@@ -62,62 +112,70 @@ function Quote(props) {
             id="delivery_on"
             min={new Date().toISOString().substr(0, 10)}
             defaultValue={new Date().toISOString().substr(0, 10)}
+            value={useSelector((state) => state.Enquiries.delivery_on)}
+            onChange={(event) => {
+              handleChange(event, dispatch);
+            }}
           />
         </div>
       </div>
       <div class="quote-confirm">
-        <button
-          onClick={() => {
-            sendEnquiry(dispatch, props,token);
-          }}
-        >
-          PUKKAO
-        </button>
+        <button type="submit">PUKKAO</button>
       </div>
-      {/* <SendEnquiryBtn data={props.data}/> */}
       {console.log("Quote")}
-    </>
+    </form>
   );
 }
-
+let handleChange = (event, dispatch) => {
+  dispatch(
+    setEnquiryDetails({ key: event.target.id, value: event.target.value })
+  );
+};
 function getcoords() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 }
 
-let sendEnquiry = (dispatch, props,token) => {
-  getcoords().then((position) => {
-    console.log("sendEnquiry");
-    let myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append("Authorization", "Basic cml0ZXNoOnJpdGVzaFNpbmdo");
-    myHeaders.set("X-Access-Token", token);
+let sendEnquiry = (dispatch, props, token, data) => {
+  // getcoords().then((position) => {
+  console.log("sendEnquiry");
+  let myHeaders = new Headers();
+  myHeaders.append("Accept", "application/json");
+  myHeaders.append("Authorization", "Basic cml0ZXNoOnJpdGVzaFNpbmdo");
+  myHeaders.set("X-Access-Token", token);
 
-    let mainInit = {
-      method: "POST",
-      headers: myHeaders,
-      mode: "cors",
-    };
-    let body = new FormData();
+  let mainInit = {
+    method: "POST",
+    headers: myHeaders,
+    mode: "cors",
+  };
+  let body = new FormData();
 
-    let quoteVars = ["enquiry_desc", "wanna_pay", "user_count", "delivery_on"];
-    quoteVars.forEach((x) => {
-      body.append(x, document.getElementById(x).value);
-    });
-
-    body.append("latitude", position.coords.latitude);
-    body.append("longitude", position.coords.longitude);
-    body.append(
-      "serving_type",
-      document.querySelector('input[name="radio"]:checked').value
-    );
-
-    let tempInit = mainInit;
-    tempInit.body = body;
-    body = JSON.stringify(body);
-    dispatch(SendEnquiry([props.data, tempInit]));
+  // data.map((x) => {
+  //   body.append(
+  //     x,
+  //     useSelector((state) => state.Enquiries[x])
+  //   );
+  // });
+  Object.keys(data).map((x) => {
+    body.append(x, data[x]);
   });
+
+  // body.append(
+  //   "latitude",
+  //   useSelector((state) => state.Location.latitude)
+  // );
+  // body.append(
+  //   "longitude",
+  //   useSelector((state) => state.Location.longitude)
+  // );
+
+  let tempInit = mainInit;
+  tempInit.body = body;
+  body = JSON.stringify(body);
+  dispatch(SendEnquiry([props.data, tempInit]));
+  // });
 };
 
 export default Quote;

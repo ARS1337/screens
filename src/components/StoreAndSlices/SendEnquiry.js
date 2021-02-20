@@ -11,8 +11,18 @@ export const SendEnquiry = createAsyncThunk(
 
 export const EnquirySlice = createSlice({
     name: "EnquirySlice",
-    initialState: { SendEnquiry: "" },
-    reducers: {},
+    initialState: {
+        enquiry_desc: "",
+        wanna_pay: "",
+        user_count: "",
+        delivery_on: "",
+        serving_type: ""
+    },
+    reducers: {
+        setEnquiryDetails: (state, action) => {
+            state[action.payload.key] = action.payload.value;
+        },
+    },
     extraReducers: {
         [SendEnquiry.pending]: (state, action) => {},
         [SendEnquiry.rejected]: (state, action) => {
@@ -20,11 +30,16 @@ export const EnquirySlice = createSlice({
         },
         [SendEnquiry.fulfilled]: (state, action) => {
             console.log(action.payload);
-            if (action.payload.success == "0" && action.payload.message == "Authentication failed") {
+            if (
+                action.payload.success == "0" &&
+                action.payload.message == "Authentication failed"
+            ) {
                 alert("Please Login To Continue");
             } else {
-                alert(action.payload.message)
+                alert(action.payload.message);
             }
         },
     },
 });
+
+export const { setEnquiryDetails } = EnquirySlice.actions;

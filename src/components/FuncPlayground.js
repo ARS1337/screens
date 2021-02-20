@@ -4,6 +4,7 @@ import { fetchMasterData } from "./StoreAndSlices/MasterFetch";
 import { useEffect } from "react";
 import { fetchPosRelData } from "./StoreAndSlices/PosRelData";
 import { VideoFetch } from "./StoreAndSlices/VideoFetch";
+import { fetchLocation } from "./StoreAndSlices/Location";
 
 function FuncPlayground(props) {
   const dispatch = useDispatch();
@@ -16,16 +17,24 @@ function FuncPlayground(props) {
       headers: myheaders,
       mode: "cors",
     };
-    dispatch(fetchMasterData([props.data.MasterDataURL, mainInit]));
-    dispatch(VideoFetch([props.data.VideoDataURL, mainInit]));
-    getData(mainInit, myheaders, "topPicks", props.data.TopPicksURL, dispatch);
-    getData(
-      mainInit,
-      myheaders,
-      "hotelsNearby",
-      props.data.HotelsNearbyURL,
-      dispatch
-    );
+    dispatch(fetchLocation()).then(() => {
+      dispatch(fetchMasterData([props.data.MasterDataURL, mainInit]));
+      dispatch(VideoFetch([props.data.VideoDataURL, mainInit]));
+      getData(
+        mainInit,
+        myheaders,
+        "topPicks",
+        props.data.TopPicksURL,
+        dispatch
+      );
+      getData(
+        mainInit,
+        myheaders,
+        "hotelsNearby",
+        props.data.HotelsNearbyURL,
+        dispatch
+      );
+    });
   }, []);
   return <></>;
 }

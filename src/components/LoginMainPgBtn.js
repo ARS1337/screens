@@ -1,15 +1,20 @@
 import React from "react";
-import { clearToken } from "./StoreAndSlices/HandleLogin";
+import {
+  clearToken,
+  displayContainerVisible,
+} from "./StoreAndSlices/HandleLogin";
 import { useDispatch, useSelector } from "react-redux";
 
 function LoginMainPgBtn() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token.token);
+  const shouldDisplay = useSelector((state) => state.token.displayContainer);
+
   if (token == "") {
     return (
       <label
         onClick={() => {
-          document.getElementById("login-container").style.display = "block";
+          dispatch(displayContainerVisible());
         }}
       >
         Login

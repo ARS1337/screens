@@ -1,36 +1,60 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FuncPlayground, { getData, getcoords } from "./FuncPlayground";
-import { fetchToken, clearToken } from "./StoreAndSlices/HandleLogin";
+import { fetchToken, clearToken, setDetails, clearDetails,displayContainerInVisible } from "./StoreAndSlices/HandleLogin";
 import { fetchPosRelData } from "./StoreAndSlices/PosRelData";
 
 function Login(props) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token.token);
+  let id = useSelector(state=>state.token.loginId);
+  let password = useSelector(state=>state.token.password);
   console.log("restieved token is " + token);
   return (
     <>
-      <div id="login-container">
+      <form
+        id="login-container"
+        name="login-form"
+        style={useSelector(state=>state.token.displayContainer)}
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(displayContainerInVisible())
+          dispatch(
+            fetchToken([
+              "https://staging.mypcot.com/Homefood/customergateway/processLogin",
+              getCred(props, id, password),
+            ])
+          ).then((r) => {
+            getData(
+              mainInit,
+              myheaders,
+              "recommended",
+              urls.RecommendedURL,
+              dispatch,
+              token
+            );
+          });
+        }}
+      >
         <div className="login-box" id="login-box">
           <h2>Login</h2>
-          <input type="text" defaultValue="7977586379" id="login-id" />
+          <input type="text" defaultValue="7977586379" value={useSelector(state=>state.token.loginId)} id="loginId" onChange={(event)=>{handleChange(event,dispatch)}}/>
           <br />
-          <input type="text" defaultValue="123456" id="login-password" />
+          <input type="text" defaultValue="123456" value={useSelector(state=>state.token.password)} id="password" onChange={(event)=>{handleChange(event,dispatch)}}/>
           <br />
           {returnLogInOut(props, dispatch, token)}
         </div>
-      </div>
+      </form>
       {console.log("login")}
     </>
   );
 }
-
-let getCred = (props) => {
+let handleChange=(event,dispatch)=>{
+  dispatch(setDetails({"key":event.target.id,"value":event.target.value}));
+}
+let getCred = (props,id,password) => {
   document.getElementById("login-container").style.display = "none";
   let body = new FormData();
-
-  let id = document.getElementById("login-id").value;
-  let password = document.getElementById("login-password").value;
 
   body.append("phone_number", id);
   body.append("password", password);
@@ -72,26 +96,27 @@ let urls = {
 let returnLogInOut = (props, dispatch, token) => {
   myheaders.delete("X-Access-Token");
   myheaders.set("X-Access-Token", token);
-  console.log("token send is "+token);
+
   return (
-    <button
-      onClick={() => {
-        dispatch(
-          fetchToken([
-            "https://staging.mypcot.com/Homefood/customergateway/processLogin",
-            getCred(props),
-          ])
-        ).then((r) => {
-          getData(
-            mainInit,
-            myheaders,
-            "recommended",
-            urls.RecommendedURL,
-            dispatch,
-            token
-          );
-        });
-      }}
+    <button 
+    type="submit"
+      // onClick={() => {
+      //   dispatch(
+      //     fetchToken([
+      //       "https://staging.mypcot.com/Homefood/customergateway/processLogin",
+      //       getCred(props),
+      //     ])
+      //   ).then((r) => {
+      //     getData(
+      //       mainInit,
+      //       myheaders,
+      //       "recommended",
+      //       urls.RecommendedURL,
+      //       dispatch,
+      //       token
+      //     );
+      //   });
+      // }}
     >
       Login
     </button>
