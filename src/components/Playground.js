@@ -42,9 +42,9 @@ export function Playground() {
           makeVisible((container = false));
         }}
       />
-    <div class="loader-container">
+    {/* <div class="loader-container">
       <LoaderAnim />
-    </div>
+    </div> */}
 
       <div class="mainbg">
         <div class="mainbg-title">
