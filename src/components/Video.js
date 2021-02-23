@@ -2,9 +2,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function Video() {
-  // return <></>
   let videos = useSelector((state) => state.video.videoData[0]);
-  if (videos !== undefined) {
+  let doneLoading = useSelector(state => state.video.doneLoading);
+  if(doneLoading=="pending"){
+    return <div class="loader"></div>
+  }else if(doneLoading=="rejected"){
+    return <div>couldn't load data</div>
+  }else{
     return videos.slice(0,3).map((x) => {
       return (
         <>
@@ -29,8 +33,6 @@ function Video() {
         </>
       );
     });
-  } else {
-    return <></>;
   }
 }
 

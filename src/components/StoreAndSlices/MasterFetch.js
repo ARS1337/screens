@@ -1,25 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import makeRequest from './../fetchh';
 
 export const fetchMasterData = createAsyncThunk(
     "MasterFetch/fetchMasterData",
-    async(data, thunkAPI) => {
-        let temp = await fetch(data[0], data[1]);
+    async(url, thunkAPI) => {
+        let temp = await makeRequest(url);
         return temp.json();
     }
 );
 
 export const MasterSlice = createSlice({
     name: "MasterFetch",
-    initialState: { categories: [], servingType: [] },
+    initialState: { categories: [], servingType: [], doneLoading: "pending" },
     reducers: {},
     extraReducers: {
-        [fetchMasterData.pending]: (state, action) => {},
+        [fetchMasterData.pending]: (state, action) => {
+            state.doneLoading = "pending"
+        },
         [fetchMasterData.rejected]: (state, action) => {
-            console.log("rejected");
+            state.doneLoading = "rejected";
         },
         [fetchMasterData.fulfilled]: (state, action) => {
-            console.log("fulfilled");
-            console.log(action);
+            state.doneLoading = "fulfilled";
             state.categories = action.payload.getHomeFoodTypes;
             state.servingType = action.payload.getMenusServingType;
         },

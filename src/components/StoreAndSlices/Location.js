@@ -11,16 +11,17 @@ export const fetchLocation = createAsyncThunk(
 
 export const Location = createSlice({
     name: "Location",
-    initialState: { latitude: "", longitude: "" },
+    initialState: { latitude: "", longitude: "", doneLoading: "pending" },
     reducers: {},
     extraReducers: {
-        [fetchLocation.pending]: (state, action) => {},
+        [fetchLocation.pending]: (state, action) => {
+            state.doneLoading = "pending"
+        },
         [fetchLocation.rejected]: (state, action) => {
-            console.log("rejected");
+            state.doneLoading = "rejected";
         },
         [fetchLocation.fulfilled]: (state, action) => {
-            console.log("fulfilled");
-            console.log(action);
+            state.doneLoading = "fulfilled";
             state.latitude = action.payload.coords.latitude;
             state.longitude = action.payload.coords.longitude;
         },

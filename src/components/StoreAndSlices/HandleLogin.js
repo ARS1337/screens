@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import makeRequest from './../fetchh';
 
 export const fetchToken = createAsyncThunk(
     "tokenSlice/fetchToken",
     async(data, thunkAPI) => {
-        let temp = await fetch(data[0], data[1]);
-        console.log("thunk....");
+        let temp = await makeRequest(data[0], data[1], data[2])
         return temp.json();
     }
 );
@@ -13,36 +13,25 @@ export const tokenSlice = createSlice({
     name: "tokenSlice",
     initialState: {
         token: "",
-        loginId: "",
-        password: "",
-        displayContainer: { "display": "none" },
+        doneLoading: "fulfilled",
+        message: ""
     },
     reducers: {
         clearToken: (state, action) => {
             state.token = "";
         },
-        setDetails: (state, action) => {
-            state[action.payload.key] = action.payload.value;
-        },
-        clearDetails: (state, action) => {
-            state.loginId = "";
-            state.password = "";
-        },
-        displayContainerVisible: (state, action) => {
-            state.displayContainer.display = "block"
-        },
-        displayContainerInVisible: (state, action) => {
-            state.displayContainer.diplay = "none"
-        },
     },
     extraReducers: {
-        [fetchToken.pending]: (state, action) => {},
+        [fetchToken.pending]: (state, action) => {
+            state.doneLoading = "pending";
+        },
         [fetchToken.rejected]: (state, action) => {
-            console.log("rejected");
+            state.doneLoading = "rejected";
+            state.message = action.payload.message;
         },
         [fetchToken.fulfilled]: (state, action) => {
-            console.log("login fulfilled");
-            console.log(action);
+            state.doneLoading = "fulfilled";
+            state.message = action.payload.message;
             if (action.payload.success == "1") {
                 state.token = action.payload.data[0].token;
             } else {
@@ -53,8 +42,4 @@ export const tokenSlice = createSlice({
 });
 export const {
     clearToken,
-    setDetails,
-    clearDetails,
-    displayContainerInVisible,
-    displayContainerVisible,
 } = tokenSlice.actions;

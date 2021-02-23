@@ -1,34 +1,35 @@
 import React from "react";
-import {
-  clearToken,
-  displayContainerVisible,
-} from "./StoreAndSlices/HandleLogin";
+import { clearToken } from "./StoreAndSlices/HandleLogin";
 import { useDispatch, useSelector } from "react-redux";
 
-function LoginMainPgBtn() {
+function LoginMainPgBtn(props) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token.token);
-  const shouldDisplay = useSelector((state) => state.token.displayContainer);
+  const doneLoading = useSelector((state) => state.token.doneLoading);
 
   if (token == "") {
     return (
-      <label
-        onClick={() => {
-          dispatch(displayContainerVisible());
-        }}
-      >
-        Login
-      </label>
+      <>
+        <label
+          onClick={() => {
+            props.onClick();
+          }}
+        >
+          Login
+        </label>
+      </>
     );
   } else {
     return (
-      <label
-        onClick={() => {
-          dispatch(clearToken());
-        }}
-      >
-        Logout
-      </label>
+      <>
+        <label
+          onClick={() => {
+            dispatch(clearToken());
+          }}
+        >
+          Logout
+        </label>
+      </>
     );
   }
 }

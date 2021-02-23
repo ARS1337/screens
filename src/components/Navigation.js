@@ -1,11 +1,8 @@
 import React from "react";
-// import styles from '../screen4.css';
-// import "../Playground.css";
 import "../App.css";
 import Videos from "./Videos";
 import Title from "./Title";
 import Header from "./Header";
-// import './screen4.css';
 import Reviews from "./Reviews";
 import Recommended from "./Recommended";
 import {

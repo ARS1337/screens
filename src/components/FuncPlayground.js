@@ -9,61 +9,36 @@ import { fetchLocation } from "./StoreAndSlices/Location";
 function FuncPlayground(props) {
   const dispatch = useDispatch();
   useEffect(() => {
-    let myheaders = new Headers();
-    myheaders.append("Accept", "application/json");
-    myheaders.append("Authorization", "Basic cml0ZXNoOnJpdGVzaFNpbmdo");
-    let mainInit = {
-      method: "POST",
-      headers: myheaders,
-      mode: "cors",
-    };
-    dispatch(fetchLocation()).then(() => {
-      dispatch(fetchMasterData([props.data.MasterDataURL, mainInit]));
-      dispatch(VideoFetch([props.data.VideoDataURL, mainInit]));
-      getData(
-        mainInit,
-        myheaders,
-        "topPicks",
-        props.data.TopPicksURL,
-        dispatch
+    dispatch(fetchLocation()).then((r) => {
+      dispatch(fetchMasterData(props.data.MasterDataURL));
+      dispatch(VideoFetch(props.data.VideoDataURL));
+      dispatch(
+        fetchPosRelData([
+          props.data.TopPicksURL,
+          ,
+          {
+            latitude: r.payload.coords.latitude,
+            longitude: r.payload.coords.longitude,
+          },
+          "topPicks",
+        ])
       );
-      getData(
-        mainInit,
-        myheaders,
-        "hotelsNearby",
-        props.data.HotelsNearbyURL,
-        dispatch
+      dispatch(
+        fetchPosRelData([
+          props.data.HotelsNearbyURL,
+          ,
+          {
+            latitude: r.payload.coords.latitude,
+            longitude: r.payload.coords.longitude,
+            page_limit:3,
+            limit:0,
+          },
+          "hotelsNearby",
+        ])
       );
     });
   }, []);
   return <></>;
 }
 
-function getcoords() {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-}
-
-function getData(mainInit, myheaders, key, url, dispatch, token) {
-  getcoords().then((position) => {
-    let body = new FormData();
-    body.append("latitude", position.coords.latitude);
-    body.append("longitude", position.coords.longitude);
-
-    if (key == "hotelsNearby") {
-      body.append("page_limit", 3);
-      body.append("limit", 0);
-    }
-    console.log("recommendeded token is " + token);
-
-    let tempInit = mainInit;
-    tempInit.headers = myheaders;
-    tempInit.body = body;
-
-    body = JSON.stringify(body);
-    dispatch(fetchPosRelData([url, tempInit, key]));
-  });
-}
-export { getData, getcoords };
 export default FuncPlayground;

@@ -1,10 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
+import makeRequest from './../fetchh';
 
 export const SendEnquiry = createAsyncThunk(
     "EnquirySlice/SendEnquiry",
     async(data, thunkAPI) => {
-        let temp = await fetch(data[0], data[1]);
+        let temp = await makeRequest(data[0], data[1], data[2]);
         return temp.json();
     }
 );
@@ -12,11 +13,8 @@ export const SendEnquiry = createAsyncThunk(
 export const EnquirySlice = createSlice({
     name: "EnquirySlice",
     initialState: {
-        enquiry_desc: "",
-        wanna_pay: "",
-        user_count: "",
-        delivery_on: "",
-        serving_type: ""
+        doneLoading: "fulfilled",
+        message: ""
     },
     reducers: {
         setEnquiryDetails: (state, action) => {
@@ -24,19 +22,23 @@ export const EnquirySlice = createSlice({
         },
     },
     extraReducers: {
-        [SendEnquiry.pending]: (state, action) => {},
+        [SendEnquiry.pending]: (state, action) => {
+            state.doneLoading = "pending";
+        },
         [SendEnquiry.rejected]: (state, action) => {
-            console.log("sendEnquiry failed");
+            state.message = action.payload.message;
+            state.doneLoading = "rejected";
         },
         [SendEnquiry.fulfilled]: (state, action) => {
-            console.log(action.payload);
+            state.doneLoading = "fulfilled";
+            state.message = action.payload.message;
             if (
                 action.payload.success == "0" &&
                 action.payload.message == "Authentication failed"
             ) {
-                alert("Please Login To Continue");
+                state.message = "Please Login To Continue";
             } else {
-                alert(action.payload.message);
+                state.message = action.payload.message;
             }
         },
     },

@@ -17,7 +17,6 @@ function header(props) {
           <h3 class="location">Mumbai, Andheri, Road Name</h3>
         </div>
         <div class="header-info-details2">
-          {/* <h3 class="location">Mumbai, Andheri, Road Name</h3> */}
         </div>
 
         <div class="header-rating">

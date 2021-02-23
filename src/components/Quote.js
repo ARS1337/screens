@@ -1,27 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
-import {
-  SendEnquiry,
-  setEnquiryDetails,
-} from "../components/StoreAndSlices/SendEnquiry";
+import { SendEnquiry } from "../components/StoreAndSlices/SendEnquiry";
 import { useDispatch, useSelector } from "react-redux";
 
 function Quote(props) {
   const dispatch = useDispatch();
   let servingType = useSelector((state) => state.masterData.servingType);
   const token = useSelector((state) => state.token.token);
-  let temp = useSelector((state) => state.Enquiries);
-  console.log(temp);
-  let data={...temp}
-  data["latitude"] = useSelector((state) => state.Location.latitude);
-  data["longitude"] = useSelector((state) => state.Location.longitude);
+  let latitude = useSelector((state) => state.Location.latitude);
+  let longitude = useSelector((state) => state.Location.longitude);
+  let [enquiry_desc, setEnquiryDesc] = useState("");
+  let [wanna_pay, setWannaPay] = useState("");
+  let [delivery_on, setDeliveryDate] = useState("");
+  let [user_count, setUserCount] = useState("");
+  let [serving_type, setServingType] = useState("");
+  let message = useSelector((state) => state.Enquiries.message);
+  let status = useSelector((state) => state.Enquiries.doneLoading);
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        sendEnquiry(dispatch, props, token, data);
+        dispatch(
+          SendEnquiry([
+            props.data,
+            { "X-Access-Token": token },
+            {
+              latitude: latitude,
+              longitude: longitude,
+              enquiry_desc: enquiry_desc,
+              wanna_pay: wanna_pay,
+              delivery_on: delivery_on,
+              user_count: user_count,
+              serving_type: serving_type,
+            },
+          ])
+        );
       }}
     >
+      {(() => {
+        if (status == "pending") {
+          return <label class="message message-gray">sending data...</label>;
+        } else if (status == "rejected") {
+          return <label class="message message-red">{message}</label>;
+        } else {
+          return <label class="message message-green">{message}</label>;
+        }
+      })()}
       <div class="highlight-above-quote">
         <span>let us know what you</span>
         <br />
@@ -37,9 +62,9 @@ function Quote(props) {
           type="text"
           class="pp what-eat-input"
           id="enquiry_desc"
-          value={useSelector((state) => state.Enquiries.enquiry_desc)}
+          value={enquiry_desc}
           onChange={(event) => {
-            handleChange(event, dispatch);
+            setEnquiryDesc(event.target.value);
           }}
         />
         <div class="quote-price-label">
@@ -52,9 +77,9 @@ function Quote(props) {
             placeholder="Min. 100/person"
             size="11"
             id="wanna_pay"
-            value={useSelector((state) => state.Enquiries.wanna_pay)}
+            value={wanna_pay}
             onChange={(event) => {
-              handleChange(event, dispatch);
+              setWannaPay(event.target.value);
             }}
           />
         </div>
@@ -64,17 +89,14 @@ function Quote(props) {
             type="number"
             id="user_count"
             min="1"
-            value={useSelector((state) => state.Enquiries.user_count)}
+            value={user_count}
             onChange={(event) => {
-              handleChange(event, dispatch);
+              setUserCount(event.target.value);
             }}
           />
         </div>
         <div class="radio">
-          <ul
-            class="select-type"
-            value={useSelector((state) => state.Enquiries.serving_type)}
-          >
+          <ul class="select-type" value={serving_type}>
             {servingType.map((x) => {
               return (
                 <li key={x.key}>
@@ -90,12 +112,7 @@ function Quote(props) {
                     id="serving_type"
                     value={x.key}
                     onClick={(event) => {
-                      handleChange(
-                        (event = {
-                          target: { id: "serving_type", value: x.key },
-                        }),
-                        dispatch
-                      );
+                      setServingType(x.key);
                     }}
                   >
                     {x.value}
@@ -112,9 +129,9 @@ function Quote(props) {
             id="delivery_on"
             min={new Date().toISOString().substr(0, 10)}
             defaultValue={new Date().toISOString().substr(0, 10)}
-            value={useSelector((state) => state.Enquiries.delivery_on)}
+            value={delivery_on}
             onChange={(event) => {
-              handleChange(event, dispatch);
+              setDeliveryDate(event.target.value);
             }}
           />
         </div>
@@ -122,60 +139,8 @@ function Quote(props) {
       <div class="quote-confirm">
         <button type="submit">PUKKAO</button>
       </div>
-      {console.log("Quote")}
     </form>
   );
 }
-let handleChange = (event, dispatch) => {
-  dispatch(
-    setEnquiryDetails({ key: event.target.id, value: event.target.value })
-  );
-};
-function getcoords() {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-}
-
-let sendEnquiry = (dispatch, props, token, data) => {
-  // getcoords().then((position) => {
-  console.log("sendEnquiry");
-  let myHeaders = new Headers();
-  myHeaders.append("Accept", "application/json");
-  myHeaders.append("Authorization", "Basic cml0ZXNoOnJpdGVzaFNpbmdo");
-  myHeaders.set("X-Access-Token", token);
-
-  let mainInit = {
-    method: "POST",
-    headers: myHeaders,
-    mode: "cors",
-  };
-  let body = new FormData();
-
-  // data.map((x) => {
-  //   body.append(
-  //     x,
-  //     useSelector((state) => state.Enquiries[x])
-  //   );
-  // });
-  Object.keys(data).map((x) => {
-    body.append(x, data[x]);
-  });
-
-  // body.append(
-  //   "latitude",
-  //   useSelector((state) => state.Location.latitude)
-  // );
-  // body.append(
-  //   "longitude",
-  //   useSelector((state) => state.Location.longitude)
-  // );
-
-  let tempInit = mainInit;
-  tempInit.body = body;
-  body = JSON.stringify(body);
-  dispatch(SendEnquiry([props.data, tempInit]));
-  // });
-};
 
 export default Quote;

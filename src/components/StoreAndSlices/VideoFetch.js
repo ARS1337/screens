@@ -1,24 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import makeRequest from './../fetchh';
 
 export const VideoFetch = createAsyncThunk(
     "VideoSlice/VideoFetch",
-    async(data, thunkAPI) => {
-        let temp = await fetch(data[0], data[1]);
+    async(url, thunkAPI) => {
+        let temp = await makeRequest(url);
         return temp.json();
     }
 );
 
 export const VideoSlice = createSlice({
     name: "VideoSlice",
-    initialState: { videoData: [] },
+    initialState: { videoData: [], doneLoading: "pending" },
     reducers: {},
     extraReducers: {
-        [VideoFetch.pending]: (state, action) => {},
+        [VideoFetch.pending]: (state, action) => {
+            state.doneLoading = "pending"
+        },
         [VideoFetch.rejected]: (state, action) => {
-            console.log("video rejected");
+            state.doneLoading = "rejected";
         },
         [VideoFetch.fulfilled]: (state, action) => {
-            console.log(action);
+            state.doneLoading = "fulfilled"
             state.videoData.push(action.payload.video_data);
         },
     },
