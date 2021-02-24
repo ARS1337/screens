@@ -22,6 +22,7 @@ function Quote(props) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        makeVisible(quoteMessage=true);
         dispatch(
           SendEnquiry([
             props.data,
@@ -39,17 +40,10 @@ function Quote(props) {
         );
       }}
     >
-      {(() => {
-        if (status == "pending") {
-          return <div class="message message-gray quoteMessage"><label >sending data...</label> </div> 
-        } else if (status == "rejected") {
-          return <div class="message message-red quoteMessage"><label >{message}</label> </div> 
-        } else if (status == "fulfilled") {
-          return <div class="message message-green quoteMessage"><label >{message}</label> </div> 
-        } else{
-          return <></>
-        }
-      })()}
+      {console.log("quote")}
+      {console.log(quoteMessage)}
+      {quoteMessage ? showMessage(makeVisible, status, message, quoteMessage) : null}
+      {console.log(quoteMessage)}
       <div class="highlight-above-quote">
         <span>let us know what you</span>
         <br />
@@ -145,5 +139,25 @@ function Quote(props) {
     </form>
   );
 }
-
+let showMessage = (makeVisible, status, message, quoteMessage) => {
+  console.log("ffffffffffffffffffffffffffffffffff");
+  if (status == "pending") {
+    return <div class="message message-gray quoteMessage"><label >sending data...</label><button onClick={() => {
+      makeVisible(quoteMessage = false);
+    }
+    }>X</button> </div>
+  } else if (status == "rejected") {
+    return <div class="message message-red quoteMessage"><label >{message}</label> <button onClick={() => {
+      makeVisible(quoteMessage = false);
+    }
+    }>X</button></div>
+  } else if (status == "fulfilled") {
+    return <div class="message message-green quoteMessage"><label >{message}</label><button onClick={() => {
+      makeVisible(quoteMessage = false);
+    }
+    }>X</button> </div>
+  } else {
+    return <></>
+  }
+}
 export default Quote;
