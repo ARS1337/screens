@@ -13,7 +13,7 @@ export const tokenSlice = createSlice({
     name: "tokenSlice",
     initialState: {
         token: "",
-        doneLoading: "fulfilled",
+        doneLoading: null,
         message: ""
     },
     reducers: {
@@ -34,8 +34,6 @@ export const tokenSlice = createSlice({
             state.message = action.payload.message;
             if (action.payload.success == "1") {
                 state.token = action.payload.data[0].token;
-            } else {
-                alert(action.payload.message);
             }
         },
     },

@@ -13,7 +13,7 @@ export const SendEnquiry = createAsyncThunk(
 export const EnquirySlice = createSlice({
     name: "EnquirySlice",
     initialState: {
-        doneLoading: "fulfilled",
+        doneLoading: null,
         message: ""
     },
     reducers: {

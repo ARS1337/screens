@@ -128,11 +128,11 @@ body {
 
 /* 
 .search-box {
-  border: 1px grey solid;
-  height: 15px;
-  margin: 20px;
-  border-radius: 5px;
-  width: 30%;
+ border: 1px grey solid;
+ height: 15px;
+ margin: 20px;
+ border-radius: 5px;
+ width: 30%;
 } */
 
 .user-login {
@@ -317,11 +317,11 @@ body {
 
 
 /* .user {
-  display: flex;
-  justify-content: left;
-  flex-direction: row;
-  align-items: center;
-  text-align: left;
+ display: flex;
+ justify-content: left;
+ flex-direction: row;
+ align-items: center;
+ text-align: left;
 } */
 
 @media only screen and (max-width: 600px) {
@@ -341,9 +341,9 @@ body {
 
 .main {
     /* align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; */
+ display: flex;
+ flex-direction: column;
+ justify-content: center; */
     display: grid;
     grid-template-columns: 0.05fr 1fr 0.05fr;
     grid-template-rows: 1fr;
@@ -725,10 +725,10 @@ ul::before {
 
 
 /* video {
-    max-width: -webkit-fill-available;
-    max-height: inherit;
-    min-height: auto;
-    min-width: auto;
+   max-width: -webkit-fill-available;
+   max-height: inherit;
+   min-height: auto;
+   min-width: auto;
 } */
 
 .card video {
@@ -770,9 +770,9 @@ ul::before {
 
 
 /* @media only screen and (max-width: 1200px) {
-    .videos .card {
-        width: 50%
-    }
+   .videos .card {
+       width: 50%
+   }
 } */
 
 
@@ -791,7 +791,7 @@ ul::before {
     grid-template-columns: 0.1fr 0.15fr 0.45fr 0.45fr 0.1fr;
     grid-template-rows: 0.1fr 0.3fr auto auto;
     /* grid-template-columns: repeat(4, 1fr);
-   grid-template-rows:  repeat(4, 1fr); */
+  grid-template-rows:  repeat(4, 1fr); */
     grid-template-areas: "main-title main-title main-title main-title  main-title" " . main-header main-header main-header . " " . main-navigation main-content main-content . " " . . main-content main-content . ";
     /* align-items: start; */
 }
@@ -911,8 +911,8 @@ ul::before {
         font-size: smaller;
     }
     /* .main-title {
-        grid-template-columns: 0.1fr 0.3fr 0.2fr 0.15fr 0.2fr;
-    } */
+       grid-template-columns: 0.1fr 0.3fr 0.2fr 0.15fr 0.2fr;
+   } */
     .search {
         width: 80%;
     }
@@ -1013,12 +1013,12 @@ ul::before {
 
 @media only screen and (max-width: 800px) {
     /* .search-box-left,
-    .search-box-center,
-    .vl1,
-    .vl2 {
-        display: none;
-        background-color: red;
-    } */
+   .search-box-center,
+   .vl1,
+   .vl2 {
+       display: none;
+       background-color: red;
+   } */
     .search-box-right {
         /* background-color: #282c34; */
         margin-right: 0px;
@@ -1777,7 +1777,7 @@ input::-webkit-calendar-picker-indicator {
     .mainbg {
         background-size: contain;
         /* width: 100%;
-        height: auto; */
+       height: auto; */
         background-repeat: no-repeat;
     }
 }
@@ -1883,9 +1883,9 @@ input::-webkit-calendar-picker-indicator {
 
 .exploreCategory {
     /* display: grid;
-    grid-template-columns: repeat(7, auto);
-    grid-template-rows: repeat(4, auto);
-    grid-template-areas: ". . h1 h1 h1 h1 . ." ". . span span span span . ." ". categories categories categories categories categories ." ". categories categories categories categories categories ."; */
+   grid-template-columns: repeat(7, auto);
+   grid-template-rows: repeat(4, auto);
+   grid-template-areas: ". . h1 h1 h1 h1 . ." ". . span span span span . ." ". categories categories categories categories categories ." ". categories categories categories categories categories ."; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2371,10 +2371,10 @@ input::-webkit-calendar-picker-indicator {
 
 
 /* .mainbg-footer img {
-    max-width: 80%;
-    max-height: auto;
-    min-height: auto;
-    min-width: auto;
+   max-width: 80%;
+   max-height: auto;
+   min-height: auto;
+   min-width: auto;
 } */
 
 @media only screen and (max-width: 1100px) {
@@ -2431,7 +2431,7 @@ a {
 
 
 /* #login-container {
-    display: none;
+   display: none;
 } */
 
 .loader {
@@ -2466,7 +2466,8 @@ a {
     color: #e54e53;
     font-size: 20px;
     padding: 5px;
-    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
 }
 
 .message-green {
@@ -2481,5 +2482,25 @@ a {
 
 .message-gray {
     border: 1px solid rgb(146, 140, 140);
-    color: rgb(146, 140, 140);
+    color: black;
+}
+
+.message label {
+    float: right;
+    width: 100%
+}
+
+.loginMessage {
+    top: 6%;
+}
+
+.message button {
+    background: transparent;
+    border: 0px;
+    color: #e54e51;
+    font-size: 14px;
+}
+
+.message button:hover {
+    cursor: pointer;
 }

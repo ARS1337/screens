@@ -16,6 +16,7 @@ function Quote(props) {
   let [serving_type, setServingType] = useState("");
   let message = useSelector((state) => state.Enquiries.message);
   let status = useSelector((state) => state.Enquiries.doneLoading);
+  let [quoteMessage, makeVisible] = useState(true);
 
   return (
     <form
@@ -40,11 +41,13 @@ function Quote(props) {
     >
       {(() => {
         if (status == "pending") {
-          return <label class="message message-gray">sending data...</label>;
+          return <div class="message message-gray quoteMessage"><label >sending data...</label> </div> 
         } else if (status == "rejected") {
-          return <label class="message message-red">{message}</label>;
-        } else {
-          return <label class="message message-green">{message}</label>;
+          return <div class="message message-red quoteMessage"><label >{message}</label> </div> 
+        } else if (status == "fulfilled") {
+          return <div class="message message-green quoteMessage"><label >{message}</label> </div> 
+        } else{
+          return <></>
         }
       })()}
       <div class="highlight-above-quote">
