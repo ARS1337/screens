@@ -27,7 +27,6 @@ export const tokenSlice = createSlice({
         },
         [fetchToken.rejected]: (state, action) => {
             state.doneLoading = "rejected";
-            state.message = action.payload.message;
         },
         [fetchToken.fulfilled]: (state, action) => {
             state.doneLoading = "fulfilled";

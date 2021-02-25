@@ -13,23 +13,27 @@ import LoaderAnim from './LoaderAnim';
 import { useSelector } from 'react-redux';
 
 export function Playground() {
-  let [container, makeVisible] = useState(false);
-
+  let [container, setContainer] = useState(false);
+  let nearbyKitchens = useSelector(state => state.otherData.nearbyKitchens);
+  let LocationStatus = useSelector(state => state.Location.doneLoading);
+  let [LoginMessage, setLoginMessage] = useState(true);
+  const status = useSelector((state) => state.token.doneLoading);
+  const message = useSelector((state) => state.token.message);
   let urls = {
     MasterDataURL:
-      "https://staging.mypcot.com/Homefood/customergateway/getMasterData",
+      "/getMasterData",
     VideoDataURL:
-      "https://staging.mypcot.com/Homefood/customergateway/fetchHomeVideos",
+      "/fetchHomeVideos",
     HotelsNearbyURL:
-      "https://staging.mypcot.com/Homefood/customergateway/hotelsNearby",
+      "/hotelsNearby",
     TopPicksURL:
-      "https://staging.mypcot.com/Homefood/customergateway/homeTopPicks",
+      "/homeTopPicks",
     LoginURL:
-      "https://staging.mypcot.com/Homefood/customergateway/processLogin",
+      "/processLogin",
     RecommendedURL:
-      "https://staging.mypcot.com/Homefood/customergateway/recommendedHotelAndBanner",
+      "/recommendedHotelAndBanner",
     EnquiriesURL:
-      "https://staging.mypcot.com/Homefood/customergateway/saveEnquires",
+      "/saveEnquires",
   };
 
 
@@ -37,15 +41,18 @@ export function Playground() {
     <>
       <FuncPlayground data={urls} />
       <Login
-        data={[container, urls.RecommendedURL]}
+        data={[container, urls.RecommendedURL,()=>setContainer(container=false)]}
         onClick={() => {
-          makeVisible((container = false));
+          // setContainer((container = false));
+          setLoginMessage(LoginMessage=true);
+          setTimeout(() => {
+            setLoginMessage(LoginMessage = false);
+          }, 5000)
         }}
       />
-    {/* <div class="loader-container">
-      <LoaderAnim />
-    </div> */}
-
+        {LoginMessage
+          ? showMessage(status, message, LoginMessage, setLoginMessage)
+          : null}
       <div class="mainbg">
         <div class="mainbg-title">
           <div class="main-location">
@@ -75,7 +82,7 @@ export function Playground() {
           <div class="user-login">
             <LoginMainPgBtn
               onClick={() => {
-                makeVisible((container = true));
+                setContainer((container = true));
               }}
             />
           </div>
@@ -115,14 +122,22 @@ export function Playground() {
         <span>"Find out what's cooking around you!"</span>
       </div>
 
-      {() => {
-        if (this.state.nearbyKitchens != 0) {
-          <h1>Nearby Kitchens</h1>;
+      {(() => {
+        if (nearbyKitchens != 0) {
+          return (<>
+            <h1>Nearby Kitchens</h1>
+            <div class="exploreKitchen-content">
+              <Kitchen data="hotelsNearby" />
+            </div>
+          </>
+          )
+        } else if (LocationStatus == "rejected" | LocationStatus == "pending") {
+          console.log("no location gven fo enaereyb jotrels");
+          return <label style={{"text-align":"center","font-size":"18px"}}>Please allow location to get nearby hotels</label>;
         }
-      }}
-      <div class="exploreKitchen-content">
-        <Kitchen data="hotelsNearby" />
-      </div>
+      })()}
+
+
 
       <RecommendedNew />
 
@@ -142,4 +157,50 @@ export function Playground() {
     </>
   );
 }
+let showMessage = (status, message, LoginMessage, setLoginMessage) => {
+  if (status == "pending") {
+    return (
+      <div class="message message-gray LoginMessage">
+        <label>Logging in...</label>
+        <button
+          onClick={() => {
+            setLoginMessage((LoginMessage = false));
+          }}
+        >
+          X
+        </button>
+      </div>
+    );
+  } else if (status == "rejected") {
+    return (
+      <div class="message message-red LoginMessage">
+        <label>{message}</label>
+        <button
+          onClick={() => {
+            setLoginMessage((LoginMessage = false));
+          }}
+        >
+          X
+        </button>
+      </div>
+    );
+  } else if (status == "fulfilled") {
+    return (
+      <div class="message message-green LoginMessage">
+        <label>{message}</label>
+        <button
+          onClick={() => {
+            console.log("setLoginMessage is " + LoginMessage);
+            setLoginMessage((LoginMessage = false));
+            console.log("setLoginMessage is " + LoginMessage);
+          }}
+        >
+          X
+        </button>
+      </div>
+    );
+  } else {
+    return <></>;
+  }
+};
 

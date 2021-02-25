@@ -26,7 +26,6 @@ export const EnquirySlice = createSlice({
             state.doneLoading = "pending";
         },
         [SendEnquiry.rejected]: (state, action) => {
-            state.message = action.payload.message;
             state.doneLoading = "rejected";
         },
         [SendEnquiry.fulfilled]: (state, action) => {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import { SendEnquiry } from "../components/StoreAndSlices/SendEnquiry";
 import { useDispatch, useSelector } from "react-redux";
+import {fetchLocation} from "./StoreAndSlices/Location";
 
 function Quote(props) {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ function Quote(props) {
   const token = useSelector((state) => state.token.token);
   let latitude = useSelector((state) => state.Location.latitude);
   let longitude = useSelector((state) => state.Location.longitude);
+  let LocationStatus = useSelector(state => state.Location.doneLoading);
   let [enquiry_desc, setEnquiryDesc] = useState("");
   let [wanna_pay, setWannaPay] = useState("");
   let [delivery_on, setDeliveryDate] = useState("");
@@ -16,34 +18,43 @@ function Quote(props) {
   let [serving_type, setServingType] = useState("");
   let message = useSelector((state) => state.Enquiries.message);
   let status = useSelector((state) => state.Enquiries.doneLoading);
-  let [quoteMessage, makeVisible] = useState(true);
-
+  let [quoteResponse, setQuoteResponse] = useState(true);
+  setTimeout(()=>{
+    setQuoteResponse(quoteResponse=false);
+  },5000)
+  
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        makeVisible(quoteMessage=true);
-        dispatch(
-          SendEnquiry([
-            props.data,
-            { "X-Access-Token": token },
-            {
-              latitude: latitude,
-              longitude: longitude,
-              enquiry_desc: enquiry_desc,
-              wanna_pay: wanna_pay,
-              delivery_on: delivery_on,
-              user_count: user_count,
-              serving_type: serving_type,
-            },
-          ])
-        );
+        setQuoteResponse(quoteResponse = true);
+        if (LocationStatus == "fulfilled") {
+          dispatch(
+            SendEnquiry([
+              props.data,
+              { "X-Access-Token": token },
+              {
+                latitude: latitude,
+                longitude: longitude,
+                enquiry_desc: enquiry_desc,
+                wanna_pay: wanna_pay,
+                delivery_on: delivery_on,
+                user_count: user_count,
+                serving_type: serving_type,
+              },
+            ])
+          );
+        } else {
+          alert("Please allow location access to make an enquiry!");
+          // dispatch(fetchLocation());
+        }
       }}
     >
       {console.log("quote")}
-      {console.log(quoteMessage)}
-      {quoteMessage ? showMessage(makeVisible, status, message, quoteMessage) : null}
-      {console.log(quoteMessage)}
+      {console.log(quoteResponse)}
+      {quoteResponse ? showMessage(setQuoteResponse, status, message, quoteResponse) : null}
+      {}
+      {console.log(quoteResponse)}
       <div class="highlight-above-quote">
         <span>let us know what you</span>
         <br />
@@ -139,21 +150,21 @@ function Quote(props) {
     </form>
   );
 }
-let showMessage = (makeVisible, status, message, quoteMessage) => {
+let showMessage = (setQuoteResponse, status, message, quoteResponse) => {
   console.log("ffffffffffffffffffffffffffffffffff");
   if (status == "pending") {
-    return <div class="message message-gray quoteMessage"><label >sending data...</label><button onClick={() => {
-      makeVisible(quoteMessage = false);
+    return <div class="message message-gray quoteResponse"><label >sending data...</label><button onClick={() => {
+      setQuoteResponse(quoteResponse = false);
     }
     }>X</button> </div>
   } else if (status == "rejected") {
-    return <div class="message message-red quoteMessage"><label >{message}</label> <button onClick={() => {
-      makeVisible(quoteMessage = false);
+    return <div class="message message-red quoteResponse"><label >{message}</label> <button onClick={() => {
+      setQuoteResponse(quoteResponse = false);
     }
     }>X</button></div>
   } else if (status == "fulfilled") {
-    return <div class="message message-green quoteMessage"><label >{message}</label><button onClick={() => {
-      makeVisible(quoteMessage = false);
+    return <div class="message message-green quoteResponse"><label >{message}</label><button onClick={() => {
+      setQuoteResponse(quoteResponse = false);
     }
     }>X</button> </div>
   } else {

@@ -19,10 +19,9 @@ function Login(props) {
           name="login-form"
           onSubmit={(e) => {
             e.preventDefault();
-            props.onClick();
             dispatch(
               fetchToken([
-                "https://staging.mypcot.com/Homefood/customergateway/processLogin",
+                "/processLogin",
                 ,
                 {
                   phone_number: id,
@@ -30,13 +29,15 @@ function Login(props) {
                 },
               ])
             ).then((r) => {
+            props.onClick();
+            props.data[2]();
               console.log(r);
-              if(r.payload.success=="1"){
+              if(r.payload=!undefined && r.payload!=null && r.payload.success=="1"){
                 dispatch(
                   fetchPosRelData([
                     props.data[1]
                     ,
-                    { "X-Access-Token": r.payload.data[0].token },
+                    { "X-Access-Token": token },
                     {
                       latitude: latitude,
                       longitude: longitude,
@@ -54,7 +55,7 @@ function Login(props) {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  props.onClick();
+                  props.data[2]();
                 }}
               >
                 X
@@ -80,7 +81,8 @@ function Login(props) {
               }}
             />
             <br />
-            {returnLogInOut()}
+            <button type="submit">Login</button>
+            {/* {returnLogInOut()} */}
           </div>
         </form>
       </>

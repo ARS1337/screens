@@ -1,4 +1,8 @@
 function makeRequest(url, headers, body, key) {
+    let base_url = "https://staging.mypcot.com/Homefood/customergateway";
+    if(url!=undefined){
+        base_url+=url;
+    }
     let myheaders = new Headers();
 
     myheaders.append("Accept", "application/json");
@@ -20,6 +24,6 @@ function makeRequest(url, headers, body, key) {
         mainInit.body = JSON.stringify(body);
     }
 
-    return fetch(url, mainInit, key);
+    return fetch(base_url, mainInit, key);
 }
 export default makeRequest;
