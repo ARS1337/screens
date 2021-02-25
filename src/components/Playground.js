@@ -19,6 +19,8 @@ export function Playground() {
   let [LoginMessage, setLoginMessage] = useState(true);
   const status = useSelector((state) => state.token.doneLoading);
   const message = useSelector((state) => state.token.message);
+  let [titleMenu, showTitleMenu] = useState(true);
+
   let urls = {
     MasterDataURL:
       "/getMasterData",
@@ -38,23 +40,23 @@ export function Playground() {
 
   // Removed urls from Playground.js, left the nessasary last part.
   // app doesnt crashes now without location, 2 apis(enquiry,hotelsNearby) required location.
-  
+
   return (
     <>
       <FuncPlayground data={urls} />
       <Login
-        data={[container, urls.RecommendedURL,()=>setContainer(container=false)]}
+        data={[container, urls.RecommendedURL, () => setContainer(container = false)]}
         onClick={() => {
           // setContainer((container = false));
-          setLoginMessage(LoginMessage=true);
+          setLoginMessage(LoginMessage = true);
           setTimeout(() => {
             setLoginMessage(LoginMessage = false);
           }, 5000)
         }}
       />
-        {LoginMessage
-          ? showMessage(status, message, LoginMessage, setLoginMessage)
-          : null}
+      {LoginMessage
+        ? showMessage(status, message, LoginMessage, setLoginMessage)
+        : null}
       <div class="mainbg">
         <div class="mainbg-title">
           <div class="main-location">
@@ -76,22 +78,34 @@ export function Playground() {
           <div class="company-name">
             <img src="images jpg/title/logo white.png" />
           </div>
-          <div class="help" id="help">
-            <img src="images jpg/title/Warning.png" />
-            <label>Help</label>
+
+          <div class="title-menu">
+            {/* <div class="help" id="help">
+              <img src="images jpg/title/Warning.png" />
+              <label>Help</label>
+            </div>
+            <div class="user-login">
+              <LoginMainPgBtn
+                onClick={() => {
+                  setContainer((container = true));
+                }}
+              />
+            </div>
+            <div class="signup">
+              <label>Signup</label>
+            </div> */}
+            <div class="hamburger" onClick={() => {
+              showTitleMenu(titleMenu = !titleMenu);
+            }}>
+              <hr></hr>
+              <hr></hr>
+              <hr></hr>
+              {titleMenu ? titleMenuContents(setContainer, container) : null}
+            </div>
+
+            {titleMenuContents(setContainer, container)}
           </div>
 
-          <div class="user-login">
-            <LoginMainPgBtn
-              onClick={() => {
-                setContainer((container = true));
-              }}
-            />
-          </div>
-
-          <div class="signup">
-            <label>Signup</label>
-          </div>
           <div class="mainbg-search">
             <input
               type="text"
@@ -135,7 +149,7 @@ export function Playground() {
           )
         } else if (LocationStatus == "rejected" | LocationStatus == "pending") {
           console.log("no location gven fo enaereyb jotrels");
-          return <label style={{"text-align":"center","font-size":"18px"}}>Please allow location to get nearby hotels</label>;
+          return <label style={{ "text-align": "center", "font-size": "18px" }}>Please allow location to get nearby hotels</label>;
         }
       })()}
 
@@ -206,3 +220,29 @@ let showMessage = (status, message, LoginMessage, setLoginMessage) => {
   }
 };
 
+let titleMenuContents = (setContainer, container, titleMenu) => {
+  return (<div class="titleMenuContents">
+    <div class="help" id="help">
+      {() => {
+        if (!titleMenu) {
+          return <img src="images jpg/title/Warning.png" />
+        }
+      }}
+      <label>Help</label>
+    </div>
+    <div class="user-login">
+      <LoginMainPgBtn
+        onClick={() => {
+          setContainer((container = true));
+        }}
+      />
+    </div>
+    <div class="signup">
+      <label>Signup</label>
+    </div>
+  </div>)
+}
+
+let Hamburger = () => {
+  return titleMenuContents();
+}

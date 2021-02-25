@@ -1760,24 +1760,24 @@ input::-webkit-calendar-picker-indicator {
 .mainbg-title {
     display: grid;
     grid-template-columns: 0.4fr 0.3fr 0.5fr 1fr 0.2fr 0.2fr 0.3fr 0.1fr;
-    grid-template-rows: repeat(2, auto) 0.5fr;
+    grid-template-rows: repeat(3, auto) ;
     grid-template-areas: ". main-location company-name company-name title-menu title-menu title-menu ." ". . mainbg-search mainbg-search . . . ." ". quote quote quote . . . .";
     padding-top: 50px;
     width: 100%;
 }
-.title-menu{
+.title-menu {
     grid-area:title-menu;
+    display:flex;
+    justify-content: center;
+}
+.titleMenuContents{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    width:100%
 }
 .hamburger{
     display: none;
-}
-@media only screen and (max-width: 600px) {
-    .hamburger{
-        display:block;
-    }
 }
 .hamburger hr{
     width: 60px;
@@ -1785,6 +1785,48 @@ input::-webkit-calendar-picker-indicator {
     height:5px;
     background-color:rgb(90, 88, 88)
 }
+@media only screen and (max-width: 600px) {
+    .hamburger, .hamburger .titleMenuContents{
+        display:block;
+    }
+    .titleMenuContents{
+        display:none;
+    }
+    .hamburger .titleMenuContents{
+        position: fixed;
+        top:50px;
+        background-color: white; 
+        color:black;
+        display:flex;
+        flex-direction: column;
+        width:auto
+    }
+    .hamburger hr{
+        width:35px;
+        min-width: auto;
+    }
+
+    .titleMenuContents>*{
+        margin:10px 20px;
+        padding-right:50px;
+        border:0px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .titleMenuContents>*:hover{
+        
+    }
+}
+@media only screen and (max-width: 400px) {
+    .titleMenuContents>*{
+        margin:10px 0px;
+        padding-right:50px;
+        border:0px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
 .company-name,
 .search-box-left {
     display: flex;
@@ -1796,7 +1838,7 @@ input::-webkit-calendar-picker-indicator {
 @media only screen and (max-width: 600px) {
     .mainbg-title {
         grid-template-columns: 0.4fr 1fr 0.2fr 0.2fr 0.2fr;
-        grid-template-areas: "main-location company-name title-menu title-menu title-menu" ". mainbg-search mainbg-search mainbg-search . " "quote quote quote quote quote";
+        grid-template-areas: "main-location company-name company-name  title-menu title-menu" ". mainbg-search mainbg-search mainbg-search . " "quote quote quote quote quote";
         padding-top: 10px;
     }
     .mainbg {
