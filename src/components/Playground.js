@@ -36,7 +36,9 @@ export function Playground() {
       "/saveEnquires",
   };
 
-
+  // Removed urls from Playground.js, left the nessasary last part.
+  // app doesnt crashes now without location, 2 apis(enquiry,hotelsNearby) required location.
+  
   return (
     <>
       <FuncPlayground data={urls} />
