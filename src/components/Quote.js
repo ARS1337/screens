@@ -22,7 +22,7 @@ function Quote(props) {
   setTimeout(()=>{
     setQuoteResponse(quoteResponse=false);
   },5000)
-  
+
   return (
     <form
       onSubmit={(e) => {
@@ -137,7 +137,7 @@ function Quote(props) {
             id="delivery_on"
             min={new Date().toISOString().substr(0, 10)}
             defaultValue={new Date().toISOString().substr(0, 10)}
-            value={delivery_on}
+            value={delivery_on||(new Date().toISOString().substr(0, 10))}
             onChange={(event) => {
               setDeliveryDate(event.target.value);
             }}
