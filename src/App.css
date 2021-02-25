@@ -1043,8 +1043,6 @@ ul::before {
         font-size: 16px;
     }
 }
-
-
 /* main container css grid end  */
 
 
@@ -1763,11 +1761,30 @@ input::-webkit-calendar-picker-indicator {
     display: grid;
     grid-template-columns: 0.4fr 0.3fr 0.5fr 1fr 0.2fr 0.2fr 0.3fr 0.1fr;
     grid-template-rows: repeat(2, auto) 0.5fr;
-    grid-template-areas: ". main-location company-name company-name help user-login signup ." ". . mainbg-search mainbg-search . . . ." ". quote quote quote . . . .";
+    grid-template-areas: ". main-location company-name company-name title-menu title-menu title-menu ." ". . mainbg-search mainbg-search . . . ." ". quote quote quote . . . .";
     padding-top: 50px;
     width: 100%;
 }
-
+.title-menu{
+    grid-area:title-menu;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.hamburger{
+    display: none;
+}
+@media only screen and (max-width: 600px) {
+    .hamburger{
+        display:block;
+    }
+}
+.hamburger hr{
+    width: 60px;
+    margin-top:5px;
+    height:5px;
+    background-color:rgb(90, 88, 88)
+}
 .company-name,
 .search-box-left {
     display: flex;
@@ -1779,7 +1796,7 @@ input::-webkit-calendar-picker-indicator {
 @media only screen and (max-width: 600px) {
     .mainbg-title {
         grid-template-columns: 0.4fr 1fr 0.2fr 0.2fr 0.2fr;
-        grid-template-areas: "main-location company-name help user-login signup" ". mainbg-search mainbg-search mainbg-search . " "quote quote quote quote quote";
+        grid-template-areas: "main-location company-name title-menu title-menu title-menu" ". mainbg-search mainbg-search mainbg-search . " "quote quote quote quote quote";
         padding-top: 10px;
     }
     .mainbg {
